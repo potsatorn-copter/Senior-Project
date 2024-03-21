@@ -39,4 +39,15 @@ public class Mainmenu : MonoBehaviour
         SceneManager.LoadScene("Stage 2 Rule");
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
+
+    public void Stage1()
+    {
+        SceneManager.LoadScene("Stage 1");
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+    public void Stage2()
+    {
+        SceneManager.LoadScene("Stage 2");
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
 }

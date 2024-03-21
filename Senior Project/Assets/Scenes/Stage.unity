@@ -579,7 +579,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 675909252}
         m_TargetAssemblyTypeName: Mainmenu, Assembly-CSharp
-        m_MethodName: Stage1
+        m_MethodName: Stage1Rule
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1302,7 +1302,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 675909252}
         m_TargetAssemblyTypeName: Mainmenu, Assembly-CSharp
-        m_MethodName: Stage2
+        m_MethodName: Stage2Rule
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
