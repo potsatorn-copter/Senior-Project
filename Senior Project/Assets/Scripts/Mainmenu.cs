@@ -14,24 +14,29 @@ public class Mainmenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
     public void Credits()
     {
         SceneManager.LoadScene("Credits");
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
     public void Back()
     {
         SceneManager.LoadScene("Mainmenu");
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
-    public void Stage1()
+    public void Stage1Rule()
     {
-        SceneManager.LoadScene("Stage 1");
+        SceneManager.LoadScene("Stage 1 Rule");
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-    public void Stage2()
+    public void Stage2Rule()
     {
-        SceneManager.LoadScene("Stage 2");
+        SceneManager.LoadScene("Stage 2 Rule");
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 }
