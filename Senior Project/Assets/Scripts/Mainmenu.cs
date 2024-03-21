@@ -25,4 +25,13 @@ public class Mainmenu : MonoBehaviour
     {
         SceneManager.LoadScene("Mainmenu");
     }
+
+    public void Stage1()
+    {
+        SceneManager.LoadScene("Stage 1");
+    }
+    public void Stage2()
+    {
+        SceneManager.LoadScene("Stage 2");
+    }
 }

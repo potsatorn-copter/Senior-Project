@@ -36,7 +36,8 @@ public class SoundManager : MonoBehaviour
     public enum SoundName
     {
        MainmenuSong,
-       Click
+       Click,
+       CreditSong
        
     }
     // Start is called before the first frame update
