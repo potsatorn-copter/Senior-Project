@@ -8,6 +8,7 @@ public class Mainmenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Stage");
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
     public void QuitGame()
