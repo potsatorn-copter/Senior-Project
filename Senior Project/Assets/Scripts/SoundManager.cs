@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -21,8 +22,12 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private Sound[] sounds;
-    
+    private void Start()
+    {
+        Play(SoundName.MainmenuSong);
+    }
+
+    [SerializeField] public Sound[] sounds;
     [Serializable] 
     public struct Sound
     {
@@ -35,15 +40,10 @@ public class SoundManager : MonoBehaviour
     
     public enum SoundName
     {
-       MainmenuSong,
-       Click,
-       CreditSong
+        MainmenuSong,
+        Click,
+        CreditSong
        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     public void Play(SoundName soundName)
@@ -60,15 +60,20 @@ public class SoundManager : MonoBehaviour
         sound.audioSource.loop = sound.loop;
         sound.audioSource.Play();
     }
+    
 
-    private Sound GetSound(SoundName soundName)
+    public Sound GetSound(SoundName soundName)
     {
         return Array.Find(sounds, s => s.soundName == soundName);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void MuteAllSounds(bool isMuted)
     {
-        
+        // ปิดเสียงทั้งหมด
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
+        {
+            audioSource.mute = isMuted;
+        }
     }
+    
 }
