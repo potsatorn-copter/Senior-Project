@@ -23,33 +23,34 @@ public class SoundManager : MonoBehaviour
     }
 
     [SerializeField] private Sound[] sounds;
-    
-    [Serializable] 
+
+    [Serializable]
     public struct Sound
     {
         public SoundName soundName;
         public AudioClip clip;
         public float volume;
         public bool loop;
-        [HideInInspector] public AudioSource audioSource;
+        public AudioSource audioSource;
     }
-    
+
     public enum SoundName
     {
-       MainmenuSong,
-       Click,
-       CreditSong
-       
+        MainmenuSong,
+        Click,
+        CreditSong
+
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void Play(SoundName soundName)
     {
-        Sound sound = GetSound( soundName );
+        Sound sound = GetSound(soundName);
 
         if (sound.audioSource == null)
         {
@@ -67,16 +68,19 @@ public class SoundManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+
+    [SerializeField] private Song[] song;
+
+    [Serializable]
+    public struct Song
     {
-<<<<<<< HEAD
         public SongName songName;
         public AudioClip clips;
         public float volumes;
         public bool loops;
-        [HideInInspector] public AudioSource audioSources;
+        public AudioSource audioSources;
     }
-    
+
     public enum SongName
     {
         MenuSong,
@@ -85,7 +89,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySong(SongName songname)
     {
-        Song song = GetSong( songname );
+        Song song = GetSong(songname);
 
         if (song.audioSources == null)
         {
@@ -99,13 +103,10 @@ public class SoundManager : MonoBehaviour
 
     private Song GetSong(SongName songName)
     {
-        return Array.Find(songs, t => t.songName == songName);
+        return Array.Find(song, t => t.songName == songName);
     }
+}
     
 
 
-=======
-        
-    }
-}
->>>>>>> parent of 49cf6c2 (update at 11:58 saturday)
+
