@@ -426,7 +426,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 287, y: 484}
+  m_AnchoredPosition: {x: 287, y: 539}
   m_SizeDelta: {x: 1515.5001, y: 73.8294}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &769723848
@@ -451,8 +451,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CHOOSE STAGE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b4ddab78768ed64ab91e29d44a86fed, type: 2}
-  m_sharedMaterial: {fileID: -1759678625254332220, guid: 0b4ddab78768ed64ab91e29d44a86fed, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e17bae6865ed404e8104917dafd7434, type: 2}
+  m_sharedMaterial: {fileID: -2492907282176111853, guid: 3e17bae6865ed404e8104917dafd7434, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1009,7 +1009,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -41, y: 32}
+  m_AnchoredPosition: {x: -41, y: 51}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228452721
@@ -1034,8 +1034,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: STAGE 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b4ddab78768ed64ab91e29d44a86fed, type: 2}
-  m_sharedMaterial: {fileID: -1759678625254332220, guid: 0b4ddab78768ed64ab91e29d44a86fed, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e17bae6865ed404e8104917dafd7434, type: 2}
+  m_sharedMaterial: {fileID: -2492907282176111853, guid: 3e17bae6865ed404e8104917dafd7434, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1238,7 +1238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -41, y: 25}
+  m_AnchoredPosition: {x: -41, y: 46}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638979038
@@ -1263,8 +1263,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: STAGE 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b4ddab78768ed64ab91e29d44a86fed, type: 2}
-  m_sharedMaterial: {fileID: -1759678625254332220, guid: 0b4ddab78768ed64ab91e29d44a86fed, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e17bae6865ed404e8104917dafd7434, type: 2}
+  m_sharedMaterial: {fileID: -2492907282176111853, guid: 3e17bae6865ed404e8104917dafd7434, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
