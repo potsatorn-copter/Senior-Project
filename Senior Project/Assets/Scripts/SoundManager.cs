@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class SoundManager : MonoBehaviour
     {
         public SoundName soundName;
         public AudioClip clip;
-        [Range(0f,1f)] public float volume;
+        public float volume;
         public bool loop;
         [HideInInspector] public AudioSource audioSource;
     }
@@ -48,7 +49,6 @@ public class SoundManager : MonoBehaviour
         }
 
         sound.audioSource.clip = sound.clip;
-        sound.audioSource.volume = sound.volume;
         sound.audioSource.loop = sound.loop;
         sound.audioSource.Play();
     }
@@ -67,7 +67,7 @@ public class SoundManager : MonoBehaviour
     {
         public SongName songName;
         public AudioClip clips;
-        [Range(0f,1f)] public float volumes;
+        public float volumes;
         public bool loops;
         [HideInInspector] public AudioSource audioSources;
     }
@@ -88,7 +88,6 @@ public class SoundManager : MonoBehaviour
         }
 
         song.audioSources.clip = song.clips;
-        song.audioSources.volume = song.volumes;
         song.audioSources.loop = song.loops;
         song.audioSources.Play();
     }
@@ -97,6 +96,6 @@ public class SoundManager : MonoBehaviour
     {
         return Array.Find(songs, t => t.songName == songName);
     }
-
     
-}
+
+
