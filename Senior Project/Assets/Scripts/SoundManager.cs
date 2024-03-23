@@ -35,18 +35,10 @@ public class SoundManager : MonoBehaviour
     
     public enum SoundName
     {
-       MainmenuSong,
-       Click,
-       CreditSong
-       
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+       Click
     }
 
-    public void Play(SoundName soundName)
+    public void PlaySound(SoundName soundName)
     {
         Sound sound = GetSound( soundName );
 
@@ -65,10 +57,46 @@ public class SoundManager : MonoBehaviour
     {
         return Array.Find(sounds, s => s.soundName == soundName);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    
+   
+    [SerializeField] private Song[] songs;
+    
+    [Serializable] 
+    public struct Song
     {
-        
+        public SongName songName;
+        public AudioClip clips;
+        [Range(0f,1f)] public float volumes;
+        public bool loops;
+        [HideInInspector] public AudioSource audioSources;
     }
+    
+    public enum SongName
+    {
+        MenuSong,
+        CreditSong
+    }
+
+    public void PlaySong(SongName songname)
+    {
+        Song song = GetSong( songname );
+
+        if (song.audioSources == null)
+        {
+            song.audioSources = gameObject.AddComponent<AudioSource>();
+        }
+
+        song.audioSources.clip = song.clips;
+        song.audioSources.volume = song.volumes;
+        song.audioSources.loop = song.loops;
+        song.audioSources.Play();
+    }
+
+    private Song GetSong(SongName songName)
+    {
+        return Array.Find(songs, t => t.songName == songName);
+    }
+
+    
 }
