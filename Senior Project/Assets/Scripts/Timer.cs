@@ -24,8 +24,9 @@ public class Timer : MonoBehaviour
                 timeCount = 0;
             }
 
-            int seconds = Mathf.FloorToInt(timeCount);
+            int minute = Mathf.FloorToInt(timeCount / 60);
+            int seconds = Mathf.FloorToInt(timeCount % 60);
 
-            timeText.text = string.Format("{00:00}", seconds);
+            timeText.text = string.Format("{00:00}:{01:00}", minute, seconds);
         }
 }

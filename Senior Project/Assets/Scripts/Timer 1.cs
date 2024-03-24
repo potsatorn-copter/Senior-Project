@@ -17,9 +17,10 @@ public class Timer1 : MonoBehaviour
     {
         timeCount += Time.deltaTime; // เพิ่มเวลา
 
-        int seconds = Mathf.FloorToInt(timeCount);
+        int minute = Mathf.FloorToInt(timeCount / 60);
+        int seconds = Mathf.FloorToInt(timeCount % 60);
 
-        timeText.text = string.Format("{0:0}", seconds);
+        timeText.text = string.Format("{00:00}:{01:00}", minute, seconds);
     }
 }
 
