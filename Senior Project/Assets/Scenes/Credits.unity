@@ -172,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 1197335149}
   muteButton: {fileID: 96092514}
-  mutedSprite: {fileID: -735744388, guid: 67c30ddffd69d2d4b9d3ecb780dbbb84, type: 3}
-  unmutedSprite: {fileID: -1335436717, guid: 211156282ac9ea24fa193382b2cd26e7, type: 3}
+  mutedSprite: {fileID: -307432907, guid: 107853f2d65ddd64a8d192fb82878035, type: 3}
+  unmutedSprite: {fileID: 75629211, guid: 1b2ab57197d24c941a829387285ba815, type: 3}
 --- !u!114 &96092514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1335436717, guid: 211156282ac9ea24fa193382b2cd26e7, type: 3}
+  m_Sprite: {fileID: 75629211, guid: 1b2ab57197d24c941a829387285ba815, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -480634060, guid: 79e3733c3101ec54998c9856d46cd9a3, type: 3}
+  m_Sprite: {fileID: 1990931653, guid: d53086343e7e2a347a84c367a74b2794, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

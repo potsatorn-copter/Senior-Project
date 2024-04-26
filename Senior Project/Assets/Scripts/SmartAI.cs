@@ -36,14 +36,14 @@ public class SmartAI : MonoBehaviour
 
     void FindClosestItem()
     {
-        Collider[] itemsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, itemLayerMask);
+        Collider[] itemsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius);
         float closestDistance = Mathf.Infinity;
         Collider closestItem = null;
 
         foreach (Collider item in itemsInViewRadius)
         {
-            Vector3 dirToItem = (item.transform.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToItem) < viewAngle / 2)
+            // ตรวจสอบว่าไอเท็มมี Tag เป็น GoodItem หรือ BadItem
+            if (item.CompareTag("GoodItem") || item.CompareTag("BadItem"))
             {
                 float distanceToItem = Vector3.Distance(transform.position, item.transform.position);
                 if (distanceToItem < closestDistance && item.gameObject.activeInHierarchy)
@@ -114,6 +114,33 @@ public class SmartAI : MonoBehaviour
             itemScript.Deactivate();
             Itempool.ReturnItemToPool(other.gameObject); // ตรวจสอบให้แน่ใจว่า itemPool ถูกอ้างอิงถูกต้อง
         }
+    }
+    void OnDrawGizmos()
+    {
+        // แสดงรัศมีการมองเห็นของ AI
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
+
+        // แสดงมุมการมองเห็นของ AI
+        Vector3 forwardYAdjusted = transform.forward + Vector3.up * 0.5f;  // ปรับเพิ่ม Y เล็กน้อย
+        Vector3 frontRayPoint = transform.position + (forwardYAdjusted.normalized * viewRadius);
+        Vector3 leftRayPoint = transform.position + (Quaternion.Euler(0, -viewAngle / 2, 0) * forwardYAdjusted.normalized * viewRadius);
+        Vector3 rightRayPoint = transform.position + (Quaternion.Euler(0, viewAngle / 2, 0) * forwardYAdjusted.normalized * viewRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, frontRayPoint);
+        Gizmos.DrawLine(transform.position, leftRayPoint);
+        Gizmos.DrawLine(transform.position, rightRayPoint);
+
+        // ถ้ามีวัตถุที่ AI พบและกำลังเคลื่อนที่ไปหา ให้วาดเส้นไปยังวัตถุนั้น
+        if (closestItemTransform != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, closestItemTransform.position);
+        }
+
+        // แสดงตำแหน่งเริ่มต้นด้วยจุดสีแดง
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(startPosition, 0.2f);
     }
 }
 
