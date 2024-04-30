@@ -61,7 +61,7 @@ public class SmartAI : MonoBehaviour
     {
         isMoving = true; // ตั้งค่า isMoving เป็น true เมื่อเริ่มเคลื่อนที่
 
-        yield return new WaitForSeconds(2f); // Delay 2 วินาทีก่อนเริ่มเคลื่อนที่
+        yield return new WaitForSeconds(1f); // Delay 2 วินาทีก่อนเริ่มเคลื่อนที่
 
         float elapsedTime = 0;
         Vector3 originalPosition = transform.position;

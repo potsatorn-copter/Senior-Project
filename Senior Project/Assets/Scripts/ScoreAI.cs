@@ -32,4 +32,8 @@ public class ScoreAI : MonoBehaviour
             scoreAIText.text = "Score: " + scoreAI; // อัพเดทข้อความ UI
         }
     }
+    public int GetCurrentScoreAI()
+    {
+        return scoreAI;
+    }
 }

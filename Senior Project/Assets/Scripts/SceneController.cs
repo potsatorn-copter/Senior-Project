@@ -9,12 +9,15 @@ public class SceneController : MonoBehaviour {
     public const int gridCols = 4;
     public const float offsetX = 4f;
     public const float offsetY = 5f;
+    public GameObject winGameUI; 
+    private int successfulMatches = 0;
 
     [SerializeField] private MainCard originalCard;
     [SerializeField] private Sprite[] images;
 
     private void Start()
     {
+        winGameUI.SetActive(false);
         Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
 
         int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3};
@@ -87,10 +90,16 @@ public class SceneController : MonoBehaviour {
 
     private IEnumerator CheckMatch()
     {
-        if(_firstRevealed.id == _secondRevealed.id)
+        if (_firstRevealed.id == _secondRevealed.id)
         {
             _score++;
             scoreLabel.text = "Score: " + _score;
+            successfulMatches++;  // เพิ่มการนับคู่ที่จับได้สำเร็จ
+
+            if (successfulMatches == gridCols * gridRows / 2) // ตรวจสอบว่าจับคู่ครบทุกคู่หรือยัง
+            {
+                winGameUI.SetActive(true); // แสดง GameObject
+            }
         }
         else
         {
@@ -102,12 +111,6 @@ public class SceneController : MonoBehaviour {
 
         _firstRevealed = null;
         _secondRevealed = null;
-
     }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene("Scene_001");
-    }
-
+    
 }

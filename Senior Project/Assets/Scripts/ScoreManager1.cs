@@ -32,4 +32,8 @@ public class ScoreManager1 : MonoBehaviour
             scoreText.text = "Score: " + score; // อัพเดทข้อความ UI
         }
     }
+    public int GetCurrentScore()
+    {
+        return score;
+    }
 }
