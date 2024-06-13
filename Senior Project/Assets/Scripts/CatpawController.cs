@@ -40,6 +40,7 @@ public class CatpawController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("GoodItem"))
         {
+            SoundManager.instance.Play(SoundManager.SoundName.Correct);
             // เป็น GoodItem บวกคะแนน 1
             Debug.Log("This is Good Player");
             if (scoreManager != null)
@@ -50,6 +51,7 @@ public class CatpawController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("BadItem"))
         {
+            SoundManager.instance.Play(SoundManager.SoundName.Wrong);
             // เป็น BadItem ลบคะแนน 1
             Debug.Log("This is Bad Player");
             if (scoreManager != null)

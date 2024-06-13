@@ -106,6 +106,7 @@ public class Itempool : MonoBehaviour
         {
             // ถ้าคะแนนเพลเยอร์มากกว่า AI
             winPanel.gameObject.SetActive(true);
+            SoundManager.instance.Play(SoundManager.SoundName.WinSound);
             resultText.text = "WIN";
             resultText.color = Color.green; // ตั้งค่าสีเป็นเขียว
         }
@@ -113,6 +114,7 @@ public class Itempool : MonoBehaviour
         {
             // ถ้าคะแนน AI มากกว่าเพลเยอร์
             losePanel.gameObject.SetActive(true);
+            SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
             resultText.text = "LOSE";
             resultText.color = Color.red; // ตั้งค่าสีเป็นแดง
         }

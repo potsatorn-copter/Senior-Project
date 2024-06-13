@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 75629211, guid: 1b2ab57197d24c941a829387285ba815, type: 3}
+  m_Sprite: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -135,5 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   muteButton: {fileID: 8406301792764093936}
-  mutedSprite: {fileID: -735744388, guid: 67c30ddffd69d2d4b9d3ecb780dbbb84, type: 3}
-  unmutedSprite: {fileID: -1335436717, guid: 211156282ac9ea24fa193382b2cd26e7, type: 3}
+  mutedSprite: {fileID: 697239517, guid: ba7b14f1125e4b0479a318bcdb24ad97, type: 3}
+  unmutedSprite: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}

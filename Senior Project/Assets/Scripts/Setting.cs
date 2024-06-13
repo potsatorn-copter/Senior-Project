@@ -9,6 +9,7 @@ public class Setting : MonoBehaviour
     
     public void ToggleSettings()
     {
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
         // สลับสถานะของ settingPanel
         settingPanel.SetActive(!settingPanel.activeSelf);
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 210802340298987406}
   - component: {fileID: 655288909996407819}
   m_Layer: 3
-  m_Name: Good Fish
+  m_Name: Remote
   m_TagString: GoodItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 538848957, guid: b105de8ec4b29d74b88f794354e473d9, type: 3}
+  m_Sprite: {fileID: 64151869, guid: 1b62487b2f41e3a4a81372851a61dff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

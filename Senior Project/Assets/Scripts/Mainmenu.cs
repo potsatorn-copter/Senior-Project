@@ -9,6 +9,7 @@ public class Mainmenu : MonoBehaviour
     {
         SceneManager.LoadScene("Stage");
         Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.MainmenuSong);
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
@@ -28,7 +29,7 @@ public class Mainmenu : MonoBehaviour
 
     public void Back()
     {
-        SceneManager.LoadScene("Mainmenu");
+        SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
@@ -39,9 +40,9 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-    public void Stage2Rule()
+    public void Stage4Rule()
     {
-        SceneManager.LoadScene("Stage 2 Rule");
+        SceneManager.LoadScene("Stage 4 Rule");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
@@ -52,9 +53,9 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-    public void Stage2Play()
+    public void Stage4Play()
     {
-        SceneManager.LoadScene("Stage 2 Play");
+        SceneManager.LoadScene("Stage 4 Play");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }

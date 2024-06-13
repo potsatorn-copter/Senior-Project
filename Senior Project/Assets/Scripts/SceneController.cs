@@ -3,32 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour {
-
+public class SceneController : MonoBehaviour
+{
     public const int gridRows = 2;
     public const int gridCols = 4;
     public const float offsetX = 4f;
     public const float offsetY = 5f;
-    public GameObject winGameUI; 
     private int successfulMatches = 0;
+    public const int totalMatches = gridRows * gridCols / 2;
 
     [SerializeField] private MainCard originalCard;
     [SerializeField] private Sprite[] images;
+    [SerializeField] private GameObject gameOverUI; // GameObject สำหรับแสดง UI เมื่อเกมจบ
+    [SerializeField] private Timer timer; // อ้างอิงถึง Timer
 
     private void Start()
     {
-        winGameUI.SetActive(false);
-        Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
+        Vector3 startPos = originalCard.transform.position; // ตำแหน่งของการ์ดแรก
 
-        int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3};
-        numbers = ShuffleArray(numbers); //This is a function we will create in a minute!
+        int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3 };
+        numbers = ShuffleArray(numbers); // ฟังก์ชันสุ่มลำดับการ์ด
 
-        for(int i = 0; i < gridCols; i++)
+        for (int i = 0; i < gridCols; i++)
         {
-            for(int j = 0; j < gridRows; j++)
+            for (int j = 0; j < gridRows; j++)
             {
                 MainCard card;
-                if(i == 0 && j == 0)
+                if (i == 0 && j == 0)
                 {
                     card = originalCard;
                 }
@@ -46,13 +47,14 @@ public class SceneController : MonoBehaviour {
                 card.transform.position = new Vector3(posX, posY, startPos.z);
             }
         }
+
+        gameOverUI.SetActive(false); // ซ่อน UI เมื่อเริ่มเกม
     }
 
-    //random p order
     private int[] ShuffleArray(int[] numbers)
     {
         int[] newArray = numbers.Clone() as int[];
-        for(int i = 0; i < newArray.Length; i++)
+        for (int i = 0; i < newArray.Length; i++)
         {
             int tmp = newArray[i];
             int r = Random.Range(i, newArray.Length);
@@ -61,8 +63,6 @@ public class SceneController : MonoBehaviour {
         }
         return newArray;
     }
-
-    //-------------------------------------------------------------------------------------------------------------------------------------------
 
     private MainCard _firstRevealed;
     private MainCard _secondRevealed;
@@ -77,7 +77,7 @@ public class SceneController : MonoBehaviour {
 
     public void CardRevealed(MainCard card)
     {
-        if(_firstRevealed == null)
+        if (_firstRevealed == null)
         {
             _firstRevealed = card;
         }
@@ -94,15 +94,17 @@ public class SceneController : MonoBehaviour {
         {
             _score++;
             scoreLabel.text = "Score: " + _score;
-            successfulMatches++;  // เพิ่มการนับคู่ที่จับได้สำเร็จ
+            successfulMatches++;
+            SoundManager.instance.Play(SoundManager.SoundName.Correct);
 
-            if (successfulMatches == gridCols * gridRows / 2) // ตรวจสอบว่าจับคู่ครบทุกคู่หรือยัง
+            if (successfulMatches == totalMatches)
             {
-                winGameUI.SetActive(true); // แสดง GameObject
+                GameOver();
             }
         }
         else
         {
+            SoundManager.instance.Play(SoundManager.SoundName.Wrong);
             yield return new WaitForSeconds(0.5f);
 
             _firstRevealed.Unreveal();
@@ -112,5 +114,11 @@ public class SceneController : MonoBehaviour {
         _firstRevealed = null;
         _secondRevealed = null;
     }
-    
+
+    private void GameOver()
+    {
+        timer.StopTimer(); // หยุดการนับเวลา
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
+        gameOverUI.SetActive(true); // แสดง UI เมื่อเกมจบ
+    }
 }

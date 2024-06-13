@@ -42,6 +42,11 @@ public class SoundManager : MonoBehaviour
     {
         MainmenuSong,
         Click,
+        hoverSound,
+        Correct,
+        Wrong,
+        LoseSound,
+        WinSound,
         CreditSong
        
     }
@@ -75,5 +80,14 @@ public class SoundManager : MonoBehaviour
             audioSource.mute = isMuted;
         }
     }
+    public void MuteSound(SoundName soundName, bool isMuted)
+    {
+        Sound sound = GetSound(soundName);
+        if (sound.audioSource != null)
+        {
+            sound.audioSource.mute = isMuted;
+        }
+    }
+    
     
 }
