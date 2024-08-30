@@ -29,6 +29,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 4 Play.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Stage 2 Play.unity
+    guid: d049fe37cacded64faee64be3ceb7e26
+  - enabled: 1
+    path: Assets/Scenes/Stage 2 Rule.unity
+    guid: 0e8178053b3e3164787e7500f03238b8
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6358f0e105f473043a4ea331c1c4911e, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fc8d0b46a541c56429b1c4fce79718aa, type: 2}

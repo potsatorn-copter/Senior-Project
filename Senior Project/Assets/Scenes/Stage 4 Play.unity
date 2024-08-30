@@ -1196,7 +1196,6 @@ MonoBehaviour:
   - {fileID: 131598955, guid: 5bc9e7b1481277a4fa8441c75db805ff, type: 3}
   gameOverUI: {fileID: 384722209}
   timer: {fileID: 1684910901}
-  _audioSource: {fileID: 0}
   scoreLabel: {fileID: 382268175}
 --- !u!4 &1274583072
 Transform:

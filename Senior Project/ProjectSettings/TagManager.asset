@@ -7,11 +7,12 @@ TagManager:
   - BadItem
   - GoodItem
   - Ground
+  - TrampolinePlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

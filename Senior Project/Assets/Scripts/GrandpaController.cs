@@ -1,71 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class GrandpaController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 5f;
+    private PlayerInput playerInput;
+   [SerializeField] private float movementSpeed = 10f;
+   [SerializeField] private float slowFallMultiplier = 0.5f; // ปัจจัยที่ใช้ลดความเร็วการตก
+    
     private Rigidbody rb;
+    private Vector2 movementInput; 
     private bool isGrounded;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
-    void Update()
+    private void Update()
     {
-        Move();
-        Jump();
+        // Get movement input from the Input System
+        movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        
     }
 
-    void Move()
+    private void FixedUpdate()
     {
-        float moveDirection = 0f;
+        // Apply horizontal movement
+        Vector3 velocity = rb.velocity;
+        velocity.x = movementInput.x * movementSpeed;
+        rb.velocity = velocity;
 
-        if (Input.GetKey(KeyCode.A))
+        // Rotate character based on movement direction
+        if (movementInput.x > 0)
         {
-            moveDirection = -1f; // เคลื่อนที่ไปทางซ้าย
-            RotateCharacter(180f); // หมุนตัวละครให้หันหน้าไปทางซ้าย
+            transform.rotation = Quaternion.Euler(0, 0, 0); // Facing right
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (movementInput.x < 0)
         {
-            moveDirection = 1f; // เคลื่อนที่ไปทางขวา
-            RotateCharacter(0f); // หมุนตัวละครให้หันหน้าไปทางขวา
+            transform.rotation = Quaternion.Euler(0, 180, 0); // Facing left
         }
 
-        Vector3 movement = new Vector3(moveDirection * moveSpeed, rb.velocity.y, 0f);
-        rb.velocity = movement;
-    }
-
-    void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        // Apply slow fall effect when the character is falling
+        if (rb.velocity.y < 0)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            rb.AddForce(Vector3.up * slowFallMultiplier, ForceMode.Acceleration);
         }
     }
-
-    void RotateCharacter(float yRotation)
-    {
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+    
 }
