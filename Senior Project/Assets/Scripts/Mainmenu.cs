@@ -7,6 +7,14 @@ public class Mainmenu : MonoBehaviour
 {
     public void StartGame()
     {
+        SceneManager.LoadScene("MMSB FORM");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.MainmenuSong);
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+
+    public void SelectGame()
+    {
         SceneManager.LoadScene("Stage");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.MainmenuSong);
@@ -51,8 +59,8 @@ public class Mainmenu : MonoBehaviour
                 SceneManager.LoadScene("Stage 2 Rule");
                 Time.timeScale = 1;
                 SoundManager.instance.Play(SoundManager.SoundName.Click);
-            }
-            public void Stage2Play()
+            } 
+         public void Stage2Play()
                 {
                     SceneManager.LoadScene("Stage 2 Play");
                     Time.timeScale = 1;

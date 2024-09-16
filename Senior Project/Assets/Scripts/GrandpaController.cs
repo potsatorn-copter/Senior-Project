@@ -5,12 +5,11 @@ using UnityEngine.InputSystem;
 public class GrandpaController : MonoBehaviour
 {
     private PlayerInput playerInput;
-   [SerializeField] private float movementSpeed = 10f;
-   [SerializeField] private float slowFallMultiplier = 0.5f; // ปัจจัยที่ใช้ลดความเร็วการตก
-    
+    [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private float slowFallMultiplier = 0.5f;
+
     private Rigidbody rb;
     private Vector2 movementInput; 
-    private bool isGrounded;
 
     private void Start()
     {
@@ -22,7 +21,6 @@ public class GrandpaController : MonoBehaviour
     {
         // Get movement input from the Input System
         movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
-        
     }
 
     private void FixedUpdate()
@@ -48,5 +46,24 @@ public class GrandpaController : MonoBehaviour
             rb.AddForce(Vector3.up * slowFallMultiplier, ForceMode.Acceleration);
         }
     }
-    
+
+    // Function to detect collision with other objects
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if the object the player collided with has the tag "TrampolinePlatform"
+        if (collision.gameObject.CompareTag("TrampolinePlatform"))
+        {
+            // Iterate through all contact points to check if the collision was from the top
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                // Check if the contact point normal is pointing upwards (indicating a top collision)
+                if (Vector3.Dot(contact.normal, Vector3.up) > 0.7f)
+                {
+                    // Play the jump sound when the player hits the top of the platform
+                    SoundManager.instance.Play(SoundManager.SoundName.Jump);
+                    break;
+                }
+            }
+        }
+    }
 }

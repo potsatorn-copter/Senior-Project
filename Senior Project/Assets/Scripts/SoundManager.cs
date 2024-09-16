@@ -47,7 +47,8 @@ public class SoundManager : MonoBehaviour
         Wrong,
         LoseSound,
         WinSound,
-        CreditSong
+        CreditSong,
+        Jump
        
     }
 

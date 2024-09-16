@@ -47,6 +47,7 @@ public class CameraFollow : MonoBehaviour
     {
         gameIsOver = true;
         Time.timeScale = 0f; // หยุดเกมโดยการหยุดเวลา
+        SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
         gameOverUI.SetActive(true); // แสดง UI
     }
 }

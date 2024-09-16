@@ -15,6 +15,7 @@ public class GameOverTrigger : MonoBehaviour
             // แสดง UI
             if (gameOverUI != null)
             {
+                SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
                 gameOverUI.SetActive(true);
             }
         }
