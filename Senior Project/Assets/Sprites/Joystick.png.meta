@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4fa427e789951547a28a735b7b2c142
-      internalID: 416288518
+      spriteID: 1ad4559bc3e438142bcfd17c7019f579
+      internalID: 695311652
       vertices: []
       indices: 
       edges: []
@@ -159,7 +159,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 36a0b03a8bc4aa041abd48f6daae3e9c
+    spriteID: 70adc98c26c81d34eb150b7db2f58e66
     internalID: 0
     vertices: []
     indices: 
@@ -167,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Joystick_0: 416288518
+      Joystick_0: 695311652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

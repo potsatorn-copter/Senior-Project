@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class CatpawController : MonoBehaviour
 {
-    public Vector3 targetPositionStatic = new Vector3(-9.93f, -4.79f, 6.5f); 
+    public Transform itemSpawnerTransform; // Reference to Itemspawner's Transform
     private Vector3 startPosition;
     public ScoreManager1 scoreManager;
     public float delayBeforeReturning = 0.2f;
@@ -23,8 +23,15 @@ public class CatpawController : MonoBehaviour
 
     private void MoveToTargetPosition()
     {
-        // ย้ายไปยังตำแหน่งเป้าหมาย
-        transform.position = targetPositionStatic; 
+        // ย้ายไปยังตำแหน่งของ Itemspawner
+        if (itemSpawnerTransform != null)
+        {
+            transform.position = itemSpawnerTransform.position; 
+        }
+        else
+        {
+            Debug.LogWarning("Itemspawner Transform is not assigned!");
+        }
         StartCoroutine(ReturnToStartPositionAfterDelay());
     }
 
