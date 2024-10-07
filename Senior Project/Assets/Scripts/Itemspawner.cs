@@ -34,7 +34,7 @@ public class Itemspawner : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(Random.Range(5f, 10f)); // ไอเท็มจะอยู่ใน scene ระหว่าง 5 ถึง 10 วินาที
+            yield return new WaitForSeconds(Random.Range(3f, 6f)); // ไอเท็มจะอยู่ใน scene ระหว่าง 5 ถึง 10 วินาที
 
             // ตรวจสอบค่า null อีกครั้งก่อนการปิดใช้งาน
             if (item != null) // ตอนนี้ item สามารถใช้ได้เพราะถูกประกาศอยู่นอกบล็อค if

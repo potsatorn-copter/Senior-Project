@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -37,10 +39,13 @@ public class CameraFollow : MonoBehaviour
         }
 
         // ตรวจสอบว่าตัวละครตกต่ำกว่ากล้องหรือไม่
-        if (target.position.y < transform.position.y - 0.7)
+        if (target.position.y < transform.position.y - 0.7f)
         {
             GameOver();
         }
+
+        // ตรวจจับแพลตฟอร์มที่พ้นกล้อง
+        DetectAndDestroyPlatforms();
     }
 
     private void GameOver()
@@ -49,5 +54,25 @@ public class CameraFollow : MonoBehaviour
         Time.timeScale = 0f; // หยุดเกมโดยการหยุดเวลา
         SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
         gameOverUI.SetActive(true); // แสดง UI
+    }
+
+    // ฟังก์ชันสำหรับตรวจจับแพลตฟอร์มที่พ้นกล้องและทำลายมัน
+    private void DetectAndDestroyPlatforms()
+    {
+        // ค้นหาแพลตฟอร์มทั้งหมดในเกม
+        GameObject[] platforms = GameObject.FindGameObjectsWithTag("TrampolinePlatform");
+
+        // ตรวจสอบว่าแพลตฟอร์มใดพ้นกล้องไปแล้ว
+        foreach (GameObject platform in platforms)
+        {
+            // แปลงตำแหน่งของแพลตฟอร์มจาก world space ไปเป็น viewport space
+            Vector3 viewportPos = Camera.main.WorldToViewportPoint(platform.transform.position);
+
+            // ถ้าแพลตฟอร์มอยู่นอกขอบล่างของกล้อง (viewport Y < 0) แสดงว่ามันพ้นจากการมองเห็นแล้ว
+            if (viewportPos.y < 0)
+            {
+                Destroy(platform); // ทำลายแพลตฟอร์มที่พ้นกล้องไปแล้ว
+            }
+        }
     }
 }

@@ -7,9 +7,12 @@ public class GrandpaController : MonoBehaviour
     private PlayerInput playerInput;
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private float slowFallMultiplier = 0.5f;
-
+    
     private Rigidbody rb;
     private Vector2 movementInput; 
+
+    public bool hasJumpBoost = false; // สถานะการบูสต์การกระโดดจากกล้วย
+    public float boostMultiplier = 1.5f; // ตัวคูณแรงกระโดดเมื่อมีบูสต์
 
     private void Start()
     {
@@ -65,5 +68,11 @@ public class GrandpaController : MonoBehaviour
                 }
             }
         }
+    }
+
+    // ฟังก์ชันเก็บไอเทมกล้วย
+    public void CollectBanana()
+    {
+        hasJumpBoost = true; // ตั้งค่าการบูสต์เมื่อเก็บกล้วย
     }
 }

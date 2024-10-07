@@ -7,6 +7,13 @@ public class Mainmenu : MonoBehaviour
 {
     public void StartGame()
     { 
+        SceneManager.LoadScene("Level");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.MainmenuSong);
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+    public void DoTest()
+    { 
         SceneManager.LoadScene("MMSB FORM");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.MainmenuSong);
