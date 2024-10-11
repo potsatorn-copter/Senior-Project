@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class CatpawController : MonoBehaviour
 {
@@ -37,44 +40,57 @@ public class CatpawController : MonoBehaviour
 
     private IEnumerator ReturnToStartPositionAfterDelay()
     {
-        // รอเวลาที่ตั้งไว้
         yield return new WaitForSeconds(delayBeforeReturning);
-        // กลับสู่ตำแหน่งเริ่มต้น
-        transform.position = startPosition;
+        transform.position = startPosition; // กลับสู่ตำแหน่งเริ่มต้น
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // ตรวจสอบว่าไอเท็มที่ชนเป็น GoodItem หรือ BadItem
         if (other.gameObject.CompareTag("GoodItem"))
         {
+            Debug.Log("Good Item Collected");
             SoundManager.instance.Play(SoundManager.SoundName.Correct);
-            // เป็น GoodItem บวกคะแนน 1
-            Debug.Log("This is Good Player");
+
+            // เมื่อชนไอเท็มดี เพิ่มตัวนับ
             if (scoreManager != null)
             {
-                scoreManager.AddScore(1);
-                Debug.Log("+1 Score");
+                StartCoroutine(DelayCollectGoodItem()); // รอให้มือชนแล้วค่อยเพิ่มตัวนับ
             }
         }
         else if (other.gameObject.CompareTag("BadItem"))
         {
+            Debug.Log("Bad Item Collected");
             SoundManager.instance.Play(SoundManager.SoundName.Wrong);
-            // เป็น BadItem ลบคะแนน 1
-            Debug.Log("This is Bad Player");
+
+            // เมื่อชนไอเท็มไม่ดี ลดตัวนับ
             if (scoreManager != null)
             {
-                scoreManager.SubtractScore(1);
-                Debug.Log("-1 Score");
+                StartCoroutine(DelayCollectBadItem()); // รอให้มือชนแล้วค่อยลดตัวนับ
             }
         }
-    
-        // ตรวจสอบว่าได้รับ Item script จาก GameObject ที่ชน
+
         Item itemScript = other.GetComponent<Item>();
         if (itemScript != null)
         {
-            // คืนไอเท็มกลับสู่ pool
             itemScript.Deactivate();
-            Itempool.ReturnItemToPool(other.gameObject); // ตรวจสอบให้แน่ใจว่า itemPool ถูกอ้างอิงถูกต้อง
+            Itempool.ReturnItemToPool(other.gameObject);
         }
+    }
+
+    // เพิ่มฟังก์ชัน Coroutine สำหรับหน่วงเวลาก่อนเพิ่มตัวนับ
+    private IEnumerator DelayCollectGoodItem()
+    {
+        yield return new WaitForSeconds(0.1f); // หน่วงเวลาเล็กน้อย
+        scoreManager.CollectGoodItem(); // เพิ่มจำนวนไอเท็มดีที่เก็บได้หลังจากชนแล้ว
+        Debug.Log("+1 Good Item Count");
+    }
+
+    // เพิ่มฟังก์ชัน Coroutine สำหรับหน่วงเวลาก่อนลดตัวนับ
+    private IEnumerator DelayCollectBadItem()
+    {
+        yield return new WaitForSeconds(0.1f); // หน่วงเวลาเล็กน้อย
+        scoreManager.CollectBadItem(); // ลดจำนวนไอเท็มเมื่อเก็บไอเท็มไม่ดีหลังจากชนแล้ว
+        Debug.Log("-1 Good Item Count");
     }
 }

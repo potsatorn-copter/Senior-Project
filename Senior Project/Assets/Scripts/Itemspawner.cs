@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Itemspawner : MonoBehaviour
 {
     public Itempool itemPool;
     public Transform spawnPoint;
+    public ScoreManager1 scoreManager; // อ้างอิงไปยัง ScoreManager เพื่อจบเกมเมื่อไอเท็มหมด
 
     private void Start()
     {
@@ -16,31 +18,38 @@ public class Itemspawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(1f,2f)); // รอเวลาสุ่ม
+            yield return new WaitForSeconds(Random.Range(1f, 2f));
 
             var itemGameObject = itemPool.GetItemFromPool();
-            Item item = null; // ประกาศ item ที่นี่เพื่อให้สามารถใช้ได้ทั่วทั้ง scope ของ coroutine
-            if (itemGameObject != null) // ตรวจสอบว่าได้ GameObject จาก pool มาหรือไม่
+            Item item = null;
+            if (itemGameObject != null)
             {
-                item = itemGameObject.GetComponent<Item>(); // พยายามดึงคอมโพเนนต์ Item
-                if (item != null && spawnPoint != null) // ตรวจสอบว่าทั้ง item และ spawnPoint ไม่เป็น null
+                item = itemGameObject.GetComponent<Item>();
+                if (item != null && spawnPoint != null)
                 {
-                    item.Activate(spawnPoint.position); // เปิดใช้งานไอเท็มที่ตำแหน่งเกิด
+                    item.Activate(spawnPoint.position);
                 }
                 else
                 {
                     Debug.LogError("Item or spawnPoint is null.");
-                    Itempool.ReturnItemToPool(itemGameObject); // คืน GameObject กลับสู่ pool ถ้าไม่สามารถเปิดใช้งานได้
+                    Itempool.ReturnItemToPool(itemGameObject);
                 }
             }
 
-            yield return new WaitForSeconds(Random.Range(3f, 6f)); // ไอเท็มจะอยู่ใน scene ระหว่าง 5 ถึง 10 วินาที
+            // เช็คว่าไอเท็มใน Pool หมดหรือไม่ ถ้าหมดให้จบเกม
+            if (itemPool.IsPoolCompleted())
+            {
+                yield return new WaitForSeconds(2.0f); // ดีเลย์ 2 วินาทีก่อนจบเกม
+                scoreManager.CalculateFinalScore(); // เรียกใช้ฟังก์ชันคำนวณคะแนน
+                break; // ออกจากลูปเมื่อไอเท็มหมด
+            }
 
-            // ตรวจสอบค่า null อีกครั้งก่อนการปิดใช้งาน
-            if (item != null) // ตอนนี้ item สามารถใช้ได้เพราะถูกประกาศอยู่นอกบล็อค if
+            yield return new WaitForSeconds(Random.Range(3f, 6f));
+
+            if (item != null)
             {
                 item.Deactivate();
-                Itempool.ReturnItemToPool(itemGameObject); // คืนไอเท็มกลับสู่ pool
+                Itempool.ReturnItemToPool(itemGameObject);
             }
         }
     }

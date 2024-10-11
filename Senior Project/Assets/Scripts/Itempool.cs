@@ -1,130 +1,109 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Itempool : MonoBehaviour
 {
     public GameObject goodItemPrefab;
     public GameObject badItemPrefab;
-    public static int poolSize = 10;  // จำกัดไอเท็มให้มีเพียง 10 ชิ้น
-    public TextMeshProUGUI resultText; // อ้างอิงไปยัง TextMeshProUGUI สำหรับแสดงผลลัพธ์
-
-    private static List<GameObject> itemsPool;
-    private int itemsActivated = 0; // ตัวแปรสำหรับนับจำนวนไอเท็มที่ถูกเรียกใช้
+    public static int poolSize = 18;  // ขนาดของ pool คือ 18 ชิ้น (12 ไอเท็มดี + 6 ไอเท็มไม่ดี)
+    
+    private static List<GameObject> goodItemsPool;
+    private static List<GameObject> badItemsPool;
+    private int itemsActivated = 0;
     private bool poolCompleted = false;
-
-    public ScoreManager1 scoreManagerPlayer;
-    public ScoreAI scoreManagerAI;
-    public GameObject winPanel;
-    public GameObject losePanel;
-
 
     private void Awake()
     {
-        // ซ่อน resultText ที่เริ่มเกม
-            if (resultText != null)
-                resultText.gameObject.SetActive(false);
-            if(winPanel != null)
-                winPanel.gameObject.SetActive(false);
-            if(losePanel != null)
-                losePanel.gameObject.SetActive(false);
-        
-        
-            // สร้าง list ของไอเท็ม
-        itemsPool = new List<GameObject>(poolSize);
-        
-        // เพิ่มไอเท็มตามลำดับที่ต้องการ (ปรับลำดับที่นี่)
-        for (int i = 0; i < poolSize; i++)
+        // สร้างรายการไอเท็มดีและไอเท็มไม่ดี
+        goodItemsPool = new List<GameObject>(12);
+        badItemsPool = new List<GameObject>(6);
+
+        // เพิ่มไอเท็มดีเข้า pool
+        for (int i = 0; i < 12; i++)
         {
-            GameObject prefab = (i % 2 == 0) ? goodItemPrefab : badItemPrefab;
-            var newItem = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            newItem.SetActive(false);
-            itemsPool.Add(newItem);
+            var goodItem = Instantiate(goodItemPrefab, Vector3.zero, Quaternion.identity);
+            goodItem.SetActive(false);
+            goodItemsPool.Add(goodItem);
+        }
+
+        // เพิ่มไอเท็มไม่ดีเข้า pool
+        for (int i = 0; i < 6; i++)
+        {
+            var badItem = Instantiate(badItemPrefab, Vector3.zero, Quaternion.identity);
+            badItem.SetActive(false);
+            badItemsPool.Add(badItem);
         }
     }
 
     public GameObject GetItemFromPool()
     {
-        if (poolCompleted) return null; // ถ้าวนครบแล้ว จะไม่วนไอเท็มอีก
+        if (poolCompleted) return null;
 
-        if (itemsPool.Count > 0)
+        float phase = (float)itemsActivated / poolSize;
+        float goodItemChance = 1.0f;
+
+        // ปรับอัตราส่วนการสุ่มไอเท็มตามเฟสของเกม
+        if (phase < 0.33f)
         {
-            var item = itemsPool[0];
-            item.SetActive(true);
-            itemsPool.RemoveAt(0);
-            itemsActivated++;
-
-            // ตรวจสอบหากไอเท็มถูกเรียกใช้ครบ 10 ครั้ง
-            if (itemsActivated >= poolSize)
-            {
-                poolCompleted = true; // กำหนดว่าวนครบแล้ว
-                SummarizeScores();
-            }
-
-            return item;
+            goodItemChance = 0.65f;  // ช่วงแรก 75% เป็นไอเท็มดี
+        }
+        else if (phase < 0.66f)
+        {
+            goodItemChance = 0.55f;  // ช่วงกลาง 60% เป็นไอเท็มดี
         }
         else
         {
-            Debug.Log("No items left in the pool!");
-            return null;
+            goodItemChance = 0.50f;  // ช่วงท้าย 50/50 ระหว่างดีและไม่ดี
         }
+
+        GameObject itemToSpawn;
+        if (Random.value <= goodItemChance && goodItemsPool.Count > 0)
+        {
+            itemToSpawn = goodItemsPool[0];
+            goodItemsPool.RemoveAt(0); // เอาไอเท็มออกจาก pool อย่างถาวร
+        }
+        else if (badItemsPool.Count > 0)
+        {
+            itemToSpawn = badItemsPool[0];
+            badItemsPool.RemoveAt(0); // เอาไอเท็มออกจาก pool อย่างถาวร
+        }
+        else
+        {
+            return null;  // หากไม่มีไอเท็มเหลือ
+        }
+
+        itemToSpawn.SetActive(true);
+        itemsActivated++;
+
+        // เช็คว่าไอเท็มใน pool ถูกดึงออกครบแล้วหรือยัง
+        if (itemsActivated >= poolSize)
+        {
+            poolCompleted = true;
+        }
+
+        return itemToSpawn;
     }
 
     public static void ReturnItemToPool(GameObject item)
     {
         item.SetActive(false);
-        if (itemsPool.Count < poolSize)
+
+        // เอาไอเท็มกลับเข้า pool ตามประเภทได้ หากต้องการในภายหลัง
+        if (item.CompareTag("GoodItem") && goodItemsPool.Count < 12)
         {
-            itemsPool.Add(item);  // เพิ่มไอเท็มกลับเข้า list ที่ตำแหน่งท้ายสุด
+            goodItemsPool.Add(item);
         }
-        else
+        else if (item.CompareTag("BadItem") && badItemsPool.Count < 6)
         {
-            Debug.Log("Item pool is full!");
-            // อาจจะทำลายไอเท็มหรือจัดการอย่างอื่น
+            badItemsPool.Add(item);
         }
     }
-    private void SummarizeScores()
+
+    // ฟังก์ชันเช็คว่า Pool หมดแล้วหรือยัง
+    public bool IsPoolCompleted()
     {
-        // การเริ่ม Coroutine เพื่อรอ 3 วินาทีก่อนแสดงผลลัพธ์
-        StartCoroutine(SummarizeScoresCoroutine());
-    }
-    
-    private IEnumerator SummarizeScoresCoroutine()
-    {
-        int playerScore = scoreManagerPlayer.GetCurrentScore();
-        int aiScore = scoreManagerAI.GetCurrentScoreAI();
-        
-        yield return new WaitForSeconds(3);
-
-        Debug.Log("Final Scores:");
-        Debug.Log("Player Score: " + playerScore);
-        Debug.Log("AI Score: " + aiScore);
-
-        if (playerScore > aiScore)
-        {
-            // ถ้าคะแนนเพลเยอร์มากกว่า AI
-            winPanel.gameObject.SetActive(true);
-            SoundManager.instance.Play(SoundManager.SoundName.WinSound);
-            resultText.text = "WIN";
-            resultText.color = Color.green; // ตั้งค่าสีเป็นเขียว
-        }
-        else if (playerScore < aiScore)
-        {
-            // ถ้าคะแนน AI มากกว่าเพลเยอร์
-            losePanel.gameObject.SetActive(true);
-            SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
-            resultText.text = "LOSE";
-            resultText.color = Color.red; // ตั้งค่าสีเป็นแดง
-        }
-        else
-        {
-            // ถ้าคะแนนเท่ากัน
-            resultText.text = "DRAW";
-            resultText.color = Color.yellow; // ตั้งค่าสีเป็นเหลือง
-        }
-
-        // อาจจะแสดงผลลัพธ์บน UI หรือจบเกม
+        return poolCompleted;
     }
 }
