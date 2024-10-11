@@ -11,37 +11,53 @@ public class Thrownable : MonoBehaviour
     public float maxThrowForce = 50f;
     public float holdTimeMultiplier = 10f;
     public float maxHoldTime = 2f;
+    public float chargeDecreaseRate = 1f; // อัตราที่ลดลงเมื่อกดปุ่มเพื่อลด
     public bool showHoldTimeUpdate = true; 
     
-    [Header("GUI")]
-    public TextMeshProUGUI holdTimeText; 
-    public Slider holdTimeSlider; 
+    [Header("Trajectory Line")]
+    public LineRenderer trajectoryLine; // เส้นแสดงทิศทางการปา
+    public int lineSegmentCount = 20;   // จำนวนจุดของเส้น
 
-    private float holdStartTime;
+    [Header("GUI")]
+    public TextMeshProUGUI holdTimeText;
+    public Slider holdTimeSlider;
+
+    private float holdDuration = 0f;  // ระยะเวลาที่ชาร์จ
 
     void Update()
     {
+        if (Time.timeScale == 0f) return; // ถ้าเกมหยุด ให้หยุดการทำงานของสคริปต์นี้เช่นกัน
+
         if (IsHoldingStart())
         {
-            holdStartTime = Time.time;
-            UpdateHoldTimeUI(0);
+            // เพิ่มค่าชาร์จเมื่อกดปุ่ม
+            holdDuration += chargeDecreaseRate * Time.deltaTime; 
+            holdDuration = Mathf.Min(holdDuration, maxHoldTime); // ห้ามเกินค่า maxHoldTime
         }
         else if (IsHoldingEnd())
         {
+            // ปาเมื่อปล่อยปุ่ม
             float throwForce = CalculateThrowForce();
             Vector2 position = Input.touchCount > 0 ? (Vector2)Input.GetTouch(0).position : (Vector2)Input.mousePosition;
             ThrowProjectile(position, throwForce);
-            UpdateHoldTimeUI(0);
+
+            // รีเซ็ตค่าเกจชาร์จ
+            holdDuration = 0f; 
+            UpdateHoldTimeUI(holdDuration);
+            trajectoryLine.enabled = false; // ซ่อนเส้นเมื่อปาแล้ว
         }
-        else if (IsHolding())
+
+        // วาดเส้นแสดงทิศทาง
+        if (holdDuration > 0)
         {
-            UpdateHoldTimeUI(CalculateHoldDuration());
+            UpdateHoldTimeUI(holdDuration);
+            DrawTrajectory(CalculateThrowForce()); // วาดเส้นบอกความแรง
         }
     }
 
     bool IsHoldingStart()
     {
-        return Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+        return Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Stationary);
     }
 
     bool IsHoldingEnd()
@@ -49,19 +65,9 @@ public class Thrownable : MonoBehaviour
         return Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
     }
 
-    bool IsHolding()
-    {
-        return Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended);
-    }
-
-    float CalculateHoldDuration()
-    {
-        return Mathf.Min(Time.time - holdStartTime, maxHoldTime);
-    }
-
     float CalculateThrowForce()
     {
-        return Mathf.Min(baseThrowForce + CalculateHoldDuration() * holdTimeMultiplier, maxThrowForce);
+        return Mathf.Min(baseThrowForce + holdDuration * holdTimeMultiplier, maxThrowForce);
     }
 
     void ThrowProjectile(Vector2 screenPosition, float throwForce)
@@ -71,28 +77,52 @@ public class Thrownable : MonoBehaviour
 
         if (rb != null)
         {
-            Vector2 direction = (Camera.main.ScreenToWorldPoint(screenPosition) - spawnPoint.position).normalized;// เพิ่มมุมในการโยน
-            direction.y += 0.5f; // ปรับค่านี้เพื่อเพิ่มความสูงที่ต้องการ
-            direction.Normalize(); // ทำให้ทิศทางมีความยาว 1
+            Vector2 direction = (Camera.main.ScreenToWorldPoint(screenPosition) - spawnPoint.position).normalized;
+            direction.y += 0.5f; // ปรับค่าความสูงของการปา
+            direction.Normalize();
 
             rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
-            
-            /*Vector2 direction = (Camera.main.ScreenToWorldPoint(screenPosition) - spawnPoint.position).normalized;
-            rb.AddForce(direction * throwForce, ForceMode2D.Impulse);*/
         }
     }
 
     void UpdateHoldTimeUI(float holdDuration)
+{
+    if (showHoldTimeUpdate)
     {
-        if (showHoldTimeUpdate)
-        {
-            float currentForce = Mathf.Min(baseThrowForce + holdDuration * holdTimeMultiplier, maxThrowForce);
+        // คำนวณค่าความแรงปัจจุบัน
+        float currentForce = Mathf.Min(baseThrowForce + holdDuration * holdTimeMultiplier, maxThrowForce);
+        
+        if (holdTimeText != null)
+            holdTimeText.text = $"POWER : {currentForce:F2}";
 
-            if (holdTimeText != null)
-                holdTimeText.text = $"POWER : {currentForce:F2}";
-
-            if (holdTimeSlider != null)
-                holdTimeSlider.value = holdDuration / maxHoldTime;
-        }
+        // อัพเดต Slider
+        if (holdTimeSlider != null)
+            holdTimeSlider.value = holdDuration / maxHoldTime; // ปรับ Slider ให้สัมพันธ์กับ holdDuration
     }
+}
+
+
+    void DrawTrajectory(float throwForce)
+{
+    trajectoryLine.enabled = true;  // เปิดใช้งาน LineRenderer
+    Vector3[] points = new Vector3[lineSegmentCount];
+    Vector2 startPoint = spawnPoint.position;
+    Vector2 direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - spawnPoint.position).normalized;
+    direction.y += 0.5f;  // ปรับเพื่อควบคุมแนวโค้ง
+
+    float timeStep = 0.1f; // ระยะเวลาที่ใช้ระหว่างแต่ละจุด
+    float maxTime = 1.0f; // ระยะเวลาสูงสุดที่ต้องการให้เส้นยาว (ปรับค่านี้ตามที่ต้องการ)
+
+    // คำนวณแต่ละจุดตามเวลาของ trajectory
+    for (int i = 0; i < lineSegmentCount; i++)
+    {
+        float time = i * timeStep;
+        if (time > maxTime) break; // จำกัดความยาวของเส้น
+        points[i] = startPoint + (direction * throwForce * time) + 0.5f * Physics2D.gravity * time * time;
+    }
+
+    trajectoryLine.positionCount = Mathf.Min(lineSegmentCount, (int)(maxTime / timeStep));
+    trajectoryLine.SetPositions(points);
+}
+
 }

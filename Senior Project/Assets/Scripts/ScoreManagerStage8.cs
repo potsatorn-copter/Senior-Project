@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // อย่าลืม import สำหรับ TextMeshPro
+using UnityEngine.UI;
 
 public class ScoreManagerStage8 : MonoBehaviour
 {
     public static ScoreManagerStage8 Instance;
-    public Text  scoreTextGet; // อ้างอิงไปยัง TextMeshPro text สำหรับแสดงคะแนน
+    public Text scoreTextGet;
     public Text scoreTextLoss;
-     int score = 0; // ตัวแปรสำหรับเก็บคะแนนปัจจุบัน
-     int lossScore = 0;
-    [SerializeField] private GameObject gameOverUI; // GameObject สำหรับแสดง UI เมื่อเกมจบ
-    [SerializeField] private GameObject gameWin;
+    private int score = 0;
+    private int lossScore = 0;
+    private int totalThrows = 0; // จำนวนการปาทั้งหมด
+    private const int maxThrows = 6; // จำนวนการปาที่ต้องทำให้ได้
+    private const int maxMisses = 2; // จำนวนพลาดสูงสุดที่อนุญาต
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject gameWinUI;
+
+    private bool isGameOver = false; // ตัวแปรบอกสถานะเกม
 
     private void Start()
     {
@@ -19,71 +24,76 @@ public class ScoreManagerStage8 : MonoBehaviour
         {
             Instance = this;
         }
-        UpdateScoreText(); // อัพเดท UI เมื่อเริ่มเกม
-        gameOverUI.SetActive(false); // ซ่อน UI เมื่อเริ่มเกม
-        gameWin.SetActive(false);
+
+        UpdateScoreText();
+        gameOverUI.SetActive(false);
+        gameWinUI.SetActive(false);
     }
 
     public void AddScore(int pointsToAdd)
     {
-        score += pointsToAdd;
-        UpdateScoreText(); // อัพเดท UI ทุกครั้งที่คะแนนเปลี่ยนแปลง
+        if (!isGameOver)
+        {
+            totalThrows++; // เพิ่มจำนวนการปาทุกครั้งที่ได้คะแนน
+            score += pointsToAdd;
+            UpdateScoreText();
+            CheckGameStatus(); // ตรวจสอบสถานะเกมหลังจากเพิ่มคะแนน
+        }
     }
 
     public void SubtractScore(int pointsToSubtract)
     {
-        lossScore += pointsToSubtract;
-        UpdateScoreText(); // อัพเดท UI ทุกครั้งที่คะแนนเปลี่ยนแปลง
+        if (!isGameOver)
+        {
+            lossScore += pointsToSubtract;
+            UpdateScoreText();
+            CheckGameStatus(); // ตรวจสอบสถานะเกมหลังจากลบคะแนน
+        }
     }
 
     private void UpdateScoreText()
     {
-        if (scoreTextGet != null) // ตรวจสอบว่าอ้างอิงไปยัง TextMeshPro ถูกต้อง
+        if (scoreTextGet != null)
         {
-            scoreTextGet.text = "ได้แต้ม  : " + score; // อัพเดทข้อความ UI
+            scoreTextGet.text = "ได้แต้ม  : " + score;
         }
-        if(scoreTextLoss != null)
+        if (scoreTextLoss != null)
         {
-            scoreTextLoss.text = "เสียแต้ม : " + lossScore; //
+            scoreTextLoss.text = "เสียแต้ม : " + lossScore;
         }
     }
-    /*public int GetCurrentScore()
-    {
-        return score;
-    }
-    public int GetCurrentLossScore()
-    {
-        return lossScore;
-    }*/
-    
 
-    private void GameOver()
+    private void CheckGameStatus()
     {
-        if(lossScore >= 3)
+        // เช็คสถานะการแพ้หรือชนะ
+        if (lossScore > maxMisses) // ถ้าพลาดเกินจำนวนที่อนุญาต
         {
-            SoundManager.instance.Play(SoundManager.SoundName.WinSound);
-            gameOverUI.SetActive(true); // แสดง UI เมื่อเกมจบ
+            TriggerGameOver();
+        }
+        else if (totalThrows >= maxThrows) // ถ้าปาครบจำนวนที่กำหนด
+        {
+            TriggerGameWin();
         }
     }
-    private void GameWin()
+
+    private void TriggerGameOver()
     {
-        if(score >= 3)
-        {
-            SoundManager.instance.Play(SoundManager.SoundName.WinSound);
-            gameWin.SetActive(true); // แสดง UI เมื่อเกมจบ
-        }
+        isGameOver = true; // ตั้งค่าเป็นเกมจบ
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
+        gameOverUI.SetActive(true);
+        Time.timeScale = 0f; // หยุดการทำงานของเกม
+    }
+
+    private void TriggerGameWin()
+    {
+        isGameOver = true; // ตั้งค่าเป็นเกมชนะ
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
+        gameWinUI.SetActive(true);
+        Time.timeScale = 0f; // หยุดการทำงานของเกม
     }
 
     private void Update()
     {
-        if(lossScore == 3)
-        {
-            GameOver();
-        }
-        if(score == 3)
-        {
-            GameWin();
-        }
-
+        if (isGameOver) return; // ถ้าเกมจบแล้ว ไม่ต้องทำอะไรต่อ
     }
 }
