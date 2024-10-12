@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -25,7 +25,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
+  ignoreMipmapLimit: 1
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -39,17 +39,17 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.8426417, y: 0.3238369}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 1371, y: 0, z: 61, w: 437}
+  spriteBorder: {x: 1400, y: 37, z: 71, w: 474}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -121,13 +121,38 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Bin_0
+      rect:
+        serializedVersion: 2
+        x: 1405
+        y: 33
+        width: 438
+        height: 571
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac2cce97589f1447a81122fe6bb0d0a
+      internalID: 214684471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline:
-    - - {x: 873, y: 30}
+    - - {x: 455, y: 23}
+      - {x: 501, y: -503}
+      - {x: 822, y: -499}
+      - {x: 875, y: 32}
+    physicsShape:
+    - - {x: 827, y: -502}
+      - {x: 504, y: -505}
       - {x: 455, y: 30}
-      - {x: 503, y: -504}
-      - {x: 825, y: -506}
-    physicsShape: []
+      - {x: 876, y: 26}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 1537655665
@@ -136,7 +161,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bin_0: 214684471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

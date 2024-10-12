@@ -73,37 +73,29 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-    
+
     public void Stage3Rule()
-    
     {
         SceneManager.LoadScene("Stage 3 Rule");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-        
+    
+    public void Stage3Play()
+    {
+        SceneManager.LoadScene("Stage 3 Play");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
     public void Stage4Rule()
     {
         SceneManager.LoadScene("Stage 4 Rule");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-    
     public void Stage4Play()
     {
         SceneManager.LoadScene("Stage 4 Play");
-        Time.timeScale = 1;
-        SoundManager.instance.Play(SoundManager.SoundName.Click);
-    }
-    public void Stage8Rule()
-    {
-        SceneManager.LoadScene("Stage 8 Rule");
-        Time.timeScale = 1;
-        SoundManager.instance.Play(SoundManager.SoundName.Click);
-    }
-    public void Stage8Play()
-    {
-        SceneManager.LoadScene("Stage 8 Play");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }

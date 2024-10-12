@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Itempool : MonoBehaviour
 {
     public GameObject goodItemPrefab;
     public GameObject badItemPrefab;
+    
+    public Sprite[] goodItemSprites; // สอง Sprite สำหรับไอเท็มดี
     public static int poolSize = 18;  // ขนาดของ pool คือ 18 ชิ้น (12 ไอเท็มดี + 6 ไอเท็มไม่ดี)
     
     private static List<GameObject> goodItemsPool;
@@ -47,11 +48,11 @@ public class Itempool : MonoBehaviour
         // ปรับอัตราส่วนการสุ่มไอเท็มตามเฟสของเกม
         if (phase < 0.33f)
         {
-            goodItemChance = 0.65f;  // ช่วงแรก 75% เป็นไอเท็มดี
+            goodItemChance = 0.65f;  // ช่วงแรก 65% เป็นไอเท็มดี
         }
         else if (phase < 0.66f)
         {
-            goodItemChance = 0.55f;  // ช่วงกลาง 60% เป็นไอเท็มดี
+            goodItemChance = 0.55f;  // ช่วงกลาง 55% เป็นไอเท็มดี
         }
         else
         {
@@ -63,6 +64,14 @@ public class Itempool : MonoBehaviour
         {
             itemToSpawn = goodItemsPool[0];
             goodItemsPool.RemoveAt(0); // เอาไอเท็มออกจาก pool อย่างถาวร
+
+            // สุ่มเลือก Sprite ให้กับไอเท็มดี
+            SpriteRenderer spriteRenderer = itemToSpawn.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null && goodItemSprites.Length > 0)
+            {
+                // เลือก Sprite แบบสุ่ม
+                spriteRenderer.sprite = goodItemSprites[Random.Range(0, goodItemSprites.Length)];
+            }
         }
         else if (badItemsPool.Count > 0)
         {
