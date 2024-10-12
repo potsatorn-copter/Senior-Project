@@ -47,8 +47,10 @@ public class SoundManager : MonoBehaviour
         Wrong,
         LoseSound,
         WinSound,
-        CreditSong
-       
+        CreditSong,
+        Jump,
+        Eat
+
     }
 
     public void Play(SoundName soundName)

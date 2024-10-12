@@ -6,6 +6,21 @@ using UnityEngine.SceneManagement;
 public class Mainmenu : MonoBehaviour
 {
     public void StartGame()
+    { 
+        SceneManager.LoadScene("Level");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.MainmenuSong);
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+    public void DoTest()
+    { 
+        SceneManager.LoadScene("MMSB FORM");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.MainmenuSong);
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+
+    public void SelectGame()
     {
         SceneManager.LoadScene("Stage");
         Time.timeScale = 1;
@@ -40,22 +55,21 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-    public void Stage4Rule()
-    {
-        SceneManager.LoadScene("Stage 4 Rule");
-        Time.timeScale = 1;
-        SoundManager.instance.Play(SoundManager.SoundName.Click);
-    }
-
     public void Stage1Play()
     {
         SceneManager.LoadScene("Stage 1 Play");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-    public void Stage4Play()
+    public void Stage2Rule()
     {
-        SceneManager.LoadScene("Stage 4 Play");
+        SceneManager.LoadScene("Stage 2 Rule");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    } 
+    public void Stage2Play()
+    {
+        SceneManager.LoadScene("Stage 2 Play");
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
@@ -80,5 +94,25 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
+    
+    public void Stage3Play()
+    {
+        SceneManager.LoadScene("Stage 3 Play");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+    public void Stage4Rule()
+    {
+        SceneManager.LoadScene("Stage 4 Rule");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+    public void Stage4Play()
+    {
+        SceneManager.LoadScene("Stage 4 Play");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
+    
     
 }

@@ -3,12 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BadItem
+  - GoodItem
+  - Ground
+  - TrampolinePlatform
+  - Score1
+  - Score2
+  - Score3
+  - Score4
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
