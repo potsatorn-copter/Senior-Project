@@ -51,9 +51,10 @@ public class CameraFollow : MonoBehaviour
     private void GameOver()
     {
         gameIsOver = true;
+        ScoremanagerScene2.Instance.EndGame(); 
+        gameOverUI.SetActive(true); // แสดง UI
         Time.timeScale = 0f; // หยุดเกมโดยการหยุดเวลา
         SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
-        gameOverUI.SetActive(true); // แสดง UI
     }
 
     // ฟังก์ชันสำหรับตรวจจับแพลตฟอร์มที่พ้นกล้องและทำลายมัน

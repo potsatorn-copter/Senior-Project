@@ -2023,11 +2023,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1212360454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 218, y: 129}
-  m_SizeDelta: {x: 189.08032, y: 134.4642}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -175, y: 86}
+  m_SizeDelta: {x: 189.08032, y: 134.46423}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1850265559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSpawnerTransform: {fileID: 1501047971}
   scoreManager: {fileID: 864885542}
-  delayBeforeReturning: 0.2
+  delayBeforeReturning: 0.5
 --- !u!135 &1898459637
 SphereCollider:
   m_ObjectHideFlags: 0

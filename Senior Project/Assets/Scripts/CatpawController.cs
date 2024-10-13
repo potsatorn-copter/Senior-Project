@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class CatpawController : MonoBehaviour
 {
     public Transform itemSpawnerTransform; // Reference to Itemspawner's Transform
     private Vector3 startPosition;
     public ScoreManager1 scoreManager;
     public float delayBeforeReturning = 0.2f;
+
+    private bool canClick = true; // ตัวแปรควบคุมการกดปุ่ม
 
     private void Start()
     {
@@ -21,7 +19,11 @@ public class CatpawController : MonoBehaviour
 
     public void OnButtonClick()
     {
-        MoveToTargetPosition();
+        if (canClick) // ตรวจสอบว่ากดปุ่มได้หรือไม่
+        {
+            canClick = false; // ปิดการกดปุ่มระหว่างรอการเคลื่อนที่และการคืนตำแหน่ง
+            MoveToTargetPosition();
+        }
     }
 
     private void MoveToTargetPosition()
@@ -42,6 +44,7 @@ public class CatpawController : MonoBehaviour
     {
         yield return new WaitForSeconds(delayBeforeReturning);
         transform.position = startPosition; // กลับสู่ตำแหน่งเริ่มต้น
+        canClick = true; // เปิดให้กดปุ่มได้อีกครั้ง
     }
 
     private void OnTriggerEnter(Collider other)

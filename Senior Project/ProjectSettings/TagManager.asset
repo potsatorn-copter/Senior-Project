@@ -12,6 +12,8 @@ TagManager:
   - Score2
   - Score3
   - Score4
+  - Apple
+  - Star
   layers:
   - Default
   - TransparentFX
