@@ -7,30 +7,48 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         if (cupManager.IsShuffling())
-            return; // ถ้ายังอยู่ในขั้นตอนการสลับ ให้ข้ามการตรวจจับคลิก
+            return; // ถ้ายังอยู่ในขั้นตอนการสลับ ให้ข้ามการตรวจจับคลิกและสัมผัส
 
-        if (Input.GetMouseButtonDown(0)) // ตรวจสอบเมื่อผู้เล่นคลิกเมาส์
+        // สำหรับการคลิกเม้าส์
+        if (Input.GetMouseButtonDown(0)) 
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit)) // ใช้ raycast ตรวจสอบว่าคลิกบนถ้วยหรือไม่
-            {
-                Debug.Log("คลิกถูกต้องที่: " + hit.transform.name); // แสดงชื่อของวัตถุที่ถูกคลิก
+            HandleInput(Input.mousePosition);
+        }
 
-                for (int i = 0; i < cupManager.cups.Length; i++)
+        // สำหรับการสัมผัสบนมือถือ
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                HandleInput(touch.position);
+            }
+        }
+    }
+
+    // ฟังก์ชันสำหรับการจัดการตำแหน่งการสัมผัสและการคลิก
+    void HandleInput(Vector3 inputPosition)
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(inputPosition);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log("คลิกถูกต้องที่: " + hit.transform.name); 
+
+            for (int i = 0; i < cupManager.cups.Length; i++)
+            {
+                if (hit.transform == cupManager.cups[i].transform)
                 {
-                    if (hit.transform == cupManager.cups[i].transform)
-                    {
-                        Debug.Log("คลิกที่ถ้วย: " + i);
-                        cupManager.CheckCup(i); // เรียกฟังก์ชัน CheckCup เมื่อคลิกที่ถ้วย
-                        break; // หยุดการตรวจสอบเมื่อพบถ้วยที่ถูกคลิก
-                    }
+                    Debug.Log("คลิกที่ถ้วย: " + i);
+                    cupManager.CheckCup(i); 
+                    break;
                 }
             }
-            else
-            {
-                Debug.Log("ไม่ได้คลิกบนถ้วย");
-            }
+        }
+        else
+        {
+            Debug.Log("ไม่ได้คลิกบนถ้วย");
         }
     }
 }

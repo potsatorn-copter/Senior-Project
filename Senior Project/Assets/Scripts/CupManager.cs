@@ -125,8 +125,8 @@ public class CupManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("คุณทายผิด! ลูกบอลอยู่ใต้ถ้วยที่อื่น");
-                StartCoroutine(RevealAllCups());
+                Debug.Log("คุณทายผิด! ยกถ้วยที่เลือกและถ้วยที่ถูกต้อง");
+                StartCoroutine(RevealCorrectAndSelectedCup(selectedIndex));
             }
 
             gameStarted = false;
@@ -138,27 +138,25 @@ public class CupManager : MonoBehaviour
         // ยกถ้วยที่ถูกเลือกขึ้น
         cups[selectedIndex].transform.position += new Vector3(0, 2, 0); 
 
-        // หากผู้เล่นเลือกถ้วยที่ถูกต้อง ลูกบอลจะปรากฏ
-        if (cups[selectedIndex].transform == cupWithBall)
-        {
-            ball.transform.SetParent(null); // ปลดบอลออกจากการเป็นลูกของถ้วย
-            ball.transform.position = cups[selectedIndex].transform.position + new Vector3(0, -3.0f, 0); // ปรับตำแหน่งลูกบอลให้อยู่ต่ำลง (ระดับเดียวกับการเปิดครั้งแรก)
-            ball.GetComponent<Renderer>().enabled = true; // แสดงลูกบอล
-        }
-
         yield return new WaitForSeconds(1); // รอให้ผู้เล่นเห็นการยกถ้วย
     }
 
-    IEnumerator RevealAllCups()
+    // ยกถ้วยที่เลือกและถ้วยที่มีลูกบอล
+    IEnumerator RevealCorrectAndSelectedCup(int selectedIndex)
     {
-        for (int i = 0; i < cups.Length; i++)
-        {
-            if (cups[i].transform != cupWithBall)
-            {
-                cups[i].transform.position += new Vector3(0, 2, 0); // ยกถ้วยทั้งหมดที่ไม่ถูกเลือกขึ้น
-            }
-        }
-        yield return null;
+        // ยกถ้วยที่ผู้เล่นเลือกขึ้น
+        cups[selectedIndex].transform.position += new Vector3(0, 2, 0);
+        
+        // รอให้ผู้เล่นเห็นถ้วยที่เลือกผิดถูกยกขึ้น
+        yield return new WaitForSeconds(1);
+
+        // ยกถ้วยที่มีลูกบอลขึ้นและแสดงบอล
+        cupWithBall.position += new Vector3(0, 2, 0);
+        ball.transform.SetParent(null); // ปลดบอลออกจากการเป็นลูกของถ้วย
+        ball.transform.position = cupWithBall.position + new Vector3(0, -3.0f, 0); // แสดงลูกบอลในระดับ -3.0f
+        ball.GetComponent<Renderer>().enabled = true;
+
+        yield return new WaitForSeconds(1); // รอให้ผู้เล่นเห็นการยกถ้วยที่ถูกต้อง
     }
 
     public bool IsShuffling()
