@@ -5,7 +5,7 @@ using UnityEngine;
 public class AImanager : MonoBehaviour
 {
     public SmartAI aiHand1; // มือ AI ตัวแรก
-    public SmartAI aiHand2; // มือ AI ตัวที่สอง (เก่งกว่า)
+    public AdvancedAI aiHand2; // มือ AI ตัวที่สอง (เก่งกว่า)
 
     private void Start()
     {

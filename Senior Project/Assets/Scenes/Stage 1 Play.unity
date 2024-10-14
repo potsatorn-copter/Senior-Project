@@ -2191,7 +2191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiHand1: {fileID: 103250062}
-  aiHand2: {fileID: 0}
+  aiHand2: {fileID: 1810003934}
 --- !u!4 &1839710753
 Transform:
   m_ObjectHideFlags: 0
