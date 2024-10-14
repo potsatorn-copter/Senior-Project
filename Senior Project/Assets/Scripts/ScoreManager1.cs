@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,14 @@ public class ScoreManager1 : MonoBehaviour
     public GameObject endGamePanel; // สำหรับแผง UI ของหน้าจอจบเกม
     private int goodItemCount = 0; // นับจำนวนไอเท็มดีที่เก็บได้
     private int finalScore = 0; // คะแนนสุดท้าย
+
+    // กำหนดช่วงคะแนนสำหรับแต่ละระดับความยาก
+    private Dictionary<int, int[]> difficultyThresholds = new Dictionary<int, int[]>()
+    {
+        { 0, new int[] { 11, 9, 6, 3, 1 } }, // Easy: [11-12 = 10, 9-10 = 8, 6-8 = 6, 3-5 = 4, 1-2 = 2]
+        { 1, new int[] { 14, 12, 9, 5, 1 } }, // Normal: [14-15 = 10, 12-13 = 8, 9-11 = 6, 5-8 = 4, 1-4 = 2]
+        { 2, new int[] { 15, 13, 9, 5, 1 } }  // Hard: [15-16 = 10, 13-14 = 8, 9-12 = 6, 5-8 = 4, 1-4 = 2]
+    };
 
     private void Start()
     {
@@ -37,30 +46,22 @@ public class ScoreManager1 : MonoBehaviour
     // ฟังก์ชันคำนวณคะแนนสุดท้าย
     public void CalculateFinalScore()
     {
-        if (goodItemCount >= 11)
-        {
-            finalScore = 10; // ได้ 11-12 ชิ้น ได้ 10 คะแนน
-        }
-        else if (goodItemCount >= 9)
-        {
-            finalScore = 8; // ได้ 9-10 ชิ้น ได้ 8 คะแนน
-        }
-        else if (goodItemCount >= 6)
-        {
-            finalScore = 6; // ได้ 6-8 ชิ้น ได้ 6 คะแนน
-        }
-        else if (goodItemCount >= 3)
-        {
-            finalScore = 4; // ได้ 3-5 ชิ้น ได้ 4 คะแนน
-        }
-        else if (goodItemCount >= 1)
-        {
-            finalScore = 2; // ได้ 1-2 ชิ้น ได้ 2 คะแนน
-        }
+        int difficulty = GameSettings.difficultyLevel; // ตรวจสอบระดับความยากจาก GameSettings
+        int[] thresholds = difficultyThresholds[difficulty]; // นำ threshold ของระดับความยากนั้นมาใช้
+
+        // ใช้ threshold ในการกำหนดคะแนน
+        if (goodItemCount >= thresholds[0])
+            finalScore = 10;
+        else if (goodItemCount >= thresholds[1])
+            finalScore = 8;
+        else if (goodItemCount >= thresholds[2])
+            finalScore = 6;
+        else if (goodItemCount >= thresholds[3])
+            finalScore = 4;
+        else if (goodItemCount >= thresholds[4])
+            finalScore = 2;
         else
-        {
-            finalScore = 0; // ถ้าไม่ได้เก็บไอเท็มดีเลย ได้ 0 คะแนน
-        }
+            finalScore = 0;
 
         // แสดงผลคะแนนสุดท้ายใน UI
         if (finalScoreText != null)

@@ -12,7 +12,7 @@ public class SceneController : MonoBehaviour
     public const float offsetY = 5f;
     private int successfulMatches = 0;
     public const int totalMatches = gridRows * gridCols / 2; // 6 คู่
-    private float timeRemaining = 30f; // เวลา
+    private float timeRemaining = 50f; // เวลา
     private bool isGameOver = false; // สถานะเกมจบหรือไม่
 
     [SerializeField] private MainCard originalCard;
@@ -141,10 +141,12 @@ public class SceneController : MonoBehaviour
 
     private void GameOver()
     {
+        if (isGameOver) return; // ตรวจสอบว่าถ้าเกมจบแล้วให้หยุดทำงาน
+
         SoundManager.instance.Play(SoundManager.SoundName.WinSound);
-    
+
         Debug.Log("GameOver function called"); // ตรวจสอบว่าฟังก์ชันนี้ถูกเรียกจริงหรือไม่
-    
+
         // ปรับการคิดคะแนนตามจำนวนคู่ที่จับได้
         if (successfulMatches >= 5)
         {
@@ -162,9 +164,11 @@ public class SceneController : MonoBehaviour
         {
             _score = 0; // ไม่มีคู่ที่จับได้เลย
         }
-    
+
         scoreLabel.text = "Final Score: " + _score; // แสดงคะแนนสุดท้าย
         gameOverUI.SetActive(true); // แสดง UI เมื่อเกมจบ
+    
+        isGameOver = true; // ตั้งค่าเกมเป็นสถานะจบเกม
     }
 
 }

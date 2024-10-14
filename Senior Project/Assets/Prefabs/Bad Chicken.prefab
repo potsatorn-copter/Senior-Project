@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 166573123679009592}
   - component: {fileID: -899537064426943863}
   m_Layer: 3
-  m_Name: Bad Fish
+  m_Name: Bad Chicken
   m_TagString: BadItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

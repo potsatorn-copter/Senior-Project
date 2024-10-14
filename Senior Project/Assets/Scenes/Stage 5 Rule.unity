@@ -614,7 +614,7 @@ PrefabInstance:
       objectReference: {fileID: 1825585902}
     - target: {fileID: 7634273146300422002, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Stage4Rule
+      value: Stage5Rule
       objectReference: {fileID: 0}
     - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: mutedSprite

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 210802340298987406}
   - component: {fileID: 655288909996407819}
   m_Layer: 3
-  m_Name: Remote
+  m_Name: Bread
   m_TagString: GoodItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
