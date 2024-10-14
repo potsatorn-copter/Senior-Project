@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Stage.unity
-    guid: a2a280ba901bac94dbde901a761151a5
-  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 52135a244bc2a4e41a96fe79701d2f17
   - enabled: 1
@@ -44,6 +41,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 4 Play.unity
     guid: 000f293be9ad55e4a8684d8605a3622e
+  - enabled: 1
+    path: Assets/Scenes/Stage 5 Play.unity
+    guid: 81419e5e083ba844ea296537571dcdcf
+  - enabled: 1
+    path: Assets/Scenes/Stage 5 Rule.unity
+    guid: 533d5730ffbb40c499c4ab2359fce27b
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6358f0e105f473043a4ea331c1c4911e, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fc8d0b46a541c56429b1c4fce79718aa, type: 2}
