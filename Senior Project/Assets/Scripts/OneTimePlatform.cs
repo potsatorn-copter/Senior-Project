@@ -1,14 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TrampolinePlatform : MonoBehaviour
+public class OneTimePlatform : MonoBehaviour
 {
-    public float bounceForce = 3f;
-    public bool isOneTime = false;  // ระบุว่าเป็นแพลตฟอร์มชนิดใช้ครั้งเดียวหรือไม่
-    public float disappearDelay = 0.5f; // เวลาหลังจากที่ผู้เล่นเหยียบแล้วจะหายไป (ถ้าเป็นแบบ OneTime)
-
+     public float bounceForce = 3f; // แรงดีดกลับเมื่อผู้เล่นเหยียบ
+    public float disappearDelay = 0.5f; // กำหนดเวลาหลังจากที่ผู้เล่นเหยียบแล้วแพลตฟอร์มจะหายไป
     private bool hasBeenUsed = false; // ตรวจสอบว่าแพลตฟอร์มถูกใช้หรือยัง
-    public bool isSteppedOn = false; // ตรวจสอบว่าแพลตฟอร์มถูกเหยียบเพื่อบวกคะแนนหรือยัง
+    public bool isSteppedOn = false; // ตรวจสอบว่าแพลตฟอร์มถูกเหยียบหรือยัง
     private Collider platformCollider;
 
     private void Start()
@@ -35,23 +34,17 @@ public class TrampolinePlatform : MonoBehaviour
                     playerController.hasJumpBoost = false; // ใช้บูสต์แล้ว
                 }
 
-                // ถ้าแพลตฟอร์มยังไม่เคยถูกเหยียบ ให้บวกคะแนน
-                if (!isSteppedOn)
-                {
-                    isSteppedOn = true; // บันทึกว่าถูกเหยียบแล้ว
-                    ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน
-                }
+                // เพิ่มคะแนนเมื่อเหยียบแพลตฟอร์ม
+                ScoremanagerScene2.Instance.AddScore(100);
 
                 // เพิ่มแรงกระโดด
                 rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // รีเซ็ตความเร็วในแนวดิ่ง
                 rb.AddForce(Vector3.up * finalBounceForce, ForceMode.Impulse);  // ส่งแรงขึ้นด้านบน
                 SoundManager.instance.Play(SoundManager.SoundName.Jump);
 
-                if (isOneTime) // ถ้าเป็นแพลตฟอร์มชนิดใช้ครั้งเดียว
-                {
-                    hasBeenUsed = true; // ทำให้แพลตฟอร์มถูกใช้แล้ว
-                    StartCoroutine(Disappear()); // ทำให้แพลตฟอร์มหายไปหลังจากใช้งาน
-                }
+                // ทำให้แพลตฟอร์มใช้ได้ครั้งเดียวแล้วหายไป
+                hasBeenUsed = true;
+                StartCoroutine(Disappear()); // ทำให้แพลตฟอร์มหายไปหลังจากใช้งาน
             }
         }
     }
@@ -62,3 +55,4 @@ public class TrampolinePlatform : MonoBehaviour
         Destroy(gameObject); // ลบวัตถุแพลตฟอร์มออกจากเกม
     }
 }
+

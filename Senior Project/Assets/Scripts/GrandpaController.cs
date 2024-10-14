@@ -50,23 +50,46 @@ public class GrandpaController : MonoBehaviour
         }
     }
 
-    // Function to detect collision with other objects
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the object the player collided with has the tag "TrampolinePlatform"
-        if (collision.gameObject.CompareTag("TrampolinePlatform"))
+        // ตรวจสอบว่าแพลตฟอร์มที่ชนคือ TrampolinePlatform หรือ FakePlatform
+        TrampolinePlatform trampolinePlatform = collision.gameObject.GetComponent<TrampolinePlatform>();
+        FakePlatform fakePlatform = collision.gameObject.GetComponent<FakePlatform>();
+
+        if (trampolinePlatform != null && !trampolinePlatform.isSteppedOn)
         {
-            // Iterate through all contact points to check if the collision was from the top
-            foreach (ContactPoint contact in collision.contacts)
-            {
-                // Check if the contact point normal is pointing upwards (indicating a top collision)
-                if (Vector3.Dot(contact.normal, Vector3.up) > 0.7f)
-                {
-                    // Play the jump sound when the player hits the top of the platform
-                    SoundManager.instance.Play(SoundManager.SoundName.Jump);
-                    break;
-                }
-            }
+            // กรณี TrampolinePlatform และยังไม่ได้เหยียบ
+            ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน
+            trampolinePlatform.isSteppedOn = true; // บันทึกว่าแพลตฟอร์มถูกเหยียบแล้ว
+
+            // เล่นเสียงเมื่อเหยียบแพลตฟอร์ม
+            SoundManager.instance.Play(SoundManager.SoundName.Jump);
+        }
+        else if (fakePlatform != null && !fakePlatform.isSteppedOn)
+        {
+            // กรณี FakePlatform และยังไม่ได้เหยียบ
+            ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน
+            fakePlatform.isSteppedOn = true; // บันทึกว่าแพลตฟอร์มถูกเหยียบแล้ว
+
+            // เล่นเสียงเมื่อเหยียบแพลตฟอร์ม
+            SoundManager.instance.Play(SoundManager.SoundName.Jump);
+        }
+    }
+
+    // ฟังก์ชันตรวจจับการชนกับไอเทมพิเศษ เช่น ดาวหรือแอปเปิ้ล
+    private void OnTriggerEnter(Collider other)
+    {
+        // เมื่อชนกับดาว เพิ่ม 100 คะแนน
+        if (other.CompareTag("Star"))
+        {
+            ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน 100
+            Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
+        }
+        // เมื่อชนกับแอปเปิ้ล เพิ่ม 50 คะแนน
+        else if (other.CompareTag("Apple"))
+        {
+            ScoremanagerScene2.Instance.AddScore(50); // เพิ่มคะแนน 50
+            Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
         }
     }
 

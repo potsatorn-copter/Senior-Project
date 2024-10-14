@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 31c91c620ab68f8479f88bccfc2b9ccb
+guid: f46623f505cf34147b5fdf60c7ad470b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OBJ_AP_0
+      name: Stage 3 Cup 2_0
       rect:
         serializedVersion: 2
-        x: 53
-        y: 37
-        width: 291
-        height: 344
+        x: 765
+        y: 499
+        width: 489
+        height: 550
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5db3e1d6af6c9b448a4bb34d5d9aa356
-      internalID: -517488498
+      spriteID: 5fad62c40ae96c6438111c6efcfb5b0e
+      internalID: -1107431351
       vertices: []
       indices: 
       edges: []
@@ -159,7 +159,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c7c02c82a48d3a74eb7094dc966ed74b
+    spriteID: aaa503fe1e246ed4c8970bc2b598aa19
     internalID: 0
     vertices: []
     indices: 
@@ -167,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OBJ_AP_0: -517488498
+      Stage 3 Cup 2_0: -1107431351
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
