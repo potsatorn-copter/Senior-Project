@@ -204,7 +204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1825585902}
         m_TargetAssemblyTypeName: Mainmenu, Assembly-CSharp
-        m_MethodName: Stage4Play
+        m_MethodName: Stage3Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -931,7 +931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0E01\u0E0F\u0E01\u0E32\u0E23\u0E40\u0E25\u0E48\u0E19 Stage 4"
+  m_text: "\u0E01\u0E0F\u0E01\u0E32\u0E23\u0E40\u0E25\u0E48\u0E19 Stage 3"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
   m_sharedMaterial: {fileID: -4568197349219019755, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}

@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 681029158}
     - target: {fileID: 2684800324186639464, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: Stage5Rule
       objectReference: {fileID: 0}
     - target: {fileID: 6478968082408267430, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_Name
