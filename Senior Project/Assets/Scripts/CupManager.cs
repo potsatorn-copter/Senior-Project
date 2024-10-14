@@ -1,20 +1,72 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine.UI;
 
 public class CupManager : MonoBehaviour
 {
     public GameObject[] cups; // ถ้วยทั้งหมด
     public GameObject ball; // ลูกบอล
+    public TextMeshProUGUI scoreText; // แสดงจำนวนการตอบถูก
+    public TextMeshProUGUI finalScoreText; // แสดงคะแนนสุดท้าย
+    public TextMeshProUGUI roundText; // แสดงรอบการเล่น
+    public Button nextRoundButton; // ปุ่มสำหรับเริ่มรอบถัดไป
+    public GameObject finalScoreUI; // GameObject ที่เก็บ UI สำหรับแสดงคะแนนสุดท้าย
+
     private Transform cupWithBall; // ถ้วยที่มีลูกบอลอยู่
     private bool shuffling = false; // สถานะการสลับถ้วย
     private bool gameStarted = false; // สถานะเริ่มเกม
+    private int roundCount = 0; // ตัวนับจำนวนรอบ
+    private int correctGuesses = 0; // จำนวนครั้งที่ทายถูก
+    private int finalScore = 0; // คะแนนสุดท้าย
     public float liftHeight = 2.0f; // ความสูงที่ถ้วยยกขึ้น
     public float shuffleDuration = 1.0f; // ระยะเวลาที่ใช้ในการสลับแต่ละครั้ง
-    public int shuffleTimes = 10; // จำนวนครั้งในการสลับ
+    public int shuffleTimes = 8; // จำนวนครั้งในการสลับ
+
+    private Vector3[] initialCupPositions; // ตำแหน่งเริ่มต้นของถ้วยทั้งหมด
 
     void Start()
     {
-        StartCoroutine(ShowBallThenCover()); // เริ่มด้วยการแสดงลูกบอล
+        // ซ่อน UI สำหรับคะแนนสุดท้ายตอนเริ่มเกม
+        finalScoreUI.SetActive(false);
+
+        // บันทึกตำแหน่งเริ่มต้นของถ้วย
+        initialCupPositions = new Vector3[cups.Length];
+        for (int i = 0; i < cups.Length; i++)
+        {
+            initialCupPositions[i] = cups[i].transform.position;
+        }
+
+        nextRoundButton.onClick.AddListener(StartNewRound);
+        UpdateUI();
+        StartNewRound(); // เริ่มเกมครั้งแรก
+    }
+
+    // เริ่มรอบใหม่
+    void StartNewRound()
+    {
+        roundCount++;
+        ResetCupsPosition(); // รีเซ็ตตำแหน่งถ้วยทั้งหมด
+        UpdateUI();
+        StartCoroutine(ShowBallThenCover());
+        nextRoundButton.gameObject.SetActive(false); // ซ่อนปุ่มเมื่อเริ่มรอบใหม่
+    }
+
+    // รีเซ็ตตำแหน่งถ้วยทั้งหมดกลับไปที่ตำแหน่งเริ่มต้น
+    void ResetCupsPosition()
+    {
+        for (int i = 0; i < cups.Length; i++)
+        {
+            cups[i].transform.position = initialCupPositions[i];
+        }
+    }
+
+    // อัปเดต UI
+    void UpdateUI()
+    {
+        scoreText.text = "Correct Guesses: " + correctGuesses;
+        finalScoreText.text = "Final Score: " + finalScore;
+        roundText.text = "Round: " + roundCount + "/5";
     }
 
     // แสดงลูกบอลที่อยู่ใต้ถ้วยในรอบแรก แล้วเอาถ้วยลงมาปิด
@@ -25,36 +77,23 @@ public class CupManager : MonoBehaviour
 
         // ยกถ้วยขึ้นเพื่อแสดงลูกบอล
         cupWithBall.position += new Vector3(0, liftHeight, 0);
-
-        // กำหนดตำแหน่งของลูกบอลให้อยู่ใต้ถ้วยที่ถูกยก พร้อมกับปรับให้ลูกบอลต่ำลงอีกนิด
         ball.transform.SetParent(cupWithBall);
-        ball.transform.localPosition = new Vector3(0, -3.0f, 0); // ปรับตำแหน่งลูกบอลให้อยู่ต่ำลงกว่าเดิม
+        ball.transform.localPosition = new Vector3(0, -4.0f, 0);
 
-        yield return new WaitForSeconds(2); // รอให้ผู้เล่นเห็นลูกบอล
+        yield return new WaitForSeconds(2); // แสดงบอลให้ผู้เล่นเห็นสักครู่
 
         // วางถ้วยลงเพื่อปิดลูกบอล
         cupWithBall.position -= new Vector3(0, liftHeight, 0);
+        ball.transform.localPosition = new Vector3(0, -0.5f, 0);
 
-        // รีเซ็ตตำแหน่งลูกบอลหลังจากถ้วยวางลง
-        ball.transform.localPosition = new Vector3(0, -0.5f, 0); // ปรับตำแหน่งลูกบอลให้อยู่ใต้ถ้วยหลังวางลง
+        yield return new WaitForSeconds(1); // รออีกสักครู่เพื่อให้ผู้เล่นได้เตรียมตัว
 
-        yield return StartCoroutine(WaitForPlayerClick());
-        StartCoroutine(ShuffleAnimation()); // เริ่มสลับถ้วยหลังจากปิดลูกบอล
-    }
-
-    IEnumerator WaitForPlayerClick()
-    {
-        Debug.Log("คลิกเพื่อเริ่มการสลับถ้วย...");
-        while (!Input.GetMouseButtonDown(0))
-        {
-            yield return null;
-        }
+        StartCoroutine(ShuffleAnimation());
     }
 
     IEnumerator ShuffleAnimation()
     {
         shuffling = true;
-        Debug.Log("Ball before shuffle");
 
         for (int i = 0; i < shuffleTimes; i++)
         {
@@ -71,7 +110,6 @@ public class CupManager : MonoBehaviour
             float elapsedTime = 0;
             while (elapsedTime < shuffleDuration)
             {
-                // สลับตำแหน่งของถ้วย A และ B โดยใช้ Lerp
                 cups[cupA].transform.position = Vector3.Lerp(cupAPosition, cupBPosition, (elapsedTime / shuffleDuration));
                 cups[cupB].transform.position = Vector3.Lerp(cupBPosition, cupAPosition, (elapsedTime / shuffleDuration));
 
@@ -79,84 +117,76 @@ public class CupManager : MonoBehaviour
                 yield return null;
             }
 
-            // ทำให้แน่ใจว่าถ้วยสลับตำแหน่งกันเสร็จสิ้น
             cups[cupA].transform.position = cupBPosition;
             cups[cupB].transform.position = cupAPosition;
-
-            // ตรวจสอบว่าถ้วยที่มีลูกบอลคือถ้วยไหน และทำให้ลูกบอลติดตามถ้วยนั้นเสมอ
-            if (cupWithBall == cups[cupA].transform)
-            {
-                cupWithBall = cups[cupB].transform; // อัปเดตว่าถ้วยที่มีลูกบอลได้ถูกย้ายไปที่ถ้วย B
-            }
-            else if (cupWithBall == cups[cupB].transform)
-            {
-                cupWithBall = cups[cupA].transform; // อัปเดตว่าถ้วยที่มีลูกบอลได้ถูกย้ายไปที่ถ้วย A
-            }
-
-            Debug.Log($"Ball after shuffle {i + 1}: Ball is now at the correct cup");
-
-            yield return new WaitForSeconds(0.1f);
         }
 
-        // เมื่อการสลับเสร็จสิ้น ให้ย้ายลูกบอลกลับไปที่ถ้วยที่ถูกต้อง
         ball.transform.SetParent(cupWithBall);
-        ball.transform.localPosition = new Vector3(0, -0.5f, 0); // ปรับตำแหน่งลูกบอลให้อยู่ใต้ถ้วยเสมอ
+        ball.transform.localPosition = new Vector3(0, -0.5f, 0);
 
         shuffling = false;
         gameStarted = true;
-        Debug.Log("การสลับเสร็จสิ้น คลิกที่ถ้วยเพื่อเลือก");
     }
 
     public void CheckCup(int selectedIndex)
     {
         if (gameStarted)
         {
-            // ยกถ้วยที่ผู้เล่นเลือกขึ้น
             StartCoroutine(LiftSelectedCup(selectedIndex));
 
             if (cups[selectedIndex].transform == cupWithBall)
             {
-                Debug.Log("คุณทายถูก! ลูกบอลอยู่ใต้ถ้วยนี้");
-
-                // แสดงลูกบอลเมื่อทายถูก
-                ball.transform.SetParent(null); // ปลดบอลออกจากการเป็นลูกของถ้วย
-                ball.transform.position = cups[selectedIndex].transform.position + new Vector3(0, -3.0f, 0); // วางลูกบอลในตำแหน่งเดิมเหมือนตอนเปิดถ้วยครั้งแรก
+                correctGuesses++; // เพิ่มจำนวนครั้งที่ทายถูก
+                finalScore = correctGuesses * 2; // คำนวณคะแนนสุดท้าย
+                ball.transform.SetParent(null);
+                ball.transform.position = cups[selectedIndex].transform.position + new Vector3(0, -6.0f, 0);
                 ball.GetComponent<Renderer>().enabled = true;
             }
             else
             {
-                Debug.Log("คุณทายผิด! ยกถ้วยที่เลือกและถ้วยที่ถูกต้อง");
                 StartCoroutine(RevealCorrectAndSelectedCup(selectedIndex));
             }
 
             gameStarted = false;
+            UpdateUI();
+
+            if (roundCount < 5)
+            {
+                nextRoundButton.gameObject.SetActive(true); // แสดงปุ่มเมื่อรอบจบ
+            }
+            else
+            {
+                // แสดง UI คะแนนสุดท้าย หลังจาก Reveal เสร็จสิ้น
+                StartCoroutine(ShowFinalScoreAfterReveal());
+            }
         }
+    }
+
+    IEnumerator ShowFinalScoreAfterReveal()
+    {
+        // รอจนกว่า Reveal จะเสร็จ
+        yield return new WaitForSeconds(2);
+        Debug.Log("เกมจบแล้ว! คะแนนทั้งหมด: " + finalScore);
+        finalScoreUI.SetActive(true);
     }
 
     IEnumerator LiftSelectedCup(int selectedIndex)
     {
-        // ยกถ้วยที่ถูกเลือกขึ้น
-        cups[selectedIndex].transform.position += new Vector3(0, 2, 0); 
-
-        yield return new WaitForSeconds(1); // รอให้ผู้เล่นเห็นการยกถ้วย
+        cups[selectedIndex].transform.position += new Vector3(0, 2, 0);
+        yield return new WaitForSeconds(1);
     }
 
-    // ยกถ้วยที่เลือกและถ้วยที่มีลูกบอล
     IEnumerator RevealCorrectAndSelectedCup(int selectedIndex)
     {
-        // ยกถ้วยที่ผู้เล่นเลือกขึ้น
         cups[selectedIndex].transform.position += new Vector3(0, 2, 0);
-        
-        // รอให้ผู้เล่นเห็นถ้วยที่เลือกผิดถูกยกขึ้น
         yield return new WaitForSeconds(1);
 
-        // ยกถ้วยที่มีลูกบอลขึ้นและแสดงบอล
         cupWithBall.position += new Vector3(0, 2, 0);
-        ball.transform.SetParent(null); // ปลดบอลออกจากการเป็นลูกของถ้วย
-        ball.transform.position = cupWithBall.position + new Vector3(0, -3.0f, 0); // แสดงลูกบอลในระดับ -3.0f
+        ball.transform.SetParent(null);
+        ball.transform.position = cupWithBall.position + new Vector3(0, -6.0f, 0);
         ball.GetComponent<Renderer>().enabled = true;
 
-        yield return new WaitForSeconds(1); // รอให้ผู้เล่นเห็นการยกถ้วยที่ถูกต้อง
+        yield return new WaitForSeconds(1);
     }
 
     public bool IsShuffling()
