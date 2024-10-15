@@ -83,12 +83,14 @@ public class GrandpaController : MonoBehaviour
         if (other.CompareTag("Star"))
         {
             ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน 100
+            SoundManager.instance.Play(SoundManager.SoundName.Eat);
             Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
         }
         // เมื่อชนกับแอปเปิ้ล เพิ่ม 50 คะแนน
         else if (other.CompareTag("Apple"))
         {
             ScoremanagerScene2.Instance.AddScore(50); // เพิ่มคะแนน 50
+            SoundManager.instance.Play(SoundManager.SoundName.Eat);
             Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
         }
     }
