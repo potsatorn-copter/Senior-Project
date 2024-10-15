@@ -80,6 +80,8 @@ public class ScoreManager1 : MonoBehaviour
         {
             endGamePanel.SetActive(true); // แสดงแผงจบเกมเมื่อคำนวณคะแนนเสร็จ
         }
+        Debug.Log("Setting score for Scene 1 in ScoreManager: " + finalScore);
+        ScoreManager.Instance.SetScoreForScene(1, finalScore); // บันทึกคะแนนสำหรับซีนที่ 1
     }
 
     // อัพเดท UI เพื่อแสดงจำนวนไอเท็มดีที่เก็บได้

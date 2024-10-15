@@ -8,7 +8,7 @@ public class HighlightManager : MonoBehaviour
     public Vector3 originalScale = new Vector3(1f, 1f, 1f);  // ขนาดเดิม
     public Color pressedColor = Color.yellow;  // สีเมื่อปุ่มถูกกด
     public Color originalColor = Color.white;  // สีเดิมของปุ่ม
-    public ScoreManager scoreManager;  // อ้างอิงถึง ScoreManager
+    public ScoreManagerQuiz scoreManager;  // อ้างอิงถึง ScoreManager
     public int questionIndex;  // เก็บ index ของคำถามนี้
     public Button nextButton;  // ปุ่ม Next ที่จะถูกแสดงเมื่อเลือกช้อยแล้ว
 
