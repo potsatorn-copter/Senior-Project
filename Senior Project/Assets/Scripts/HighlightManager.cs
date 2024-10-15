@@ -48,6 +48,7 @@ public class HighlightManager : MonoBehaviour
 
             // ตั้งค่าปุ่มที่ถูกคลิกให้ยุบลง
             clickedButton.transform.localScale = pressedScale;
+            SoundManager.instance.Play(SoundManager.SoundName.Click);
 
             // เปลี่ยนสีปุ่มเป็นสีเหลืองเข้มเมื่อถูกกด
             ColorBlock clickedCb = clickedButton.colors;

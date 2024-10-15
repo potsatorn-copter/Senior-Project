@@ -6,31 +6,66 @@ public class Itempool : MonoBehaviour
 {
     public GameObject goodItemPrefab;
     public GameObject badItemPrefab;
-    
-    public Sprite[] goodItemSprites; // สอง Sprite สำหรับไอเท็มดี
-    public static int poolSize = 18;  // ขนาดของ pool คือ 18 ชิ้น (12 ไอเท็มดี + 6 ไอเท็มไม่ดี)
-    
+
+    public Sprite[] goodItemSpritesEasy;   // Sprite สำหรับ Easy (2 รูป)
+    public Sprite[] goodItemSpritesNormal; // Sprite สำหรับ Normal (3 รูป)
+    public Sprite[] goodItemSpritesHard;   // Sprite สำหรับ Hard (3 รูป)
+
+    public Sprite[] badItemSpritesEasy;    // Sprite สำหรับ Easy (1 รูป)
+    public Sprite[] badItemSpritesNormal;  // Sprite สำหรับ Normal (2 รูป)
+    public Sprite[] badItemSpritesHard;    // Sprite สำหรับ Hard (2 รูป)
+
+    public static int poolSize;  // ขนาดของ pool ไดนามิกตามโหมด
+
     private static List<GameObject> goodItemsPool;
     private static List<GameObject> badItemsPool;
     private int itemsActivated = 0;
     private bool poolCompleted = false;
 
+    private Sprite[] currentGoodItemSprites;  // Sprite ที่ถูกใช้ในโหมดปัจจุบัน
+    private Sprite[] currentBadItemSprites;   // Sprite สำหรับไอเทมเสียในโหมดปัจจุบัน
+
     private void Awake()
     {
-        // สร้างรายการไอเท็มดีและไอเท็มไม่ดี
-        goodItemsPool = new List<GameObject>(12);
-        badItemsPool = new List<GameObject>(6);
+        // ตรวจสอบระดับความยากที่เก็บใน GameSettings
+        if (GameSettings.difficultyLevel == 0)  // Easy Mode
+        {
+            // Easy Mode (2 ไอเทมดี, 1 ไอเทมไม่ดี)
+            SetupPool(12, 6, goodItemSpritesEasy, badItemSpritesEasy);
+        }
+        else if (GameSettings.difficultyLevel == 1)  // Normal Mode
+        {
+            // Normal Mode (3 ไอเทมดี, 2 ไอเทมไม่ดี)
+            SetupPool(15, 7, goodItemSpritesNormal, badItemSpritesNormal);
+        }
+        else if (GameSettings.difficultyLevel == 2)  // Hard Mode
+        {
+            // Hard Mode (3 ไอเทมดี, 2 ไอเทมไม่ดี)
+            SetupPool(16, 8, goodItemSpritesHard, badItemSpritesHard);
+        }
+    }
 
-        // เพิ่มไอเท็มดีเข้า pool
-        for (int i = 0; i < 12; i++)
+    // ฟังก์ชันตั้งค่า pool
+    private void SetupPool(int goodItemCount, int badItemCount, Sprite[] goodItemSprites, Sprite[] badItemSprites)
+    {
+        // กำหนดค่าให้ poolSize และ Sprite
+        poolSize = goodItemCount + badItemCount;
+        currentGoodItemSprites = goodItemSprites;
+        currentBadItemSprites = badItemSprites;
+
+        goodItemsPool = new List<GameObject>(goodItemCount);
+        badItemsPool = new List<GameObject>(badItemCount);
+
+        // สร้างไอเท็มดีเข้า pool
+        for (int i = 0; i < goodItemCount; i++)
         {
             var goodItem = Instantiate(goodItemPrefab, Vector3.zero, Quaternion.identity);
             goodItem.SetActive(false);
             goodItemsPool.Add(goodItem);
         }
 
-        // เพิ่มไอเท็มไม่ดีเข้า pool
-        for (int i = 0; i < 6; i++)
+        // สร้างไอเท็มเสียเข้า pool
+        for (int i = 0; i < badItemCount; i++)
         {
             var badItem = Instantiate(badItemPrefab, Vector3.zero, Quaternion.identity);
             badItem.SetActive(false);
@@ -67,16 +102,22 @@ public class Itempool : MonoBehaviour
 
             // สุ่มเลือก Sprite ให้กับไอเท็มดี
             SpriteRenderer spriteRenderer = itemToSpawn.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null && goodItemSprites.Length > 0)
+            if (spriteRenderer != null && currentGoodItemSprites.Length > 0)
             {
-                // เลือก Sprite แบบสุ่ม
-                spriteRenderer.sprite = goodItemSprites[Random.Range(0, goodItemSprites.Length)];
+                spriteRenderer.sprite = currentGoodItemSprites[Random.Range(0, currentGoodItemSprites.Length)];
             }
         }
         else if (badItemsPool.Count > 0)
         {
             itemToSpawn = badItemsPool[0];
             badItemsPool.RemoveAt(0); // เอาไอเท็มออกจาก pool อย่างถาวร
+
+            // สุ่มเลือก Sprite ให้กับไอเท็มเสีย
+            SpriteRenderer spriteRenderer = itemToSpawn.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null && currentBadItemSprites.Length > 0)
+            {
+                spriteRenderer.sprite = currentBadItemSprites[Random.Range(0, currentBadItemSprites.Length)];
+            }
         }
         else
         {

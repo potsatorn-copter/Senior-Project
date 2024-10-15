@@ -14,6 +14,7 @@ TagManager:
   - Score4
   - Apple
   - Star
+  - Bottle
   layers:
   - Default
   - TransparentFX

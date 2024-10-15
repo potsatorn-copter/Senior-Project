@@ -36,25 +36,74 @@ public class ScoremanagerScene2 : MonoBehaviour
     // ฟังก์ชันสำหรับคำนวณคะแนนสุดท้าย
     public void CalculateFinalScore()
     {
-        if (score >= 2200)
+        if (GameSettings.difficultyLevel == 0) // Easy Mode
         {
-            finalScore = 10;
+            if (score >= 2200)
+            {
+                finalScore = 10;
+            }
+            else if (score >= 2000)
+            {
+                finalScore = 9;
+            }
+            else if (score >= 1500)
+            {
+                finalScore = 5;
+            }
+            else if (score >= 750)
+            {
+                finalScore = 3;
+            }
+            else
+            {
+                finalScore = 1;
+            }
         }
-        else if (score >= 2000 && score < 2100)
+        else if (GameSettings.difficultyLevel == 1) // Normal Mode
         {
-            finalScore = 9;
+            if (score >= 2400)
+            {
+                finalScore = 10;
+            }
+            else if (score >= 2200)
+            {
+                finalScore = 9;
+            }
+            else if (score >= 1800)
+            {
+                finalScore = 5;
+            }
+            else if (score >= 1000)
+            {
+                finalScore = 3;
+            }
+            else
+            {
+                finalScore = 1;
+            }
         }
-        else if (score >= 1500)
+        else if (GameSettings.difficultyLevel == 2) // Hard Mode
         {
-            finalScore = 5;
-        }
-        else if (score >= 750)
-        {
-            finalScore = 3;
-        }
-        else if (score < 750)
-        {
-            finalScore = 1;
+            if (score >= 2000)
+            {
+                finalScore = 10;
+            }
+            else if (score >= 1800)
+            {
+                finalScore = 9;
+            }
+            else if (score >= 1300)
+            {
+                finalScore = 5;
+            }
+            else if (score >= 500)
+            {
+                finalScore = 3;
+            }
+            else
+            {
+                finalScore = 1;
+            }
         }
     }
 
@@ -75,11 +124,10 @@ public class ScoremanagerScene2 : MonoBehaviour
             finalScoreText.text = "Final Score: " + finalScore;
         }
     }
+
     // เรียกฟังก์ชันนี้เมื่อเกมจบ
-    // ในฟังก์ชัน EndGame ให้แน่ใจว่า CalculateFinalScore ถูกเรียกหลังจากที่คะแนนถูกอัปเดต
     public void EndGame()
     {
-        // เพิ่มการอัปเดตคะแนนก่อนการคำนวณคะแนนสุดท้าย
         Debug.Log("Ending game with score: " + score);
 
         CalculateFinalScore();  // คำนวณคะแนนสุดท้าย
