@@ -44,6 +44,7 @@ public class RulePageController : MonoBehaviour
     {
         if (currentPageIndex < rulePages.Length - 1)
         {
+            SoundManager.instance.Play(SoundManager.SoundName.Click);
             currentPageIndex++;
             ShowPage(currentPageIndex);
         }
@@ -54,6 +55,7 @@ public class RulePageController : MonoBehaviour
     {
         if (currentPageIndex > 0)
         {
+            SoundManager.instance.Play(SoundManager.SoundName.Click);
             currentPageIndex--;
             ShowPage(currentPageIndex);
         }
