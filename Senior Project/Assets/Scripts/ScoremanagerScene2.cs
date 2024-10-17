@@ -132,6 +132,11 @@ public class ScoremanagerScene2 : MonoBehaviour
 
         CalculateFinalScore();  // คำนวณคะแนนสุดท้าย
         Debug.Log("Final score calculated: " + finalScore);  // ตรวจสอบว่าได้เรียกฟังก์ชันแล้ว
+
+        // ส่งคะแนนสุดท้ายไปยัง ScoreManager
+        ScoreManager.Instance.SetScoreForScene(2, finalScore);  // บันทึกคะแนนสำหรับซีนที่ 2
+        Debug.Log("Score for Scene 2 set in ScoreManager: " + finalScore);
+
         UpdateFinalScoreText(); // อัปเดตการแสดงผล
     }
 }
