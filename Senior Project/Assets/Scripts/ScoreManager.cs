@@ -1,38 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int[] scores = new int[14];  // เก็บคะแนนของแต่ละคำถาม (สมมติว่ามี 14 คำถาม)
-    private int totalScore = 0;  // คะแนนรวม
-    public TextMeshProUGUI finalScoreText;  // TextMeshPro เพื่อแสดงคะแนนรวม
+    public static ScoreManager Instance;
 
-    // ฟังก์ชันนี้ถูกเรียกเมื่อผู้ใช้เลือกช้อยในคำถามหนึ่ง
-    public void SetScore(int questionIndex, int score)
+    public int scoreScene1 = 0;
+    public int scoreScene2 = 0;
+    public int scoreScene3 = 0;
+    public int scoreScene4 = 0;
+    public int scoreScene5 = 0;
+
+    private void Awake()
     {
-        scores[questionIndex] = score;  // ตั้งคะแนนของคำถามนั้น
-        CalculateTotalScore();  // คำนวณคะแนนรวม
-
-        Debug.Log($"Score updated for question {questionIndex}: {score}");
-    }
-
-    private void CalculateTotalScore()
-    {
-        totalScore = 0;  // รีเซ็ตคะแนนรวม
-        foreach (int score in scores)
+        // ทำให้ ScoreManager คงอยู่ข้ามซีน (DontDestroyOnLoad)
+        if (Instance == null)
         {
-            totalScore += score;  // รวมคะแนนจากแต่ละคำถาม
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        Debug.Log("Total Score calculated: " + totalScore);  // Debug เพื่อตรวจสอบคะแนนรวมที่คำนวณได้
-
-        // แสดงคะแนนรวมใน TextMeshPro
-        finalScoreText.SetText(" Score " + totalScore);
+        else
+        {
+            Destroy(gameObject); // ทำลายตัวที่ซ้ำ
+        }
     }
 
-    // ฟังก์ชันนี้จะคืนค่า Total Score เมื่อเรียกใช้
+    // ฟังก์ชันสำหรับตั้งค่าคะแนนในแต่ละซีน
+    public void SetScoreForScene(int sceneIndex, int score)
+    {
+        switch (sceneIndex)
+        {
+            case 1:
+                scoreScene1 = score;
+                break;
+            case 2:
+                scoreScene2 = score;
+                break;
+            case 3:
+                scoreScene3 = score;
+                break;
+            case 4:
+                scoreScene4 = score;
+                break;
+            case 5:
+                scoreScene5 = score;
+                break;
+        }
+    }
+
+    // ฟังก์ชันสำหรับคำนวณคะแนนรวม
     public int GetTotalScore()
     {
-        return totalScore;  // คืนค่าคะแนนรวม
+        return scoreScene1 + scoreScene2 + scoreScene3 + scoreScene4 + scoreScene5;
     }
 }

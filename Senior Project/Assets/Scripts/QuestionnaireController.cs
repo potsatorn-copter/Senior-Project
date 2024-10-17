@@ -8,7 +8,7 @@ public class QuestionnaireController : MonoBehaviour
     public Button nextButton; // Reference to the Next button
     public Button previousButton; // Reference to the Previous button
     private int currentQuestionIndex = 0; // To track the current question index
-    public ScoreManager scoreManager;  // อ้างอิงถึง ScoreManager
+    public ScoreManagerQuiz scoreManager;  // อ้างอิงถึง ScoreManager
     
 
     void Start()

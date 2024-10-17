@@ -277,5 +277,8 @@ public class SceneController : MonoBehaviour
         scoreLabel.text = "Final Score: " + _score;
         gameOverUI.SetActive(true);
         isGameOver = true;
+        
+        ScoreManager.Instance.SetScoreForScene(3, _score);  // ซีนที่ 3
+        Debug.Log("Score for Scene 3 set in ScoreManager: " + _score);
     }
 }

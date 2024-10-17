@@ -48,6 +48,12 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
+    public void ScoreAmount()
+    {
+        SceneManager.LoadScene("Score Amount");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+    }
 
     public void Stage1Rule()
     {

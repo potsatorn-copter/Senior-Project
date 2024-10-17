@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // เพิ่มการใช้งาน TextMeshPro
 
-public class ScoreManagerStage8 : MonoBehaviour
+public class ScoreManagerStage4 : MonoBehaviour
 {
-    public static ScoreManagerStage8 Instance;
+    public static ScoreManagerStage4 Instance;
     public TextMeshProUGUI scoreTextGet;
     public TextMeshProUGUI newScoreText;  // TextMeshProUGUI สำหรับแสดงคะแนนใหม่
     public TextMeshProUGUI bottlesRemainingText;  // TextMeshProUGUI สำหรับแสดงจำนวนขวดที่เหลือ
@@ -113,8 +113,11 @@ public class ScoreManagerStage8 : MonoBehaviour
         isGameOver = true; // ตั้งค่าเป็นเกมจบ
         SoundManager.instance.Play(SoundManager.SoundName.WinSound); // แสดงผลเมื่อเกมจบ
         gameWinUI.SetActive(true);
-        newScoreText.text = "Score: " + newScore; // แสดงคะแนนใหม่สุดท้าย
+        newScoreText.text = "Final Score: " + newScore; // แสดงคะแนนใหม่สุดท้าย
         Time.timeScale = 0f; // หยุดการทำงานของเกม
+        
+        ScoreManager.Instance.SetScoreForScene(4, newScore); // ซีนที่ 4
+        Debug.Log("Score for Scene 4 set in ScoreManager: " + newScore);
     }
 
     private void Update()

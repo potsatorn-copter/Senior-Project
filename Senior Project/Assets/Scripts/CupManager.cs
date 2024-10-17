@@ -205,6 +205,11 @@ public class CupManager : MonoBehaviour
         // รอจนกว่า Reveal จะเสร็จ
         yield return new WaitForSeconds(2);
         Debug.Log("เกมจบแล้ว! คะแนนทั้งหมด: " + finalScore);
+
+        // ส่งคะแนนสุดท้ายไปยัง ScoreManager
+        ScoreManager.Instance.SetScoreForScene(5, finalScore); // ซีนที่ 5
+        Debug.Log("Score for Scene 5 set in ScoreManager: " + finalScore);
+
         finalScoreUI.SetActive(true);
     }
 
