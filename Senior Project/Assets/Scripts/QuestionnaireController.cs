@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class QuestionnaireController : MonoBehaviour
 {
     public GameObject[] questions; // Array to hold all the question GameObjects
     public Button nextButton; // Reference to the Next button
     public Button previousButton; // Reference to the Previous button
-    private int currentQuestionIndex = 0; // To track the current question index
     public ScoreManagerQuiz scoreManager;  // อ้างอิงถึง ScoreManager
+    public ScoreHistoryManager scoreHistoryManager;
+    private int currentQuestionIndex = 0; // To track the current question index
     
 
     void Start()
@@ -31,11 +33,12 @@ public class QuestionnaireController : MonoBehaviour
         }
         else
         {
-            // ซ่อนคำถามสุดท้ายและแสดงหน้าสุดท้าย
+            // ซ่อนคำถามสุดท้าย
             questions[currentQuestionIndex].SetActive(false);
-            // แสดงคะแนนรวมใน TextMeshPro
-            int totalScore = scoreManager.GetTotalScore();
-            Debug.Log("Final score displayed: " + totalScore);  // ตรวจสอบค่าที่แสดงผลใน TextMeshPro
+
+            // เมื่อถึงคำถามสุดท้าย เรียก FinishQuiz เพื่อบันทึกคะแนน
+            FinishQuiz();
+            
         }
     }
     
@@ -54,4 +57,28 @@ public class QuestionnaireController : MonoBehaviour
     {
         questions[index].SetActive(true); // Show the question at the specified index
     }
+    public void SetupSaveButton(Button saveButton)
+    {
+        saveButton.onClick.AddListener(() =>
+        {
+            int finalScore = scoreManager.GetTotalScore();
+            scoreHistoryManager.SaveScore(finalScore);
+            Debug.Log("คะแนนถูกบันทึก: " + finalScore);
+        });
+    }
+    
+    public void FinishQuiz()
+    {
+        // เรียกคำนวณคะแนนรวมทั้งหมด
+        scoreManager.CalculateTotalScore();
+
+        // ดึงคะแนนที่คำนวณได้
+        int finalScore = scoreManager.GetTotalScore();
+
+        // บันทึกคะแนนผ่านฟังก์ชัน SaveScore ของ ScoreHistoryManager
+        Debug.Log("Final score attempting to save: " + finalScore);
+        scoreHistoryManager.SaveScore(finalScore); // บันทึกเฉพาะคะแนนรวมตอนจบควิซเท่านั้น
+        Debug.Log("Score saved successfully.");
+    }
+    
 }

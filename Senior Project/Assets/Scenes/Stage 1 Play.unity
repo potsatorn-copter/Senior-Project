@@ -1736,6 +1736,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1473907721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473907723}
+  - component: {fileID: 1473907722}
+  m_Layer: 0
+  m_Name: Socre All Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1473907722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473907721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b421a9eed9dce544e93c1f9fc60db073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreScene1: 0
+  scoreScene2: 0
+  scoreScene3: 0
+  scoreScene4: 0
+  scoreScene5: 0
+--- !u!4 &1473907723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473907721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1138.2834, y: 367.963, z: 121.08789}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1477697990 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7622288941682858737, guid: 95fa597110664c24db31b4bc7214c4a9, type: 3}
@@ -3028,3 +3077,4 @@ SceneRoots:
   - {fileID: 910017887}
   - {fileID: 1839710753}
   - {fileID: 2132831579}
+  - {fileID: 1473907723}
