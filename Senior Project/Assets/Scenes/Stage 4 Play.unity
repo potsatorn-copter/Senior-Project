@@ -976,7 +976,7 @@ MonoBehaviour:
   maxHoldTime: 2
   showHoldTimeUpdate: 1
   trajectoryLine: {fileID: 463018897}
-  lineSegmentCount: 20
+  lineSegmentCount: 10
   holdTimeText: {fileID: 368308920}
   holdTimeSlider: {fileID: 1192857361}
 --- !u!120 &463018897
