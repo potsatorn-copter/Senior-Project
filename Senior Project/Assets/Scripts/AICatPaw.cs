@@ -49,7 +49,7 @@ public class AICatPaw : MonoBehaviour
         if (other.gameObject.CompareTag("GoodItem"))
         {
             // เป็น GoodItem บวกคะแนน 1
-            SoundManager.instance.Play(SoundManager.SoundName.Correct);
+            SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
             Debug.Log("This is Good AI Dumb");
             if (scoreManager != null)
             {
@@ -59,7 +59,7 @@ public class AICatPaw : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("BadItem"))
         {
-            SoundManager.instance.Play(SoundManager.SoundName.Wrong);
+            SoundManager.instance.Play(SoundManager.SoundName.WrongItem);
             // เป็น BadItem ลบคะแนน 1
             Debug.Log("This is Bad AI Dumb");
             if (scoreManager != null)
