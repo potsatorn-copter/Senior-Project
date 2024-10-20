@@ -53,7 +53,7 @@ public class CatpawController : MonoBehaviour
         if (other.gameObject.CompareTag("GoodItem"))
         {
             Debug.Log("Good Item Collected");
-            SoundManager.instance.Play(SoundManager.SoundName.Correct);
+            SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
 
             // เมื่อชนไอเท็มดี เพิ่มตัวนับ
             if (scoreManager != null)
@@ -64,7 +64,7 @@ public class CatpawController : MonoBehaviour
         else if (other.gameObject.CompareTag("BadItem"))
         {
             Debug.Log("Bad Item Collected");
-            SoundManager.instance.Play(SoundManager.SoundName.Wrong);
+            SoundManager.instance.Play(SoundManager.SoundName.WrongItem);
 
             // เมื่อชนไอเท็มไม่ดี ลดตัวนับ
             if (scoreManager != null)

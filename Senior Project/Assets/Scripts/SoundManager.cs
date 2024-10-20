@@ -43,13 +43,19 @@ public class SoundManager : MonoBehaviour
         MainmenuSong,
         Click,
         hoverSound,
-        Correct,
-        Wrong,
+        CorrectItem,
+        WrongItem,
         LoseSound,
         WinSound,
         CreditSong,
         Jump,
-        Eat
+        Eat,
+        CorrectPair,
+        WrongPair,
+        ChargeSound,
+        BottlehitBinSound,
+        ChooseBallSound,
+        ShuffleSound
 
     }
 

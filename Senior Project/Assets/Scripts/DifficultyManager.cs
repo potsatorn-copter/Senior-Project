@@ -9,5 +9,9 @@ public class DifficultyManager : MonoBehaviour
     {
         // เก็บระดับความยากที่เลือกใน GameSettings
         GameSettings.difficultyLevel = difficultyLevel;
+
+        // บันทึกระดับความยากใน PlayerPrefs
+        PlayerPrefs.SetInt("SelectedDifficulty", difficultyLevel);
+        PlayerPrefs.Save();
     }
 }

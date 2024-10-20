@@ -224,7 +224,7 @@ public class SceneController : MonoBehaviour
         {
             successfulMatches++;
             matchesLabel.text = "Matches: " + successfulMatches + "/" + totalMatches;
-            SoundManager.instance.Play(SoundManager.SoundName.Correct);
+            SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
 
             if (successfulMatches == totalMatches)
             {
@@ -233,7 +233,7 @@ public class SceneController : MonoBehaviour
         }
         else
         {
-            SoundManager.instance.Play(SoundManager.SoundName.Wrong);
+            SoundManager.instance.Play(SoundManager.SoundName.WrongItem);
             yield return new WaitForSeconds(0.5f);
             _firstRevealed.Unreveal();
             _secondRevealed.Unreveal();
