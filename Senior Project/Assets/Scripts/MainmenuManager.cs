@@ -6,33 +6,50 @@ using UnityEngine.UI;
 
 public class MainmenuManager : MonoBehaviour
 {
-    public Button startGameButton; // ปุ่มสำหรับ Start Game
-    public Button continueButton;  // ปุ่มสำหรับ Continue Game
+    public Button startGameButton;  // ปุ่มสำหรับ Start Game
+    public Button continueButton;   // ปุ่มสำหรับ Continue Game
+    public Button testButton;       // ปุ่มสำหรับทำแบบทดสอบ
+
+    public HorizontalLayoutGroup layoutGroup; // Horizontal Layout Group ที่ควบคุมปุ่มทั้งหมด
+    public float continueActiveSpacing = -44.05f; // ค่า Spacing เมื่อปุ่ม Continue แสดงอยู่
+    public float continueInactiveSpacing = 100f;  // ค่า Spacing เมื่อปุ่ม Continue ซ่อนอยู่
+    public int continueActiveLeftPadding = -456;  // ค่า Left Padding เมื่อปุ่ม Continue แสดงอยู่
+    public int continueInactiveLeftPadding = -521;// ค่า Left Padding เมื่อปุ่ม Continue ซ่อนอยู่
 
     void Start()
     {
         // โหลดระดับความยากที่เคยถูกบันทึกไว้
         LoadDifficulty();
 
+        // ซ่อนปุ่ม Continue ไว้ก่อน
+        continueButton.gameObject.SetActive(false);
+
         // ตรวจสอบว่ามีการเล่นค้างไว้หรือไม่
         if (PlayerPrefs.HasKey("LastScenePlayed"))
         {
-            // ถ้ามีการเล่นค้างไว้ แสดงปุ่ม Continue และซ่อนปุ่ม Start Game
-            startGameButton.gameObject.SetActive(false);
+            // ถ้ามีการเล่นค้างไว้ แสดงปุ่ม Continue
             continueButton.gameObject.SetActive(true);
+
+            // Debug ซีนที่ค้างไว้
+            int lastScene = PlayerPrefs.GetInt("LastScenePlayed");
+            Debug.Log("Scene ที่ค้างไว้: " + lastScene);
 
             // ผูกปุ่มให้ทำงานเพื่อไปยังซีนที่ค้างไว้
             continueButton.onClick.AddListener(ContinueGame);
+
+            // ปรับค่า Spacing และ Left Padding เมื่อปุ่ม Continue แสดง
+            layoutGroup.spacing = continueActiveSpacing;
+            layoutGroup.padding.left = continueActiveLeftPadding;
         }
         else
         {
-            // ถ้าไม่มีการเล่นค้างไว้ ให้แสดงปุ่ม Start Game และซ่อนปุ่ม Continue
-            startGameButton.gameObject.SetActive(true);
-            continueButton.gameObject.SetActive(false);
-
-            // ผูกปุ่มให้เริ่มเกมใหม่ตั้งแต่ซีนแรก
-            startGameButton.onClick.AddListener(StartNewGame);
+            // ถ้าไม่มีการเล่นค้างไว้ ให้ขยับปุ่ม Start และ Test โดยปรับค่า Spacing และ Left Padding
+            layoutGroup.spacing = continueInactiveSpacing;
+            layoutGroup.padding.left = continueInactiveLeftPadding;
         }
+
+        // ผูกปุ่มให้เริ่มเกมใหม่ตั้งแต่ซีนแรก
+        startGameButton.onClick.AddListener(StartNewGame);
     }
 
     // ฟังก์ชันสำหรับเริ่มเกมใหม่
