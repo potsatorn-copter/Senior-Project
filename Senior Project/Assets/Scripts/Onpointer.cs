@@ -8,7 +8,7 @@ public class Onpointer : MonoBehaviour
     public void OnPointerEnter()
     {
         {
-            SoundManager.instance.Play(SoundManager.SoundName.hoverSound);
+//            SoundManager.instance.Play(SoundManager.SoundName.hoverSound);
         }
     }
 }
