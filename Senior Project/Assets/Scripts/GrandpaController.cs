@@ -10,6 +10,7 @@ public class GrandpaController : MonoBehaviour
     
     private Rigidbody rb;
     private Vector2 movementInput; 
+    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
 
     public bool hasJumpBoost = false; // สถานะการบูสต์การกระโดดจากกล้วย
     public float boostMultiplier = 1.5f; // ตัวคูณแรงกระโดดเมื่อมีบูสต์
@@ -18,6 +19,13 @@ public class GrandpaController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
+
+        // ค้นหา ScoremanagerScene2 ในซีนปัจจุบัน
+        scoreManager = FindObjectOfType<ScoremanagerScene2>();
+        if (scoreManager == null)
+        {
+            Debug.LogWarning("ScoremanagerScene2 not found in the scene.");
+        }
     }
 
     private void Update()
@@ -59,7 +67,7 @@ public class GrandpaController : MonoBehaviour
         if (trampolinePlatform != null && !trampolinePlatform.isSteppedOn)
         {
             // กรณี TrampolinePlatform และยังไม่ได้เหยียบ
-            ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน
+            if (scoreManager != null) scoreManager.AddScore(100); // เพิ่มคะแนน
             trampolinePlatform.isSteppedOn = true; // บันทึกว่าแพลตฟอร์มถูกเหยียบแล้ว
 
             // เล่นเสียงเมื่อเหยียบแพลตฟอร์ม
@@ -68,7 +76,7 @@ public class GrandpaController : MonoBehaviour
         else if (fakePlatform != null && !fakePlatform.isSteppedOn)
         {
             // กรณี FakePlatform และยังไม่ได้เหยียบ
-            ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน
+            if (scoreManager != null) scoreManager.AddScore(100); // เพิ่มคะแนน
             fakePlatform.isSteppedOn = true; // บันทึกว่าแพลตฟอร์มถูกเหยียบแล้ว
 
             // เล่นเสียงเมื่อเหยียบแพลตฟอร์ม
@@ -82,14 +90,14 @@ public class GrandpaController : MonoBehaviour
         // เมื่อชนกับดาว เพิ่ม 100 คะแนน
         if (other.CompareTag("Star"))
         {
-            ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน 100
+            if (scoreManager != null) scoreManager.AddScore(100); // เพิ่มคะแนน 100
             SoundManager.instance.Play(SoundManager.SoundName.Eat);
             Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
         }
         // เมื่อชนกับแอปเปิ้ล เพิ่ม 50 คะแนน
         else if (other.CompareTag("Apple"))
         {
-            ScoremanagerScene2.Instance.AddScore(50); // เพิ่มคะแนน 50
+            if (scoreManager != null) scoreManager.AddScore(50); // เพิ่มคะแนน 50
             SoundManager.instance.Play(SoundManager.SoundName.Eat);
             Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
         }

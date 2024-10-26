@@ -5,32 +5,16 @@ using UnityEngine;
 
 public class ScoremanagerScene2 : MonoBehaviour
 {
-    public static ScoremanagerScene2 Instance;
     public TextMeshProUGUI scoreText; // UI สำหรับแสดงคะแนน
     public TextMeshProUGUI finalScoreText; // UI สำหรับแสดงคะแนนสุดท้าย
-    private int score = 0;
-    private int finalScore = 0;
-    public GameObject gameOverUI; // UI ที่จะโชว์เมื่อเกมจบ
-
-    private void Awake()
-    {
-        // สร้าง Singleton สำหรับ ScoreManager
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
+    private int score = 0; // คะแนนในซีนนี้
+    private int finalScore = 0; // คะแนนสุดท้ายในซีนนี้
+    
     // ฟังก์ชันสำหรับเพิ่มคะแนน
     public void AddScore(int points)
     {
         score += points;
         UpdateScoreText();
-        Debug.Log(score);
     }
 
     // ฟังก์ชันสำหรับคำนวณคะแนนสุดท้าย
@@ -39,72 +23,52 @@ public class ScoremanagerScene2 : MonoBehaviour
         if (GameSettings.difficultyLevel == 0) // Easy Mode
         {
             if (score >= 2200)
-            {
                 finalScore = 10;
-            }
-            else if (score >= 2000)
-            {
+            else if (score >= 2000 && score < 2200)
                 finalScore = 9;
-            }
-            else if (score >= 1500)
-            {
+            else if (score >= 1500 && score < 2000)
                 finalScore = 5;
-            }
-            else if (score >= 750)
-            {
+            else if (score >= 750 && score < 1500)
                 finalScore = 3;
-            }
             else
-            {
                 finalScore = 1;
-            }
         }
         else if (GameSettings.difficultyLevel == 1) // Normal Mode
         {
             if (score >= 2400)
-            {
                 finalScore = 10;
-            }
-            else if (score >= 2200)
-            {
+            else if (score >= 2200 && score < 2400)
                 finalScore = 9;
-            }
-            else if (score >= 1800)
-            {
+            else if (score >= 1800 && score < 2200)
                 finalScore = 5;
-            }
-            else if (score >= 1000)
-            {
+            else if (score >= 1000 && score < 1800)
                 finalScore = 3;
-            }
             else
-            {
                 finalScore = 1;
-            }
         }
         else if (GameSettings.difficultyLevel == 2) // Hard Mode
         {
             if (score >= 2000)
-            {
                 finalScore = 10;
-            }
-            else if (score >= 1800)
-            {
+            else if (score >= 1800 && score < 2000)
                 finalScore = 9;
-            }
-            else if (score >= 1300)
-            {
+            else if (score >= 1300 && score < 1800)
                 finalScore = 5;
-            }
-            else if (score >= 500)
-            {
+            else if (score >= 500 && score < 1300)
                 finalScore = 3;
-            }
             else
-            {
                 finalScore = 1;
-            }
         }
+
+        // แสดงผลคะแนนสุดท้ายใน UI
+        UpdateFinalScoreText();
+
+        // บันทึกคะแนนสำหรับซีนที่ 2
+        Debug.Log("Setting score for Scene 2 in ScoreManager: " + finalScore);
+        ScoreManager.Instance.SetScoreForScene(2, finalScore); // บันทึกคะแนนสำหรับซีนที่ 2
+
+        // เรียกฟังก์ชันดรอปจิ๊กซอว์ถ้าได้คะแนน >= 8
+        DropJigsawPieceIfEligible();
     }
 
     // อัปเดตการแสดงคะแนนบน UI
@@ -125,18 +89,29 @@ public class ScoremanagerScene2 : MonoBehaviour
         }
     }
 
-    // เรียกฟังก์ชันนี้เมื่อเกมจบ
+    // ฟังก์ชันเรียกเมื่อเกมจบ
     public void EndGame()
     {
-        Debug.Log("Ending game with score: " + score);
-
         CalculateFinalScore();  // คำนวณคะแนนสุดท้าย
-        Debug.Log("Final score calculated: " + finalScore);  // ตรวจสอบว่าได้เรียกฟังก์ชันแล้ว
+        Debug.Log("Final score calculated for Scene 2: " + finalScore);
+    }
 
-        // ส่งคะแนนสุดท้ายไปยัง ScoreManager
-        ScoreManager.Instance.SetScoreForScene(2, finalScore);  // บันทึกคะแนนสำหรับซีนที่ 2
-        Debug.Log("Score for Scene 2 set in ScoreManager: " + finalScore);
+    // ฟังก์ชันตรวจสอบการดรอปจิ๊กซอว์
+    private void DropJigsawPieceIfEligible()
+    {
+        // ตรวจสอบว่าผู้เล่นทำคะแนน 8 ขึ้นไปหรือไม่
+        if (finalScore >= 8)
+        {
+            int difficultyLevel = GameSettings.difficultyLevel;
 
-        UpdateFinalScoreText(); // อัปเดตการแสดงผล
+            // ดรอปจิ๊กซอว์ชิ้นที่ตรงกับระดับความยากและซีนที่เล่น
+            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 1); // ดรอปชิ้นส่วนซีนที่ 2
+
+            Debug.Log($"Jigsaw piece dropped: Scene 2, Difficulty Level: {difficultyLevel}, Image Part: 2, Final Score: {finalScore}");
+        }
+        else
+        {
+            Debug.Log("No jigsaw piece dropped in Scene 2. Final score below threshold.");
+        }
     }
 }

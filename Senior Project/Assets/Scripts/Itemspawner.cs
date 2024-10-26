@@ -32,7 +32,6 @@ public class Itemspawner : MonoBehaviour
                 else
                 {
                     Debug.LogError("Item or spawnPoint is null.");
-                    Itempool.ReturnItemToPool(itemGameObject);
                 }
             }
 
@@ -49,7 +48,6 @@ public class Itemspawner : MonoBehaviour
             if (item != null)
             {
                 item.Deactivate();
-                Itempool.ReturnItemToPool(itemGameObject);
             }
         }
     }

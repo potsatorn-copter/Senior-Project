@@ -91,7 +91,6 @@ public class SmartAI : MonoBehaviour
         {
             // คืนไอเท็มกลับสู่ pool
             itemScript.Deactivate();
-            Itempool.ReturnItemToPool(other.gameObject); // ตรวจสอบให้แน่ใจว่า itemPool ถูกอ้างอิงถูกต้อง
         }
     }
     void OnDrawGizmos()

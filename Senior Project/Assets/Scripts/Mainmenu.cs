@@ -54,6 +54,19 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
+    
+    public void GotoGallery()
+    {
+        SceneManager.LoadScene("MemoryGallery");
+        Time.timeScale = 1;
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
+
+        // เรียกฟังก์ชัน UpdateGallery เพื่ออัปเดตภาพในแกลลอรี
+        if (JigsawManager.Instance != null)
+        {
+            JigsawManager.Instance.UpdateGallery();
+        }
+    }
 
     public void Stage1Rule()
     {

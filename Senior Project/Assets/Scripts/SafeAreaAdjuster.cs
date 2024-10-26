@@ -28,8 +28,7 @@ public class SafeAreaAdjuster : MonoBehaviour
 
         rectTransform.offsetMin = Vector2.zero;
         rectTransform.offsetMax = Vector2.zero;
-
-        // Debugging: Print out the RectTransform values to Console
-        Debug.Log($"SafeArea - AnchorMin: {rectTransform.anchorMin}, AnchorMax: {rectTransform.anchorMax}");
+        
+       
     }
 }

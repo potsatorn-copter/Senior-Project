@@ -6,7 +6,6 @@ public class AICatPaw : MonoBehaviour
 {
     public Transform targetPosition;
     private Vector3 startPosition;
-    public ScoreAI scoreManager;
     public float delayBeforeReturning = 0.2f;
     public float movementInterval = 5.0f; // กำหนดความถี่ในการเคลื่อนไหว
     private float nextMoveTime = 0f;
@@ -48,25 +47,11 @@ public class AICatPaw : MonoBehaviour
     {
         if (other.gameObject.CompareTag("GoodItem"))
         {
-            // เป็น GoodItem บวกคะแนน 1
-            SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
-            Debug.Log("This is Good AI Dumb");
-            if (scoreManager != null)
-            {
-                scoreManager.AddScoreAI(1);
-                Debug.Log("+1 Score");
-            }
+           
         }
         else if (other.gameObject.CompareTag("BadItem"))
         {
-            SoundManager.instance.Play(SoundManager.SoundName.WrongItem);
-            // เป็น BadItem ลบคะแนน 1
-            Debug.Log("This is Bad AI Dumb");
-            if (scoreManager != null)
-            {
-                scoreManager.SubtractScoreAI(1);
-                Debug.Log("-1 Score");
-            }
+           
         }
     
         // ตรวจสอบว่าได้รับ Item script จาก GameObject ที่ชน
@@ -75,7 +60,6 @@ public class AICatPaw : MonoBehaviour
         {
             // คืนไอเท็มกลับสู่ pool
             itemScript.Deactivate();
-            Itempool.ReturnItemToPool(other.gameObject); // ตรวจสอบให้แน่ใจว่า itemPool ถูกอ้างอิงถูกต้อง
         }
     }
 }

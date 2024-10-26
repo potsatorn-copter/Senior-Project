@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+using System.Collections;
+using UnityEngine;
+
 public class MonsterMove : MonoBehaviour
 {
     public float moveDistance = 3.0f; // ระยะที่มอนสเตอร์จะขยับ
@@ -15,6 +18,7 @@ public class MonsterMove : MonoBehaviour
     private Vector3 startPosition;
     private bool movingTowardsDestination; // ตัวแปรบอกว่ากำลังไปยังจุดปลายทางหรือไม่
     private Vector3 targetPosition; // ตำแหน่งปลายทาง
+    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
 
     private void Start()
     {
@@ -31,6 +35,13 @@ public class MonsterMove : MonoBehaviour
         }
 
         movingTowardsDestination = true; // เริ่มขยับไปยังปลายทาง
+
+        // ค้นหา ScoremanagerScene2 ในซีนปัจจุบัน
+        scoreManager = FindObjectOfType<ScoremanagerScene2>();
+        if (scoreManager == null)
+        {
+            Debug.LogWarning("ScoremanagerScene2 not found in the scene.");
+        }
     }
 
     private void Update()
@@ -80,10 +91,10 @@ public class MonsterMove : MonoBehaviour
     // ฟังก์ชันนี้จะถูกเรียกเมื่อมีการชนกับ Player
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && scoreManager != null)
         {
             // ลดคะแนนเมื่อชนกับ Player
-            ScoremanagerScene2.Instance.AddScore(-damageAmount);
+            scoreManager.AddScore(-damageAmount);
             Debug.Log("Player hit monster! Score deducted by: " + damageAmount);
         }
     }
