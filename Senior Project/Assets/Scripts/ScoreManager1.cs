@@ -80,8 +80,13 @@ public class ScoreManager1 : MonoBehaviour
         {
             endGamePanel.SetActive(true); // แสดงแผงจบเกมเมื่อคำนวณคะแนนเสร็จ
         }
+
+        // บันทึกคะแนนสำหรับซีนที่ 1
         Debug.Log("Setting score for Scene 1 in ScoreManager: " + finalScore);
         ScoreManager.Instance.SetScoreForScene(1, finalScore); // บันทึกคะแนนสำหรับซีนที่ 1
+
+        // เรียกฟังก์ชันดรอปจิ๊กซอว์ถ้าได้คะแนน >= 8
+        DropJigsawPieceIfEligible();
     }
 
     // อัพเดท UI เพื่อแสดงจำนวนไอเท็มดีที่เก็บได้
@@ -97,5 +102,25 @@ public class ScoreManager1 : MonoBehaviour
     public int GetCurrentGoodItemCount()
     {
         return goodItemCount;
+    }
+
+    // ฟังก์ชันตรวจสอบการดรอปจิ๊กซอว์
+    private void DropJigsawPieceIfEligible()
+    {
+        // ตรวจสอบว่าผู้เล่นทำคะแนน 8 ขึ้นไปหรือไม่
+        if (finalScore >= 8)
+        {
+            int difficultyLevel = GameSettings.difficultyLevel;
+
+            // ดรอปจิ๊กซอว์ชิ้นที่ตรงกับระดับความยากและซีนที่เล่น
+            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 0); // ดรอปชิ้นส่วนตามระดับความยาก
+
+            // Debug log เพื่อแสดงว่าจิ๊กซอว์ชิ้นไหนดรอป
+            Debug.Log($"Jigsaw piece dropped: Scene 1, Difficulty Level: {difficultyLevel}, Image Part: 1, Final Score: {finalScore}");
+        }
+        else
+        {
+            Debug.Log("No jigsaw piece dropped. Final score below threshold.");
+        }
     }
 }

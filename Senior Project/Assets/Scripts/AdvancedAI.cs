@@ -94,7 +94,6 @@ public class AdvancedAI : MonoBehaviour
             if (itemScript != null)
             {
                 itemScript.Deactivate();
-                Itempool.ReturnItemToPool(other.gameObject);
             }
         }
     }

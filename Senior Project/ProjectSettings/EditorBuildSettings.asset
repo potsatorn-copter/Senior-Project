@@ -50,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Score Amount.unity
     guid: b49399e4e44811a4a8ed8845efc60366
+  - enabled: 1
+    path: Assets/Scenes/MemoryGallery.unity
+    guid: d54c6f1644b247640be31882a2619964
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 6358f0e105f473043a4ea331c1c4911e, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fc8d0b46a541c56429b1c4fce79718aa, type: 2}

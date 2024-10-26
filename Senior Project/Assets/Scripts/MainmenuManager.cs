@@ -57,9 +57,15 @@ public class MainmenuManager : MonoBehaviour
     {
         // ลบข้อมูลเก่าที่ค้างไว้ (ถ้ามี)
         PlayerPrefs.DeleteKey("LastScenePlayed");
+        
+        JigsawManager.Instance.ResetJigsawProgress();
+        
+        ScoreManager.Instance.ClearScores(); 
 
         // เริ่มเกมที่ซีนแรก (เช่น ซีน 1)
         SceneManager.LoadScene("Level"); // หรือใส่ชื่อซีนที่คุณต้องการ
+        
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
     // ฟังก์ชันสำหรับเล่นเกมต่อจากที่ค้างไว้

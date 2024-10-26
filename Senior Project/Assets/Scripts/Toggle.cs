@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Toggle : MonoBehaviour
 {
-    [SerializeField] private SoundManager soundManager;
+    private SoundManager soundManager;
     [SerializeField] private Button muteButton;
     [SerializeField] private Sprite mutedSprite;
     [SerializeField] private Sprite unmutedSprite;
@@ -14,6 +14,13 @@ public class Toggle : MonoBehaviour
 
     private void Awake()
     {
+        // ค้นหา SoundManager ที่เป็น Singleton จากซีนแรก
+        soundManager = FindObjectOfType<SoundManager>();
+        if (soundManager == null)
+        {
+            Debug.LogWarning("SoundManager not found in the scene.");
+        }
+
         isMuted = PlayerPrefs.GetInt("isMuted", 0) == 1;
         UpdateMuteButtonUI();
 
@@ -25,7 +32,10 @@ public class Toggle : MonoBehaviour
         isMuted = !isMuted;
         UpdateMuteButtonUI();
 
-        soundManager.MuteAllSounds(isMuted);
+        if (soundManager != null)
+        {
+            soundManager.MuteAllSounds(isMuted);
+        }
         PlayerPrefs.SetInt("isMuted", isMuted ? 1 : 0);
     }
 
@@ -34,4 +44,3 @@ public class Toggle : MonoBehaviour
         muteButton.image.sprite = isMuted ? mutedSprite : unmutedSprite;
     }
 }
-

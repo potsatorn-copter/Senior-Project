@@ -12,67 +12,62 @@ public class CameraFollow : MonoBehaviour
 
     private float highestYPosition; // ตำแหน่ง Y สูงสุดที่กล้องเคยตาม
     private bool gameIsOver = false;
+    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
 
     private void Start()
     {
         highestYPosition = transform.position.y; // เริ่มต้นที่ตำแหน่งปัจจุบันของกล้อง
         gameOverUI.SetActive(false); // ซ่อน UI เมื่อเริ่มเกม
+
+        // ค้นหา ScoremanagerScene2
+        scoreManager = FindObjectOfType<ScoremanagerScene2>();
+        if (scoreManager == null)
+        {
+            Debug.LogWarning("ScoremanagerScene2 not found in the scene.");
+        }
     }
 
     private void LateUpdate()
     {
         if (gameIsOver) return;
 
-        // ตรวจสอบว่าตัวละครอยู่สูงกว่าตำแหน่งที่กล้องเคยตามหรือไม่
         if (target.position.y > highestYPosition + cameraThreshold)
         {
-            highestYPosition = target.position.y - cameraThreshold; // ปรับตำแหน่ง Y สูงสุดใหม่
+            highestYPosition = target.position.y - cameraThreshold;
 
-            // คำนวณตำแหน่งที่ต้องการให้กล้องเลื่อนไป
             Vector3 desiredPosition = new Vector3(transform.position.x, highestYPosition + offset.y, transform.position.z);
-
-            // ใช้ Lerp เพื่อทำให้การเลื่อนกล้องราบรื่น
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-
-            // เลื่อนกล้องไปยังตำแหน่งที่คำนวณได้
             transform.position = smoothedPosition;
         }
 
-        // ตรวจสอบว่าตัวละครตกต่ำกว่ากล้องหรือไม่
         if (target.position.y < transform.position.y - 0.7f)
         {
             GameOver();
         }
 
-        // ตรวจจับแพลตฟอร์มที่พ้นกล้อง
         DetectAndDestroyPlatforms();
     }
 
     private void GameOver()
     {
         gameIsOver = true;
-        ScoremanagerScene2.Instance.EndGame(); 
-        gameOverUI.SetActive(true); // แสดง UI
-        Time.timeScale = 0f; // หยุดเกมโดยการหยุดเวลา
+        if (scoreManager != null) scoreManager.EndGame();
+        gameOverUI.SetActive(true);
+        Time.timeScale = 0f;
         SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
     }
 
-    // ฟังก์ชันสำหรับตรวจจับแพลตฟอร์มที่พ้นกล้องและทำลายมัน
     private void DetectAndDestroyPlatforms()
     {
-        // ค้นหาแพลตฟอร์มทั้งหมดในเกม
         GameObject[] platforms = GameObject.FindGameObjectsWithTag("TrampolinePlatform");
 
-        // ตรวจสอบว่าแพลตฟอร์มใดพ้นกล้องไปแล้ว
         foreach (GameObject platform in platforms)
         {
-            // แปลงตำแหน่งของแพลตฟอร์มจาก world space ไปเป็น viewport space
             Vector3 viewportPos = Camera.main.WorldToViewportPoint(platform.transform.position);
 
-            // ถ้าแพลตฟอร์มอยู่นอกขอบล่างของกล้อง (viewport Y < 0) แสดงว่ามันพ้นจากการมองเห็นแล้ว
             if (viewportPos.y < 0)
             {
-                Destroy(platform); // ทำลายแพลตฟอร์มที่พ้นกล้องไปแล้ว
+                Destroy(platform);
             }
         }
     }

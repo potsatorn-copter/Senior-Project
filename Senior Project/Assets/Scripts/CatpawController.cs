@@ -52,7 +52,6 @@ public class CatpawController : MonoBehaviour
         // ตรวจสอบว่าไอเท็มที่ชนเป็น GoodItem หรือ BadItem
         if (other.gameObject.CompareTag("GoodItem"))
         {
-            Debug.Log("Good Item Collected");
             SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
 
             // เมื่อชนไอเท็มดี เพิ่มตัวนับ
@@ -63,7 +62,6 @@ public class CatpawController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("BadItem"))
         {
-            Debug.Log("Bad Item Collected");
             SoundManager.instance.Play(SoundManager.SoundName.WrongItem);
 
             // เมื่อชนไอเท็มไม่ดี ลดตัวนับ
@@ -77,7 +75,6 @@ public class CatpawController : MonoBehaviour
         if (itemScript != null)
         {
             itemScript.Deactivate();
-            Itempool.ReturnItemToPool(other.gameObject);
         }
     }
 
@@ -86,7 +83,6 @@ public class CatpawController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); // หน่วงเวลาเล็กน้อย
         scoreManager.CollectGoodItem(); // เพิ่มจำนวนไอเท็มดีที่เก็บได้หลังจากชนแล้ว
-        Debug.Log("+1 Good Item Count");
     }
 
     // เพิ่มฟังก์ชัน Coroutine สำหรับหน่วงเวลาก่อนลดตัวนับ
@@ -94,6 +90,5 @@ public class CatpawController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); // หน่วงเวลาเล็กน้อย
         scoreManager.CollectBadItem(); // ลดจำนวนไอเท็มเมื่อเก็บไอเท็มไม่ดีหลังจากชนแล้ว
-        Debug.Log("-1 Good Item Count");
     }
 }
