@@ -244,41 +244,90 @@ public class SceneController : MonoBehaviour
     }
 
     private void GameOver()
+{
+    SoundManager.instance.Play(SoundManager.SoundName.WinSound);
+
+    int finalScore = 0;
+
+    if (GameSettings.difficultyLevel == 0) // Easy
     {
-        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
-
-        int _score = 0;
-
-        if (GameSettings.difficultyLevel == 0) // Easy
-        {
-            if (successfulMatches >= 5)
-                _score = 10; 
-            else if (successfulMatches >= 3)
-                _score = 6; 
-            else if (successfulMatches >= 1)
-                _score = 2; 
-            else
-                _score = 0; 
-        }
-        else if (GameSettings.difficultyLevel == 1 || GameSettings.difficultyLevel == 2) // Normal & Hard
-        {
-            if (successfulMatches >= 7)
-                _score = 10;
-            else if (successfulMatches >= 5)
-                _score = 6;
-            else if (successfulMatches >= 3)
-                _score = 4;
-            else if (successfulMatches >= 1)
-                _score = 2;
-            else
-                _score = 0;
-        }
-
-        scoreLabel.text = "Final Score: " + _score;
-        gameOverUI.SetActive(true);
-        isGameOver = true;
-        
-        ScoreManager.Instance.SetScoreForScene(3, _score);  // ซีนที่ 3
-        Debug.Log("Score for Scene 3 set in ScoreManager: " + _score);
+        if (successfulMatches >= 5)
+            finalScore = 10; 
+        else if (successfulMatches >= 3)
+            finalScore = 6; 
+        else if (successfulMatches >= 1)
+            finalScore = 2; 
+        else
+            finalScore = 0; 
     }
+    else if (GameSettings.difficultyLevel == 1) // Normal
+    {
+        if (successfulMatches >= 7)
+            finalScore = 10;
+        else if (successfulMatches >= 5)
+            finalScore = 6;
+        else if (successfulMatches >= 3)
+            finalScore = 4;
+        else if (successfulMatches >= 1)
+            finalScore = 2;
+        else
+            finalScore = 0;
+    }
+    else if (GameSettings.difficultyLevel == 2) // Hard
+    {
+        if (successfulMatches >= 7)
+            finalScore = 10;
+        else if (successfulMatches >= 5)
+            finalScore = 6;
+        else if (successfulMatches >= 3)
+            finalScore = 4;
+        else if (successfulMatches >= 1)
+            finalScore = 2;
+        else
+            finalScore = 0;
+    }
+
+    // อัปเดตการแสดงผลคะแนน
+    scoreLabel.text = "Final Score: " + finalScore;
+    gameOverUI.SetActive(true);
+    isGameOver = true;
+
+    // บันทึกคะแนนสำหรับซีนนี้
+    ScoreManager.Instance.SetScoreForScene(3, finalScore);
+    Debug.Log("Score for Scene 3 set in ScoreManager: " + finalScore);
+
+    // ตรวจสอบคะแนนสำหรับการดรอปจิ๊กซอว์
+    DropJigsawPieceIfEligible(finalScore);
+}
+
+private void DropJigsawPieceIfEligible(int finalScore)
+{
+    if (finalScore >= 8)  // กำหนดว่าคะแนนต้อง 8 ขึ้นไปถึงจะดรอปจิ๊กซอว์
+    {
+        int imageIndex = 0;  // Index สำหรับการดรอปชิ้นส่วนจิ๊กซอว์ (เช่น 0 สำหรับโหมดง่าย, 1 สำหรับโหมดกลาง, 2 สำหรับโหมดยาก)
+        
+        // ตรวจสอบระดับความยากเพื่อกำหนดชิ้นส่วนของภาพ
+        if (GameSettings.difficultyLevel == 0)
+        {
+            imageIndex = 0;  // ภาพที่ 1
+        }
+        else if (GameSettings.difficultyLevel == 1)
+        {
+            imageIndex = 1;  // ภาพที่ 2
+        }
+        else if (GameSettings.difficultyLevel == 2)
+        {
+            imageIndex = 2;  // ภาพที่ 3
+        }
+
+        // เรียกฟังก์ชันจาก JigsawManager เพื่อเก็บชิ้นส่วน
+        JigsawManager.Instance.CollectJigsawPiece(imageIndex, 2);
+
+        Debug.Log($"Jigsaw piece dropped: Scene 3, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 3: {imageIndex}, Final Score: {finalScore}");
+    }
+    else
+    {
+        Debug.Log("No jigsaw piece dropped in Scene 3. Final score below threshold.");
+    }
+}
 }

@@ -10,11 +10,19 @@ public class TrampolinePlatform : MonoBehaviour
     private bool hasBeenUsed = false; // ตรวจสอบว่าแพลตฟอร์มถูกใช้หรือยัง
     public bool isSteppedOn = false; // ตรวจสอบว่าแพลตฟอร์มถูกเหยียบเพื่อบวกคะแนนหรือยัง
     private Collider platformCollider;
+    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
 
     private void Start()
     {
         platformCollider = GetComponent<Collider>();
         platformCollider.isTrigger = true; // ทำให้แพลตฟอร์มทะลุผ่านได้จากด้านล่าง
+
+        // ค้นหา ScoremanagerScene2 ในซีนปัจจุบัน
+        scoreManager = FindObjectOfType<ScoremanagerScene2>();
+        if (scoreManager == null)
+        {
+            Debug.LogWarning("ScoremanagerScene2 not found in the scene.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,10 +44,10 @@ public class TrampolinePlatform : MonoBehaviour
                 }
 
                 // ถ้าแพลตฟอร์มยังไม่เคยถูกเหยียบ ให้บวกคะแนน
-                if (!isSteppedOn)
+                if (!isSteppedOn && scoreManager != null)
                 {
                     isSteppedOn = true; // บันทึกว่าถูกเหยียบแล้ว
-                    ScoremanagerScene2.Instance.AddScore(100); // เพิ่มคะแนน
+                    scoreManager.AddScore(100); // เพิ่มคะแนน
                 }
 
                 // เพิ่มแรงกระโดด

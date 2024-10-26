@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class OneTimePlatform : MonoBehaviour
 {
-     public float bounceForce = 3f; // แรงดีดกลับเมื่อผู้เล่นเหยียบ
+    public float bounceForce = 3f; // แรงดีดกลับเมื่อผู้เล่นเหยียบ
     public float disappearDelay = 0.5f; // กำหนดเวลาหลังจากที่ผู้เล่นเหยียบแล้วแพลตฟอร์มจะหายไป
     private bool hasBeenUsed = false; // ตรวจสอบว่าแพลตฟอร์มถูกใช้หรือยัง
     public bool isSteppedOn = false; // ตรวจสอบว่าแพลตฟอร์มถูกเหยียบหรือยัง
     private Collider platformCollider;
+    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
 
     private void Start()
     {
         platformCollider = GetComponent<Collider>();
         platformCollider.isTrigger = true; // ทำให้แพลตฟอร์มทะลุผ่านได้จากด้านล่าง
+
+        // ค้นหา ScoremanagerScene2 ในซีนปัจจุบัน
+        scoreManager = FindObjectOfType<ScoremanagerScene2>();
+        if (scoreManager == null)
+        {
+            Debug.LogWarning("ScoremanagerScene2 not found in the scene.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,8 +42,11 @@ public class OneTimePlatform : MonoBehaviour
                     playerController.hasJumpBoost = false; // ใช้บูสต์แล้ว
                 }
 
-                // เพิ่มคะแนนเมื่อเหยียบแพลตฟอร์ม
-                ScoremanagerScene2.Instance.AddScore(100);
+                // เพิ่มคะแนนเมื่อเหยียบแพลตฟอร์ม หาก scoreManager มีอยู่
+                if (scoreManager != null)
+                {
+                    scoreManager.AddScore(100);
+                }
 
                 // เพิ่มแรงกระโดด
                 rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // รีเซ็ตความเร็วในแนวดิ่ง
@@ -55,4 +66,3 @@ public class OneTimePlatform : MonoBehaviour
         Destroy(gameObject); // ลบวัตถุแพลตฟอร์มออกจากเกม
     }
 }
-

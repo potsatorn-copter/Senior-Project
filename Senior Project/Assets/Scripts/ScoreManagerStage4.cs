@@ -7,17 +7,17 @@ public class ScoreManagerStage4 : MonoBehaviour
 {
     public static ScoreManagerStage4 Instance;
     public TextMeshProUGUI scoreTextGet;
-    public TextMeshProUGUI newScoreText;  // TextMeshProUGUI สำหรับแสดงคะแนนใหม่
-    public TextMeshProUGUI bottlesRemainingText;  // TextMeshProUGUI สำหรับแสดงจำนวนขวดที่เหลือ
+    public TextMeshProUGUI newScoreText;
+    public TextMeshProUGUI bottlesRemainingText;
     private int score = 0;
     private int lossScore = 0;
-    private int newScore = 0;  // ตัวแปรเก็บคะแนนชนิดใหม่
-    private int totalThrows = 0; // จำนวนการปาทั้งหมด
-    private const int maxThrows = 10; // จำนวนการปาสูงสุดคือ 10 ครั้ง
-    private int remainingBottles = maxThrows; // จำนวนขวดที่เหลือจะเริ่มต้นที่ 10
-    private const int maxMisses = 2; // จำนวนพลาดสูงสุดที่อนุญาตก่อนจะเริ่มหักคะแนน
+    private int finalScore = 0;
+    private int totalThrows = 0;
+    private const int maxThrows = 10;
+    private int remainingBottles = maxThrows;
+    private const int maxMisses = 2;
     [SerializeField] private GameObject gameWinUI;
-    private bool isGameOver = false; // ตัวแปรบอกสถานะเกม
+    private bool isGameOver = false;
 
     private void Start()
     {
@@ -30,34 +30,32 @@ public class ScoreManagerStage4 : MonoBehaviour
         gameWinUI.SetActive(false);
     }
 
-    // เรียกฟังก์ชันนี้เมื่อขวดตกลงถังเท่านั้น
     public void AddScore(int pointsToAdd = 1)
     {
         if (!isGameOver)
         {
-            totalThrows++; // เพิ่มจำนวนการปาทุกครั้งที่ได้คะแนน
-            remainingBottles--; // ลดจำนวนขวดที่เหลือลงทุกครั้งที่ปา
-            score += pointsToAdd; // เพิ่มคะแนนเฉพาะเมื่อลงถัง
+            totalThrows++;
+            remainingBottles--;
+            score += pointsToAdd;
             UpdateScoreText();
-            CheckGameStatus(); // ตรวจสอบสถานะเกมหลังจากเพิ่มคะแนน
+            CheckGameStatus();
         }
     }
 
-    // เรียกฟังก์ชันนี้เมื่อผู้เล่นปาพลาด
     public void SubtractScore(int pointsToSubtract = 1)
     {
         if (!isGameOver)
         {
-            totalThrows++; // เพิ่มจำนวนการปาทุกครั้งที่พลาด
-            remainingBottles--; // ลดจำนวนขวดที่เหลือลงทุกครั้งที่ปา แม้ว่าจะพลาด
-            lossScore++; // เพิ่มจำนวนครั้งที่พลาด
+            totalThrows++;
+            remainingBottles--;
+            lossScore++;
             if (lossScore > maxMisses)
             {
-                score -= pointsToSubtract; // เริ่มหักคะแนนเมื่อลงขวดไม่ได้เกิน 2 ครั้ง
-                score = Mathf.Max(0, score); // ป้องกันไม่ให้คะแนนติดลบ
+                score -= pointsToSubtract;
+                score = Mathf.Max(0, score);
             }
             UpdateScoreText();
-            CheckGameStatus(); // ตรวจสอบสถานะเกมหลังจากลบคะแนน
+            CheckGameStatus();
         }
     }
 
@@ -65,43 +63,41 @@ public class ScoreManagerStage4 : MonoBehaviour
     {
         if (scoreTextGet != null)
         {
-            scoreTextGet.text = "Valid  : " + score; // แสดงจำนวนขวดที่ปาลงจริง
+            scoreTextGet.text = "Valid  : " + score;
         }
         if (newScoreText != null)
         {
-            newScoreText.text = "New Score: " + newScore; // แสดงคะแนนใหม่ที่คำนวณได้
+            newScoreText.text = "Final Score: " + finalScore;
         }
         if (bottlesRemainingText != null)
         {
-            bottlesRemainingText.text = "Bottles Remaining: " + remainingBottles; // แสดงจำนวนขวดที่เหลือ
+            bottlesRemainingText.text = "Bottles Remaining: " + remainingBottles;
         }
     }
 
     private void CheckGameStatus()
     {
-        // ถ้าผู้เล่นปาขวดลงครบ 6 ครั้ง หรือปาครบ 10 ครั้ง เกมจะจบ
         if (score >= 6 || totalThrows >= maxThrows)
         {
-            // คำนวณคะแนนชนิดใหม่ตามจำนวนการปาสำเร็จ
             if (score >= 6)
             {
-                newScore = 10; // ปาได้ 6 ขวดขึ้นไป
+                finalScore = 10;
             }
             else if (score == 5)
             {
-                newScore = 8; // ปาได้ 5 ขวด
+                finalScore = 8;
             }
             else if (score >= 3 && score <= 4)
             {
-                newScore = 4; // ปาได้ 3-4 ขวด
+                finalScore = 4;
             }
             else if (score >= 1 && score <= 2)
             {
-                newScore = 2; // ปาได้ 1-2 ขวด
+                finalScore = 2;
             }
             else
             {
-                newScore = 0; // ไม่ได้ขวดเลย
+                finalScore = 0;
             }
 
             TriggerGameWin();
@@ -110,18 +106,48 @@ public class ScoreManagerStage4 : MonoBehaviour
 
     private void TriggerGameWin()
     {
-        isGameOver = true; // ตั้งค่าเป็นเกมจบ
-        SoundManager.instance.Play(SoundManager.SoundName.WinSound); // แสดงผลเมื่อเกมจบ
+        isGameOver = true;
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
         gameWinUI.SetActive(true);
-        newScoreText.text = "Final Score: " + newScore; // แสดงคะแนนใหม่สุดท้าย
-        Time.timeScale = 0f; // หยุดการทำงานของเกม
+        newScoreText.text = "Final Score: " + finalScore;
+        Time.timeScale = 0f;
         
-        ScoreManager.Instance.SetScoreForScene(4, newScore); // ซีนที่ 4
-        Debug.Log("Score for Scene 4 set in ScoreManager: " + newScore);
+        ScoreManager.Instance.SetScoreForScene(4, finalScore);
+        Debug.Log("Score for Scene 4 set in ScoreManager: " + finalScore);
+
+        DropJigsawPieceIfEligible(finalScore);
+    }
+
+    private void DropJigsawPieceIfEligible(int finalScore)
+    {
+        if (finalScore >= 8)
+        {
+            int imageIndex = 0;
+
+            if (GameSettings.difficultyLevel == 0)
+            {
+                imageIndex = 0;
+            }
+            else if (GameSettings.difficultyLevel == 1)
+            {
+                imageIndex = 1;
+            }
+            else if (GameSettings.difficultyLevel == 2)
+            {
+                imageIndex = 2;
+            }
+
+            JigsawManager.Instance.CollectJigsawPiece(imageIndex, 3);
+            Debug.Log($"Jigsaw piece dropped: Scene 4, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 4: {imageIndex}, Final Score: {finalScore}");
+        }
+        else
+        {
+            Debug.Log("No jigsaw piece dropped in Scene 4. Final score below threshold.");
+        }
     }
 
     private void Update()
     {
-        if (isGameOver) return; // ถ้าเกมจบแล้ว ไม่ต้องทำอะไรต่อ
+        if (isGameOver) return;
     }
 }
