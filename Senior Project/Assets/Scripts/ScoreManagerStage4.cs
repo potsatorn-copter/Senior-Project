@@ -114,7 +114,7 @@ public class ScoreManagerStage4 : MonoBehaviour
         isGameOver = true;
         SoundManager.instance.Play(SoundManager.SoundName.WinSound);
 
-        newScoreText.text = "คะแนนที่ได้ : " + finalScore;
+        newScoreText.text = "คะแนนที่ได้: " + finalScore;
         ScoreManager.Instance.SetScoreForScene(4, finalScore);
         Debug.Log("Score for Scene 4 set in ScoreManager: " + finalScore);
 
@@ -132,7 +132,7 @@ public class ScoreManagerStage4 : MonoBehaviour
             if (jigsawUIPanel != null)
             {
                 Sprite jigsawSprite = JigsawManager.Instance.jigsawImages[imageIndex].jigsawPieces[3].pieceSprite;
-                jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "You have collected a jigsaw piece!");
+                jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
                 StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
             }
             else

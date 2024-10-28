@@ -3092,20 +3092,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2845263719161149753, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
       propertyPath: m_text
-      value: "You have collected \n  a jigsaw piece!"
+      value: "\u0E04\u0E38\u0E19\u0E44\u0E14\u0E49\u0E23\u0E31\u0E1A\u0E0A\u0E34\u0E49\u0E19\u0E2A\u0E48\u0E27\u0E19\n\u0E08\u0E34\u0E4A\u0E01\u0E0B\u0E2D\u0E27\u0E4C\u0E43\u0E2B\u0E21\u0E48"
       objectReference: {fileID: 0}
     - target: {fileID: 2845263719161149753, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
       propertyPath: m_margin.z
-      value: 114.54942
+      value: 134.30698
       objectReference: {fileID: 0}
     - target: {fileID: 2845263719161149753, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
+      objectReference: {fileID: 11400000, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
     - target: {fileID: 2845263719161149753, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -4568197349219019755, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
+      objectReference: {fileID: -1810315872351535652, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
     - target: {fileID: 2845263719161149753, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -3116,7 +3116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760779127748202299, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058903796190844671, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 73.3
       objectReference: {fileID: 0}
     - target: {fileID: 7058903796190844671, guid: 339b581f9f9ff774c88d0f5068bcebb5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3251,7 +3255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839018622066865173, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -21.1
+      value: -18.1
       objectReference: {fileID: 0}
     - target: {fileID: 900379510524170164, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3371,7 +3375,7 @@ PrefabInstance:
       objectReference: {fileID: 1816249953}
     - target: {fileID: 8261296368944978971, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_text
-      value: 
+      value: "\u0E04\u0E30\u0E41\u0E19\u0E19\u0E17\u0E35\u0E48\u0E17\u0E33\u0E44\u0E14\u0E49"
       objectReference: {fileID: 0}
     - target: {fileID: 8261296368944978971, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_fontSize
@@ -3386,8 +3390,12 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8261296368944978971, guid: a6938a66024913a439c761bba50df617, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1810315872351535652, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
+    - target: {fileID: 8261296368944978971, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

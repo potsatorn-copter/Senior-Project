@@ -68,7 +68,7 @@ public class SceneController : MonoBehaviour
             gridRows = 2;
             gridCols = 6;
             offsetY = 4f;
-            timeRemaining = 50f;
+            timeRemaining = 30f;
             totalMatches = gridRows * gridCols / 2; // 6 คู่
         }
         else if (GameSettings.difficultyLevel == 1) // Normal
@@ -76,7 +76,7 @@ public class SceneController : MonoBehaviour
             gridRows = 3;
             gridCols = 6;
             offsetY = 3f;
-            timeRemaining = 80f;
+            timeRemaining = 60f;
             totalMatches = gridRows * gridCols / 2; // 9 คู่
         }
         else if (GameSettings.difficultyLevel == 2) // Hard
@@ -84,7 +84,7 @@ public class SceneController : MonoBehaviour
             gridRows = 3;
             gridCols = 6;
             offsetY = 3f;
-            timeRemaining = 70f;
+            timeRemaining = 50f;
             totalMatches = gridRows * gridCols / 2; // 9 คู่
         }
     }
@@ -312,7 +312,7 @@ public class SceneController : MonoBehaviour
                 if (jigsawUIPanel != null)
                 {
                     Sprite jigsawSprite = jigsawManager.jigsawImages[imageIndex].jigsawPieces[2].pieceSprite;
-                    jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "You have collected a jigsaw piece!");
+                    jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
                     StartCoroutine(ShowEndGamePanelWithDelay());
                 }
                 else

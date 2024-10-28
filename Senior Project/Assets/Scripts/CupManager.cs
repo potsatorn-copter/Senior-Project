@@ -165,6 +165,9 @@ public class CupManager : MonoBehaviour
 
             if (activeCups[selectedIndex].transform == cupWithBall)
             {
+                // เล่นเสียงเมื่อเลือกถูก
+                SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
+            
                 correctGuesses++;
                 finalScore = correctGuesses * 2;
                 ball.transform.SetParent(null);
@@ -173,6 +176,8 @@ public class CupManager : MonoBehaviour
             }
             else
             {
+                // เล่นเสียงเมื่อเลือกผิด
+                SoundManager.instance.Play(SoundManager.SoundName.WrongItem);
                 StartCoroutine(RevealCorrectAndSelectedCup(selectedIndex));
             }
 
@@ -232,7 +237,7 @@ public class CupManager : MonoBehaviour
             if (jigsawUIPanel != null)
             {
                 Sprite jigsawSprite = JigsawManager.Instance.jigsawImages[imageIndex].jigsawPieces[4].pieceSprite;
-                jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "You have collected a jigsaw piece!");
+                jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
                 StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
             }
             else

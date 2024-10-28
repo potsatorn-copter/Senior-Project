@@ -124,7 +124,7 @@ public class ScoremanagerScene2 : MonoBehaviour
 
             if (jigsawUIPanel != null)
             {
-                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "You have collected a jigsaw piece!"); // ส่ง Sprite ไปแสดง
+                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!"); // ส่ง Sprite ไปแสดง
                 hasDroppedJigsaw = true;
             }
             else
