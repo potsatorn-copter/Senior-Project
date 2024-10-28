@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 
 public class JigsawManager : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class JigsawManager : MonoBehaviour
     }
 
     public List<JigsawImage> jigsawImages;
-    
+
     void Awake()
     {
         if (Instance == null)
@@ -112,11 +112,21 @@ public class JigsawManager : MonoBehaviour
                     piece.isCollected = true;
                     SaveJigsawProgress(currentJigsaw);
 
-                    // ตรวจสอบว่าภาพทั้งหมดถูกปลดล็อคหรือยัง
                     if (currentJigsaw.IsComplete())
                     {
-                        Debug.Log("Jigsaw image completed: " + currentJigsaw.imageName);
-                        PlayerPrefs.SetInt("ImageUnlocked_" + currentJigsaw.imageName, 1); // บันทึกการปลดล็อคใน PlayerPrefs
+                        // บันทึกสถานะการปลดล็อคใน PlayerPrefs
+                        if (currentJigsaw.imageName == "ImageEasy")
+                        {
+                            PlayerPrefs.SetInt("isEasyUnlocked", 1);
+                        }
+                        else if (currentJigsaw.imageName == "ImageNormal")
+                        {
+                            PlayerPrefs.SetInt("isNormalUnlocked", 1);
+                        }
+                        else if (currentJigsaw.imageName == "ImageHard")
+                        {
+                            PlayerPrefs.SetInt("isHardUnlocked", 1);
+                        }
                         PlayerPrefs.Save();
                     }
                 }
@@ -128,16 +138,31 @@ public class JigsawManager : MonoBehaviour
     {
         foreach (var piece in jigsawImage.jigsawPieces)
         {
-            PlayerPrefs.SetInt(jigsawImage.imageName + "_" + piece.pieceName, piece.isCollected ? 1 : 0);
+            piece.isCollected = true;
         }
-        PlayerPrefs.Save();
     }
 
     private void LoadJigsawProgress(JigsawImage jigsawImage)
     {
+        bool isUnlocked = false;
+        
+        // ตรวจสอบสถานะการปลดล็อคจาก PlayerPrefs
+        if (jigsawImage.imageName == "ImageEasy")
+        {
+            isUnlocked = PlayerPrefs.GetInt("isEasyUnlocked", 0) == 1;
+        }
+        else if (jigsawImage.imageName == "ImageNormal")
+        {
+            isUnlocked = PlayerPrefs.GetInt("isNormalUnlocked", 0) == 1;
+        }
+        else if (jigsawImage.imageName == "ImageHard")
+        {
+            isUnlocked = PlayerPrefs.GetInt("isHardUnlocked", 0) == 1;
+        }
+
         foreach (var piece in jigsawImage.jigsawPieces)
         {
-            piece.isCollected = PlayerPrefs.GetInt(jigsawImage.imageName + "_" + piece.pieceName, 0) == 1;
+            piece.isCollected = isUnlocked;
         }
     }
 
@@ -153,13 +178,15 @@ public class JigsawManager : MonoBehaviour
             foreach (var piece in jigsawImage.jigsawPieces)
             {
                 piece.isCollected = false;
-                PlayerPrefs.SetInt(jigsawImage.imageName + "_" + piece.pieceName, 0);
             }
-            // รีเซ็ตสถานะการปลดล็อคภาพเต็ม
-            PlayerPrefs.SetInt("ImageUnlocked_" + jigsawImage.imageName, 0);
         }
+
+        // รีเซ็ตสถานะการปลดล็อคใน PlayerPrefs
+        PlayerPrefs.SetInt("isEasyUnlocked", 0);
+        PlayerPrefs.SetInt("isNormalUnlocked", 0);
+        PlayerPrefs.SetInt("isHardUnlocked", 0);
         PlayerPrefs.Save();
+
         UpdateGallery();
     }
-    
 }

@@ -53,6 +53,10 @@ public class Thrownable : MonoBehaviour
             isCharging = true;
             holdDuration = 0f;
             trajectoryLine.enabled = true;
+            
+            // เล่นเสียงชาร์จเมื่อเริ่มชาร์จปา
+            SoundManager.instance.Play(SoundManager.SoundName.ChargeSound);
+
         }
     }
 

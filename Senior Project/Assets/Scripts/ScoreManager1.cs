@@ -100,7 +100,7 @@ public class ScoreManager1 : MonoBehaviour
             JigsawUIPanel jigsawUIPanel = FindObjectOfType<JigsawUIPanel>();
             if (jigsawUIPanel != null)
             {
-                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "You have collected a jigsaw piece!");
+                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite,"คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
                 StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
             }
             else
