@@ -108,7 +108,7 @@ public class ScoreHistoryManager : MonoBehaviour
     {
         if (quizHistory != null && quizHistory.results.Count > 0)
         {
-            string history = "Score History:\n";
+            string history = "\n";
             foreach (var result in quizHistory.results)
             {
                 history += $"Score: {result.score} | Date: {result.date}\n"; // แสดงเฉพาะสกอร์รวมที่บันทึกแล้ว

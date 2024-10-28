@@ -3,16 +3,15 @@ using UnityEngine;
 
 public class EndGameScene2 : MonoBehaviour
 {
-    public GameObject uiToShow; // UI ที่จะโชว์เมื่อชนกับไอเท็ม
-    public string playerTag = "Player"; // Tag ของ Player เพื่อเช็คการชน
-    public float delayBeforeShowingUI = 0.5f; // เวลาที่จะหน่วงก่อนโชว์ UI
-    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
+    public GameObject uiToShow;
+    public string playerTag = "Player";
+    private ScoremanagerScene2 scoreManager;
 
     private void Start()
     {
         if (uiToShow != null)
         {
-            uiToShow.SetActive(false); // ซ่อน UI ตอนเริ่มต้น
+            uiToShow.SetActive(false);
         }
 
         scoreManager = FindObjectOfType<ScoremanagerScene2>();
@@ -27,19 +26,29 @@ public class EndGameScene2 : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             Debug.Log("Player hit the item!");
-            ShowUI();
-            if (scoreManager != null) scoreManager.EndGame();
+
+            if (scoreManager != null)
+            {
+                scoreManager.EndGame();
+
+                // แสดง EndGamePanel ทันทีโดยไม่ต้องรอ JigsawUIPanel
+                ShowEndGamePanel();
+            }
         }
     }
 
-    private void ShowUI()
+    private void ShowEndGamePanel()
     {
         if (uiToShow != null)
         {
-            Debug.Log("Showing UI");
+            Debug.Log("EndGamePanel is now visible.");
             uiToShow.SetActive(true);
+            Time.timeScale = 0f;
         }
-
-        Time.timeScale = 0f;
+        else
+        {
+            Debug.LogWarning("EndGamePanel (uiToShow) is not assigned in the Inspector.");
+        }
     }
+    
 }

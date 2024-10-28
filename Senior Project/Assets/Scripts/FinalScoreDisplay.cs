@@ -28,13 +28,13 @@ public class FinalScoreDisplay : MonoBehaviour
         int totalScore = ScoreManager.Instance.GetTotalScore();
 
         // อัปเดต TextMeshPro เพื่อแสดงคะแนนแต่ละซีน
-        if (scoreScene1Text != null) scoreScene1Text.text = "Score Scene 1: " + scoreScene1 + "/10";
-        if (scoreScene2Text != null) scoreScene2Text.text = "Score Scene 2: " + scoreScene2 + "/10";
-        if (scoreScene3Text != null) scoreScene3Text.text = "Score Scene 3: " + scoreScene3 + "/10";
-        if (scoreScene4Text != null) scoreScene4Text.text = "Score Scene 4: " + scoreScene4 + "/10";
-        if (scoreScene5Text != null) scoreScene5Text.text = "Score Scene 5: " + scoreScene5 + "/10";
+        if (scoreScene1Text != null) scoreScene1Text.text = "คะแนนมินิเกม 1: " + scoreScene1 + "/10";
+        if (scoreScene2Text != null) scoreScene2Text.text = "คะแนนมินิเกม 2: " + scoreScene2 + "/10";
+        if (scoreScene3Text != null) scoreScene3Text.text = "คะแนนมินิเกม 3: " + scoreScene3 + "/10";
+        if (scoreScene4Text != null) scoreScene4Text.text = "คะแนนมินิเกม 4: " + scoreScene4 + "/10";
+        if (scoreScene5Text != null) scoreScene5Text.text = "คะแนนมินิเกม 5: " + scoreScene5 + "/10";
 
         // อัปเดต TextMeshPro เพื่อแสดงคะแนนรวม
-        if (totalScoreText != null) totalScoreText.text = "Total Score: " + totalScore + "/50";
+        if (totalScoreText != null) totalScoreText.text = "คะแนนรวม : " + totalScore + "/50";
     }
 }

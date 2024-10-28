@@ -1154,8 +1154,8 @@ MonoBehaviour:
     Game Designer\r\n1640700777      \u0E20\u0E24\u0E28 \u0E40\u0E01\u0E37\u0E49\u0E2D\u0E2B\u0E19\u0E38\u0E19\t          
     3D 2D Artist\n\n                       \u0E1E\u0E37\u0E49\u0E19\u0E17\u0E35\u0E48\u0E42\u0E25\u0E42\u0E01\u0E49\u0E02\u0E2D\u0E07\u0E42\u0E23\u0E07\u0E1E\u0E22\u0E32\u0E1A\u0E32\u0E25\u0E41\u0E25\u0E30\u0E21\u0E2D\u0E01\u0E23\u0E38\u0E07\u0E40\u0E17\u0E1E"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
-  m_sharedMaterial: {fileID: -4568197349219019755, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
+  m_sharedMaterial: {fileID: -1810315872351535652, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1389,7 +1389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 3.8, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -126, y: -116}
+  m_AnchoredPosition: {x: -1878, y: -116}
   m_SizeDelta: {x: 160, y: 129.10889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2111082060
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1118202954, guid: 5ee91b87b3a06ae43a576a4b41ae1b76, type: 3}
+  m_Sprite: {fileID: 469271881, guid: 60a2a84a4e3a1924b88cb7db8a60ec97, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

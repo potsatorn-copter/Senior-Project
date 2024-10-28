@@ -3,115 +3,167 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class ScoremanagerScene2 : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText; // UI สำหรับแสดงคะแนน
-    public TextMeshProUGUI finalScoreText; // UI สำหรับแสดงคะแนนสุดท้าย
-    private int score = 0; // คะแนนในซีนนี้
-    private int finalScore = 0; // คะแนนสุดท้ายในซีนนี้
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI finalScoreText;
+    public JigsawUIPanel jigsawUIPanel;
+    public GameObject endGamePanel;
     
-    // ฟังก์ชันสำหรับเพิ่มคะแนน
+    private int score = 0;
+    private int finalScore = 0;
+    private bool hasDroppedJigsaw = false;
+
+    private void Start()
+    {
+        UpdateScoreText();
+
+        if (endGamePanel != null)
+        {
+            endGamePanel.SetActive(false);
+        }
+    }
+
     public void AddScore(int points)
     {
         score += points;
         UpdateScoreText();
     }
 
-    // ฟังก์ชันสำหรับคำนวณคะแนนสุดท้าย
+    private void UpdateScoreText()
+    {
+        if (scoreText != null) scoreText.text = "คะแนน: " + score;
+    }
+
+    public void CheckEndGameCondition()
+    {
+        if (score >= 100) // เงื่อนไขคะแนนที่ต้องการเพื่อสิ้นสุดเกม
+        {
+            CalculateFinalScore();
+
+            if (hasDroppedJigsaw)
+            {
+                StartCoroutine(ShowEndGamePanelWithDelay());
+            }
+            else
+            {
+                ShowEndGamePanel();
+            }
+        }
+    }
+
     public void CalculateFinalScore()
     {
-        if (GameSettings.difficultyLevel == 0) // Easy Mode
+        int difficultyLevel = GameSettings.difficultyLevel;
+
+        if (difficultyLevel == 0) // ง่าย
         {
             if (score >= 2200)
                 finalScore = 10;
-            else if (score >= 2000 && score < 2200)
-                finalScore = 9;
-            else if (score >= 1500 && score < 2000)
-                finalScore = 5;
-            else if (score >= 750 && score < 1500)
-                finalScore = 3;
+            else if (score >= 2000)
+                finalScore = 8;
+            else if (score >= 1800)
+                finalScore = 6;
+            else if (score >= 1400)
+                finalScore = 4;
+            else if (score >= 1000)
+                finalScore = 2;
             else
-                finalScore = 1;
+                finalScore = 0;
         }
-        else if (GameSettings.difficultyLevel == 1) // Normal Mode
+        else if (difficultyLevel == 1) // กลาง
         {
-            if (score >= 2400)
+            if (score >= 2300)
                 finalScore = 10;
-            else if (score >= 2200 && score < 2400)
-                finalScore = 9;
-            else if (score >= 1800 && score < 2200)
-                finalScore = 5;
-            else if (score >= 1000 && score < 1800)
-                finalScore = 3;
+            else if (score >= 2000)
+                finalScore = 8;
+            else if (score >= 1900)
+                finalScore = 6;
+            else if (score >= 1500)
+                finalScore = 4;
+            else if (score >= 1000)
+                finalScore = 2;
             else
-                finalScore = 1;
+                finalScore = 0;
         }
-        else if (GameSettings.difficultyLevel == 2) // Hard Mode
+        else if (difficultyLevel == 2) // ยาก
         {
-            if (score >= 2000)
+            if (score >= 2200)
                 finalScore = 10;
-            else if (score >= 1800 && score < 2000)
-                finalScore = 9;
-            else if (score >= 1300 && score < 1800)
-                finalScore = 5;
-            else if (score >= 500 && score < 1300)
-                finalScore = 3;
+            else if (score >= 1800)
+                finalScore = 8;
+            else if (score >= 1700)
+                finalScore = 6;
+            else if (score >= 1500)
+                finalScore = 4;
+            else if (score >= 1300)
+                finalScore = 2;
             else
-                finalScore = 1;
+                finalScore = 0;
         }
 
-        // แสดงผลคะแนนสุดท้ายใน UI
-        UpdateFinalScoreText();
-
-        // บันทึกคะแนนสำหรับซีนที่ 2
+        if (finalScoreText != null)
+        {
+            finalScoreText.text = "คะแนนที่ได้ : " + finalScore;
+        }
         Debug.Log("Setting score for Scene 2 in ScoreManager: " + finalScore);
-        ScoreManager.Instance.SetScoreForScene(2, finalScore); // บันทึกคะแนนสำหรับซีนที่ 2
-
-        // เรียกฟังก์ชันดรอปจิ๊กซอว์ถ้าได้คะแนน >= 8
+        ScoreManager.Instance.SetScoreForScene(2, finalScore);
         DropJigsawPieceIfEligible();
     }
 
-    // อัปเดตการแสดงคะแนนบน UI
-    private void UpdateScoreText()
-    {
-        if (scoreText != null)
-        {
-            scoreText.text = "Score: " + score;
-        }
-    }
-
-    // อัปเดตการแสดงคะแนนสุดท้ายบน UI
-    private void UpdateFinalScoreText()
-    {
-        if (finalScoreText != null)
-        {
-            finalScoreText.text = "Final Score: " + finalScore;
-        }
-    }
-
-    // ฟังก์ชันเรียกเมื่อเกมจบ
-    public void EndGame()
-    {
-        CalculateFinalScore();  // คำนวณคะแนนสุดท้าย
-        Debug.Log("Final score calculated for Scene 2: " + finalScore);
-    }
-
-    // ฟังก์ชันตรวจสอบการดรอปจิ๊กซอว์
     private void DropJigsawPieceIfEligible()
     {
-        // ตรวจสอบว่าผู้เล่นทำคะแนน 8 ขึ้นไปหรือไม่
         if (finalScore >= 8)
         {
             int difficultyLevel = GameSettings.difficultyLevel;
 
-            // ดรอปจิ๊กซอว์ชิ้นที่ตรงกับระดับความยากและซีนที่เล่น
-            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 1); // ดรอปชิ้นส่วนซีนที่ 2
+            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 1);
+            JigsawManager.JigsawImage jigsawImage = JigsawManager.Instance.jigsawImages[difficultyLevel];
+            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[1]; // ดึงชิ้นส่วนจิ๊กซอว์ที่เหมาะสม
 
-            Debug.Log($"Jigsaw piece dropped: Scene 2, Difficulty Level: {difficultyLevel}, Image Part: 2, Final Score: {finalScore}");
+            if (jigsawUIPanel != null)
+            {
+                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "You have collected a jigsaw piece!"); // ส่ง Sprite ไปแสดง
+                hasDroppedJigsaw = true;
+            }
+            else
+            {
+                Debug.LogWarning("JigsawUIPanel is not assigned.");
+                hasDroppedJigsaw = false;
+            }
         }
         else
         {
-            Debug.Log("No jigsaw piece dropped in Scene 2. Final score below threshold.");
+            hasDroppedJigsaw = false;
+            Debug.Log("No jigsaw piece dropped. Final score below threshold.");
         }
+    }
+
+    private IEnumerator ShowEndGamePanelWithDelay()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (jigsawUIPanel != null)
+        {
+            jigsawUIPanel.HideJigsawUIPanel();
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        ShowEndGamePanel();
+    }
+
+    private void ShowEndGamePanel()
+    {
+        if (endGamePanel != null)
+        {
+            endGamePanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+    public void EndGame()
+    {
+        CalculateFinalScore();
+        Debug.Log("Final score calculated: " + finalScore);
     }
 }

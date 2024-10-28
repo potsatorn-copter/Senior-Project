@@ -6,50 +6,45 @@ using UnityEngine.UI;
 
 public class ScoreManager1 : MonoBehaviour
 {
-    public Text scoreText; // สำหรับแสดงจำนวนไอเท็มดีที่เก็บได้
-    public TextMeshProUGUI finalScoreText; // สำหรับแสดงผลคะแนนสุดท้าย
-    public GameObject endGamePanel; // สำหรับแผง UI ของหน้าจอจบเกม
-    private int goodItemCount = 0; // นับจำนวนไอเท็มดีที่เก็บได้
-    private int finalScore = 0; // คะแนนสุดท้าย
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI finalScoreText;
+    public GameObject endGamePanel;
+    private int goodItemCount = 0;
+    private int finalScore = 0;
 
-    // กำหนดช่วงคะแนนสำหรับแต่ละระดับความยาก
     private Dictionary<int, int[]> difficultyThresholds = new Dictionary<int, int[]>()
     {
-        { 0, new int[] { 11, 9, 6, 3, 1 } }, // Easy: [11-12 = 10, 9-10 = 8, 6-8 = 6, 3-5 = 4, 1-2 = 2]
-        { 1, new int[] { 14, 12, 9, 5, 1 } }, // Normal: [14-15 = 10, 12-13 = 8, 9-11 = 6, 5-8 = 4, 1-4 = 2]
-        { 2, new int[] { 15, 13, 9, 5, 1 } }  // Hard: [15-16 = 10, 13-14 = 8, 9-12 = 6, 5-8 = 4, 1-4 = 2]
+        { 0, new int[] { 11, 9, 6, 3, 1 } },
+        { 1, new int[] { 14, 12, 9, 5, 1 } },
+        { 2, new int[] { 15, 13, 9, 5, 1 } }
     };
 
     private void Start()
     {
-        UpdateScoreText(); // อัพเดท UI เมื่อเริ่มเกม
+        UpdateScoreText();
         if (endGamePanel != null)
         {
-            endGamePanel.SetActive(false); // ซ่อนแผงจบเกมเมื่อเริ่มเกม
+            endGamePanel.SetActive(false);
         }
     }
 
-    // ฟังก์ชันเพิ่มจำนวนไอเท็มดีที่เก็บได้
     public void CollectGoodItem()
     {
-        goodItemCount++; // เพิ่มตัวนับเมื่อเก็บไอเท็มดี
+        goodItemCount++;
         UpdateScoreText();
     }
 
-    // ฟังก์ชันลดจำนวนไอเท็มเมื่อเก็บไอเท็มไม่ดี
     public void CollectBadItem()
     {
-        goodItemCount--; // ลดตัวนับเมื่อเก็บไอเท็มไม่ดี
+        goodItemCount--;
         UpdateScoreText();
     }
 
-    // ฟังก์ชันคำนวณคะแนนสุดท้าย
     public void CalculateFinalScore()
     {
-        int difficulty = GameSettings.difficultyLevel; // ตรวจสอบระดับความยากจาก GameSettings
-        int[] thresholds = difficultyThresholds[difficulty]; // นำ threshold ของระดับความยากนั้นมาใช้
+        int difficulty = GameSettings.difficultyLevel;
+        int[] thresholds = difficultyThresholds[difficulty];
 
-        // ใช้ threshold ในการกำหนดคะแนน
         if (goodItemCount >= thresholds[0])
             finalScore = 10;
         else if (goodItemCount >= thresholds[1])
@@ -63,64 +58,79 @@ public class ScoreManager1 : MonoBehaviour
         else
             finalScore = 0;
 
-        // แสดงผลคะแนนสุดท้ายใน UI
         if (finalScoreText != null)
         {
-            finalScoreText.text = "Final Score: " + finalScore;
+            finalScoreText.text = "คะแนนที่ได้ : " + finalScore;
         }
 
-        // ซ่อนข้อความคะแนนที่เก็บได้ก่อนหน้าหลังจากเกมจบ
         if (scoreText != null)
         {
-            scoreText.gameObject.SetActive(false); // ปิดข้อความคะแนน
+            scoreText.gameObject.SetActive(false);
         }
 
-        // แสดงแผงจบเกม
-        if (endGamePanel != null)
-        {
-            endGamePanel.SetActive(true); // แสดงแผงจบเกมเมื่อคำนวณคะแนนเสร็จ
-        }
-
-        // บันทึกคะแนนสำหรับซีนที่ 1
         Debug.Log("Setting score for Scene 1 in ScoreManager: " + finalScore);
-        ScoreManager.Instance.SetScoreForScene(1, finalScore); // บันทึกคะแนนสำหรับซีนที่ 1
+        ScoreManager.Instance.SetScoreForScene(1, finalScore);
 
-        // เรียกฟังก์ชันดรอปจิ๊กซอว์ถ้าได้คะแนน >= 8
         DropJigsawPieceIfEligible();
     }
 
-    // อัพเดท UI เพื่อแสดงจำนวนไอเท็มดีที่เก็บได้
     private void UpdateScoreText()
     {
-        if (scoreText != null) // ตรวจสอบว่ามีการอ้างอิงถึง Text ถูกต้อง
+        if (scoreText != null)
         {
-            scoreText.text = "Your Score: " + goodItemCount; // แสดงจำนวนไอเท็มดีที่เก็บได้
+            scoreText.text = "คะแนน: " + goodItemCount;
         }
     }
 
-    // ฟังก์ชันนี้ใช้เพื่อเรียกคะแนนปัจจุบันได้
-    public int GetCurrentGoodItemCount()
-    {
-        return goodItemCount;
-    }
-
-    // ฟังก์ชันตรวจสอบการดรอปจิ๊กซอว์
     private void DropJigsawPieceIfEligible()
     {
-        // ตรวจสอบว่าผู้เล่นทำคะแนน 8 ขึ้นไปหรือไม่
+        bool jigsawDropped = false;
+
         if (finalScore >= 8)
         {
             int difficultyLevel = GameSettings.difficultyLevel;
+            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 0);
 
-            // ดรอปจิ๊กซอว์ชิ้นที่ตรงกับระดับความยากและซีนที่เล่น
-            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 0); // ดรอปชิ้นส่วนตามระดับความยาก
+            JigsawManager.JigsawImage jigsawImage = JigsawManager.Instance.jigsawImages[difficultyLevel];
+            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[0];
 
-            // Debug log เพื่อแสดงว่าจิ๊กซอว์ชิ้นไหนดรอป
+            // แสดง JigsawUIPanel ทุกครั้ง ไม่สนใจว่าเก็บแล้วหรือยัง
+            jigsawDropped = true;
+
+            JigsawUIPanel jigsawUIPanel = FindObjectOfType<JigsawUIPanel>();
+            if (jigsawUIPanel != null)
+            {
+                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "You have collected a jigsaw piece!");
+                StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
+            }
+            else
+            {
+                Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                ShowEndGamePanel();
+            }
+
             Debug.Log($"Jigsaw piece dropped: Scene 1, Difficulty Level: {difficultyLevel}, Image Part: 1, Final Score: {finalScore}");
         }
-        else
+
+        if (!jigsawDropped)
         {
-            Debug.Log("No jigsaw piece dropped. Final score below threshold.");
+            ShowEndGamePanel();
+        }
+    }
+
+    private IEnumerator ShowEndGamePanelWithDelay(JigsawUIPanel jigsawUIPanel)
+    {
+        yield return new WaitForSeconds(3f);
+        jigsawUIPanel.HideJigsawUIPanel();
+        yield return new WaitForSeconds(0.5f);
+        ShowEndGamePanel();
+    }
+
+    private void ShowEndGamePanel()
+    {
+        if (endGamePanel != null)
+        {
+            endGamePanel.SetActive(true);
         }
     }
 }
