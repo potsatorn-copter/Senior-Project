@@ -15,6 +15,7 @@ public class CupManager : MonoBehaviour
     public Button nextRoundButton;
     public GameObject finalScoreUI;
     public GameObject Cup4;
+    public JigsawUIPanel jigsawUIPanel;
 
     private Transform cupWithBall;
     private bool shuffling = false;
@@ -95,9 +96,9 @@ public class CupManager : MonoBehaviour
 
     void UpdateUI()
     {
-        scoreText.text = "Correct Guesses: " + correctGuesses;
-        finalScoreText.text = "Final Score: " + finalScore;
-        roundText.text = "Round: " + roundCount + "/5";
+        scoreText.text = "ทายถูก: " + correctGuesses;
+        finalScoreText.text = "คะแนนที่ได้ : " + finalScore;
+        roundText.text = "รอบที่เหลือ " + roundCount + "/5";
     }
 
     IEnumerator ShowBallThenCover()
@@ -197,9 +198,7 @@ public class CupManager : MonoBehaviour
         ScoreManager.Instance.SetScoreForScene(5, finalScore);
         Debug.Log("Score for Scene 5 set in ScoreManager: " + finalScore);
 
-        finalScoreUI.SetActive(true);
-
-        // เพิ่มระบบดรอปจิ๊กซอว์
+        // เรียกใช้การดรอปจิ๊กซอว์ (หรือแสดง finalScoreUI ถ้าไม่มีการดรอปจิ๊กซอว์)
         DropJigsawPieceIfEligible(finalScore);
     }
 
@@ -226,30 +225,50 @@ public class CupManager : MonoBehaviour
     {
         if (finalScore >= 8)
         {
-            int imageIndex = 0;
-
-            if (GameSettings.difficultyLevel == 0)
-            {
-                imageIndex = 0;
-            }
-            else if (GameSettings.difficultyLevel == 1)
-            {
-                imageIndex = 1;
-            }
-            else if (GameSettings.difficultyLevel == 2)
-            {
-                imageIndex = 2;
-            }
+            int imageIndex = GameSettings.difficultyLevel;
 
             JigsawManager.Instance.CollectJigsawPiece(imageIndex, 4);
-            Debug.Log($"Jigsaw piece dropped: Scene 5, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 5: {imageIndex}, Final Score: {finalScore}");
+
+            if (jigsawUIPanel != null)
+            {
+                Sprite jigsawSprite = JigsawManager.Instance.jigsawImages[imageIndex].jigsawPieces[4].pieceSprite;
+                jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "You have collected a jigsaw piece!");
+                StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
+            }
+            else
+            {
+                Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                ShowEndGamePanel();
+            }
         }
         else
         {
+            // กรณีที่คะแนนต่ำกว่า 8 ให้แสดง finalScoreUI โดยไม่ต้องรอ jigsawUIPanel
             Debug.Log("No jigsaw piece dropped in Scene 5. Final score below threshold.");
+            ShowEndGamePanel();
         }
     }
+    
+    private IEnumerator ShowEndGamePanelWithDelay(JigsawUIPanel jigsawUIPanel)
+    {
+        yield return new WaitForSeconds(3f); // รอให้ JigsawUIPanel แสดงครบ 3 วินาที
+        if (jigsawUIPanel != null)
+        {
+            jigsawUIPanel.HideJigsawUIPanel();
+        }
+        yield return new WaitForSeconds(0.5f); // รออีก 0.5 วินาที
+        ShowEndGamePanel();
+    }
 
+    private void ShowEndGamePanel()
+    {
+        if (finalScoreUI != null && !finalScoreUI.activeSelf)
+        {
+            finalScoreUI.SetActive(true);
+            Time.timeScale = 0f; // หยุดเวลา
+        }
+    }
+    
     public bool IsShuffling()
     {
         return shuffling;

@@ -23,9 +23,10 @@ public class Thrownable : MonoBehaviour
     [Header("GUI")]
     public TextMeshProUGUI holdTimeText;
     public Slider holdTimeSlider;
+    public Button throwButton; // เพิ่มตัวแปรสำหรับปุ่มปา
 
     private float holdDuration = 0f;
-    private bool isCharging = false;  // ตัวแปรบอกว่ากำลังชาร์จอยู่
+    private bool isCharging = false;  
     private bool canThrow = true;
 
     private void Awake()
@@ -36,23 +37,22 @@ public class Thrownable : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0f || !isCharging) return;  // ถ้าเกมหยุดหรือไม่ได้ชาร์จ ให้หยุดทำงาน
+        if (Time.timeScale == 0f || !isCharging) return;
 
-        // เพิ่มระยะเวลาชาร์จ
         holdDuration += Time.deltaTime;
-        holdDuration = Mathf.Min(holdDuration, maxHoldTime);  // จำกัดไม่ให้เกิน maxHoldTime
+        holdDuration = Mathf.Min(holdDuration, maxHoldTime);
 
-        UpdateHoldTimeUI(holdDuration);  // อัปเดต UI
-        DrawTrajectory(CalculateThrowForce());  // วาดเส้นแสดงทิศทาง
+        UpdateHoldTimeUI(holdDuration);
+        DrawTrajectory(CalculateThrowForce());
     }
 
     public void StartCharging()
     {
         if (canThrow)
         {
-            isCharging = true;  // เริ่มชาร์จ
-            holdDuration = 0f;  // รีเซ็ตเวลา
-            trajectoryLine.enabled = true;  // แสดงเส้นทิศทาง
+            isCharging = true;
+            holdDuration = 0f;
+            trajectoryLine.enabled = true;
         }
     }
 
@@ -66,9 +66,15 @@ public class Thrownable : MonoBehaviour
 
             holdDuration = 0f;
             UpdateHoldTimeUI(holdDuration);
-            trajectoryLine.enabled = false;  // ซ่อนเส้น
-            isCharging = false;  // หยุดชาร์จ
-            canThrow = false;  // ปาไม่ได้จนกว่าจะชน
+            trajectoryLine.enabled = false;
+            isCharging = false;
+            canThrow = false;
+
+            // ซ่อนปุ่มปาหลังจากปาไปแล้ว
+            if (throwButton != null)
+            {
+                throwButton.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -125,5 +131,11 @@ public class Thrownable : MonoBehaviour
     public void EnableThrowingAgain()
     {
         canThrow = true;
+
+        // แสดงปุ่มปาเมื่อขวดชนกับวัตถุ
+        if (throwButton != null)
+        {
+            throwButton.gameObject.SetActive(true);
+        }
     }
 }

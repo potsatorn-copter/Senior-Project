@@ -18,6 +18,7 @@ TagManager:
   - Easy
   - Normal
   - Hard
+  - Star2
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class JigsawManager : MonoBehaviour
 {
@@ -35,13 +37,13 @@ public class JigsawManager : MonoBehaviour
     }
 
     public List<JigsawImage> jigsawImages;
-
+    
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ใช้ DontDestroyOnLoad แค่กับตัวจัดการ
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -56,13 +58,11 @@ public class JigsawManager : MonoBehaviour
             LoadJigsawProgress(jigsawImage);
         }
 
-        // ติดตามการเปลี่ยนซีนเพื่ออัปเดตแกลลอรี
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // เมื่อเข้าสู่ซีนแกลลอรี ให้เรียกการอัปเดตแกลลอรี
         if (IsGalleryScene())
         {
             UpdateGallery();
@@ -111,6 +111,14 @@ public class JigsawManager : MonoBehaviour
                 {
                     piece.isCollected = true;
                     SaveJigsawProgress(currentJigsaw);
+
+                    // ตรวจสอบว่าภาพทั้งหมดถูกปลดล็อคหรือยัง
+                    if (currentJigsaw.IsComplete())
+                    {
+                        Debug.Log("Jigsaw image completed: " + currentJigsaw.imageName);
+                        PlayerPrefs.SetInt("ImageUnlocked_" + currentJigsaw.imageName, 1); // บันทึกการปลดล็อคใน PlayerPrefs
+                        PlayerPrefs.Save();
+                    }
                 }
             }
         }
@@ -147,8 +155,11 @@ public class JigsawManager : MonoBehaviour
                 piece.isCollected = false;
                 PlayerPrefs.SetInt(jigsawImage.imageName + "_" + piece.pieceName, 0);
             }
+            // รีเซ็ตสถานะการปลดล็อคภาพเต็ม
+            PlayerPrefs.SetInt("ImageUnlocked_" + jigsawImage.imageName, 0);
         }
         PlayerPrefs.Save();
         UpdateGallery();
     }
+    
 }

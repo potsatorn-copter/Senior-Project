@@ -340,8 +340,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0E08\u0E31\u0E1A\u0E04\u0E39\u0E48\u0E44\u0E1E\u0E48\u0E43\u0E2B\u0E49\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07\u0E43\u0E19\u0E40\u0E27\u0E25\u0E32\u0E17\u0E35\u0E48\u0E01\u0E33\u0E2B\u0E19\u0E14"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
-  m_sharedMaterial: {fileID: -4568197349219019755, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
+  m_sharedMaterial: {fileID: -1810315872351535652, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -993,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -386, y: 401}
+  m_AnchoredPosition: {x: -386, y: 388}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1011483229
@@ -1018,8 +1018,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0E01\u0E0F\u0E01\u0E32\u0E23\u0E40\u0E25\u0E48\u0E19 Stage 3"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
-  m_sharedMaterial: {fileID: -4568197349219019755, guid: 2c80938626ab8b846a2f5823895588e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
+  m_sharedMaterial: {fileID: -1810315872351535652, guid: 5676c37515522634c8cde5d5eb674f0b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 4
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
