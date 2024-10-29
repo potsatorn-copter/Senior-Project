@@ -20,7 +20,7 @@ public class DeathZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (scoreManager != null) scoreManager.EndGame();
+            if (scoreManager != null) scoreManager.EndGameWithJigsawCheck();
             endgGameObject.SetActive(true);
             Debug.Log("Player fell into the death zone. Game Over.");
         }

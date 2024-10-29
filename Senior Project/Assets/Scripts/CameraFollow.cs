@@ -4,61 +4,57 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target; // ตัวละครที่กล้องจะติดตาม
-    public float smoothSpeed = 0.1f; // ความเร็วในการเลื่อนกล้อง
-    public Vector3 offset; // การชดเชยตำแหน่งของกล้อง (ค่าเริ่มต้น)
-    public float cameraThreshold = 0.2f; // ระยะที่ตัวละครต้องขึ้นไปถึงก่อนที่กล้องจะเลื่อนตาม
-    public GameObject gameOverUI; // UI ที่จะโชว์เมื่อเกมจบ
+    public Transform target;
+    public float smoothSpeed = 0.3f;
+    public Vector3 offset;
+    public float cameraThreshold = 0.2f;
+    public GameObject gameOverUI;
 
-    private float highestYPosition; // ตำแหน่ง Y สูงสุดที่กล้องเคยตาม
+    private float highestYPosition;
     private bool gameIsOver = false;
-    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
+    private bool isFallingToEnd = false;
+    private ScoremanagerScene2 scoreManager;
 
     private void Start()
     {
-        highestYPosition = transform.position.y; // เริ่มต้นที่ตำแหน่งปัจจุบันของกล้อง
-        gameOverUI.SetActive(false); // ซ่อน UI เมื่อเริ่มเกม
+        highestYPosition = transform.position.y;
+        gameOverUI.SetActive(false);
 
-        // ค้นหา ScoremanagerScene2
         scoreManager = FindObjectOfType<ScoremanagerScene2>();
         if (scoreManager == null)
         {
             Debug.LogWarning("ScoremanagerScene2 not found in the scene.");
         }
+
+        // เรียกใช้การทำลายแพลตฟอร์มเป็นระยะเพื่อลดการใช้งานทรัพยากรในแต่ละเฟรม
+        InvokeRepeating("DetectAndDestroyPlatforms", 0.5f, 0.5f);
     }
 
     private void LateUpdate()
     {
-        if (gameIsOver) return;
+        if (gameIsOver || isFallingToEnd) return;
 
         if (target.position.y > highestYPosition + cameraThreshold)
         {
             highestYPosition = target.position.y - cameraThreshold;
-
             Vector3 desiredPosition = new Vector3(transform.position.x, highestYPosition + offset.y, transform.position.z);
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
             transform.position = smoothedPosition;
         }
 
-        if (target.position.y < transform.position.y - 0.7f)
+        // ตรวจสอบว่าตัวละครตกลงมาต่ำกว่ากล้อง
+        if (target.position.y < transform.position.y - 0.6f && !gameIsOver)
         {
-            GameOver();
+            Debug.Log("Player fell below camera threshold - initiating end game check.");
+            isFallingToEnd = true;
+            gameIsOver = true;  // ตั้งค่านี้เป็น true เพื่อป้องกันการเรียกซ้ำ
+            scoreManager?.EndGameWithJigsawCheck();
         }
-
-        DetectAndDestroyPlatforms();
-    }
-
-    private void GameOver()
-    {
-        gameIsOver = true;
-        if (scoreManager != null) scoreManager.EndGame();
-        gameOverUI.SetActive(true);
-        Time.timeScale = 0f;
-        SoundManager.instance.Play(SoundManager.SoundName.LoseSound);
     }
 
     private void DetectAndDestroyPlatforms()
     {
+        // ค้นหาแพลตฟอร์มที่อยู่นอกขอบหน้าจอและทำลายเพื่อเพิ่มประสิทธิภาพ
         GameObject[] platforms = GameObject.FindGameObjectsWithTag("TrampolinePlatform");
 
         foreach (GameObject platform in platforms)

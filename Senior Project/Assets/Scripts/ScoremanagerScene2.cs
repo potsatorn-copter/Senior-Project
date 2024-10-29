@@ -10,15 +10,15 @@ public class ScoremanagerScene2 : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
     public JigsawUIPanel jigsawUIPanel;
     public GameObject endGamePanel;
-    
+
     private int score = 0;
     private int finalScore = 0;
     private bool hasDroppedJigsaw = false;
+    private bool isGameEnded = false;
 
     private void Start()
     {
         UpdateScoreText();
-
         if (endGamePanel != null)
         {
             endGamePanel.SetActive(false);
@@ -36,20 +36,27 @@ public class ScoremanagerScene2 : MonoBehaviour
         if (scoreText != null) scoreText.text = "คะแนน: " + score;
     }
 
-    public void CheckEndGameCondition()
+    public int GetCurrentScore()
     {
-        if (score >= 100) // เงื่อนไขคะแนนที่ต้องการเพื่อสิ้นสุดเกม
-        {
-            CalculateFinalScore();
+        return score;
+    }
 
-            if (hasDroppedJigsaw)
-            {
-                StartCoroutine(ShowEndGamePanelWithDelay());
-            }
-            else
-            {
-                ShowEndGamePanel();
-            }
+    public void EndGameWithJigsawCheck()
+    {
+        if (isGameEnded) return;
+
+        isGameEnded = true;
+        CalculateFinalScore();
+
+        if (hasDroppedJigsaw)
+        {
+            Debug.Log("Starting ShowJigsawAndEndGamePanel coroutine.");
+            StartCoroutine(ShowJigsawAndEndGamePanelCoroutine());
+        }
+        else
+        {
+            Debug.Log("Score not high enough for jigsaw - showing endGamePanel directly.");
+            ShowEndGamePanel();
         }
     }
 
@@ -57,57 +64,25 @@ public class ScoremanagerScene2 : MonoBehaviour
     {
         int difficultyLevel = GameSettings.difficultyLevel;
 
-        if (difficultyLevel == 0) // ง่าย
+        if (difficultyLevel == 0)
         {
-            if (score >= 2200)
-                finalScore = 10;
-            else if (score >= 2000)
-                finalScore = 8;
-            else if (score >= 1800)
-                finalScore = 6;
-            else if (score >= 1400)
-                finalScore = 4;
-            else if (score >= 1000)
-                finalScore = 2;
-            else
-                finalScore = 0;
+            finalScore = score >= 2200 ? 10 : score >= 2000 ? 8 : score >= 1800 ? 6 : score >= 1400 ? 4 : score >= 1000 ? 2 : 0;
         }
-        else if (difficultyLevel == 1) // กลาง
+        else if (difficultyLevel == 1)
         {
-            if (score >= 2300)
-                finalScore = 10;
-            else if (score >= 2000)
-                finalScore = 8;
-            else if (score >= 1900)
-                finalScore = 6;
-            else if (score >= 1500)
-                finalScore = 4;
-            else if (score >= 1000)
-                finalScore = 2;
-            else
-                finalScore = 0;
+            finalScore = score >= 2300 ? 10 : score >= 2000 ? 8 : score >= 1900 ? 6 : score >= 1500 ? 4 : score >= 1000 ? 2 : 0;
         }
-        else if (difficultyLevel == 2) // ยาก
+        else if (difficultyLevel == 2)
         {
-            if (score >= 2200)
-                finalScore = 10;
-            else if (score >= 1800)
-                finalScore = 8;
-            else if (score >= 1700)
-                finalScore = 6;
-            else if (score >= 1500)
-                finalScore = 4;
-            else if (score >= 1300)
-                finalScore = 2;
-            else
-                finalScore = 0;
+            finalScore = score >= 2200 ? 10 : score >= 1800 ? 8 : score >= 1700 ? 6 : score >= 1500 ? 4 : score >= 1300 ? 2 : 0;
         }
 
         if (finalScoreText != null)
         {
             finalScoreText.text = "คะแนนที่ได้ : " + finalScore;
+            Debug.Log("Final score set to: " + finalScore);
         }
-        Debug.Log("Setting score for Scene 2 in ScoreManager: " + finalScore);
+
         ScoreManager.Instance.SetScoreForScene(2, finalScore);
         DropJigsawPieceIfEligible();
     }
@@ -117,53 +92,55 @@ public class ScoremanagerScene2 : MonoBehaviour
         if (finalScore >= 8)
         {
             int difficultyLevel = GameSettings.difficultyLevel;
-
             JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 1);
+
             JigsawManager.JigsawImage jigsawImage = JigsawManager.Instance.jigsawImages[difficultyLevel];
-            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[1]; // ดึงชิ้นส่วนจิ๊กซอว์ที่เหมาะสม
+            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[1];
 
             if (jigsawUIPanel != null)
             {
-                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!"); // ส่ง Sprite ไปแสดง
+                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
                 hasDroppedJigsaw = true;
+                Debug.Log("JigsawUIPanel shown with new piece.");
             }
             else
             {
-                Debug.LogWarning("JigsawUIPanel is not assigned.");
+                Debug.LogWarning("JigsawUIPanel is not found in the scene.");
                 hasDroppedJigsaw = false;
             }
         }
         else
         {
             hasDroppedJigsaw = false;
-            Debug.Log("No jigsaw piece dropped. Final score below threshold.");
+            Debug.Log("No jigsaw piece dropped - final score below threshold.");
         }
     }
 
-    private IEnumerator ShowEndGamePanelWithDelay()
+    private IEnumerator ShowJigsawAndEndGamePanelCoroutine()
     {
-        yield return new WaitForSeconds(3f);
-
-        if (jigsawUIPanel != null)
+        if (jigsawUIPanel != null && hasDroppedJigsaw)
         {
+            Debug.Log("Waiting 3 seconds to hide jigsawUIPanel.");
+            yield return new WaitForSecondsRealtime(3f);
+
+            Debug.Log("3 seconds elapsed, hiding jigsawUIPanel.");
             jigsawUIPanel.HideJigsawUIPanel();
+            Debug.Log("JigsawUIPanel hidden.");
         }
 
-        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Waiting additional 0.5 seconds before showing endGamePanel.");
+        yield return new WaitForSecondsRealtime(0.5f);
+
         ShowEndGamePanel();
     }
 
-    private void ShowEndGamePanel()
+    public void ShowEndGamePanel()
     {
         if (endGamePanel != null)
         {
             endGamePanel.SetActive(true);
             Time.timeScale = 0f;
+            Debug.Log("EndGamePanel displayed and game paused.");
         }
-    }
-    public void EndGame()
-    {
-        CalculateFinalScore();
-        Debug.Log("Final score calculated: " + finalScore);
     }
 }

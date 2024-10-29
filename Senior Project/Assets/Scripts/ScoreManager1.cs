@@ -42,6 +42,7 @@ public class ScoreManager1 : MonoBehaviour
 
     public void CalculateFinalScore()
     {
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
         int difficulty = GameSettings.difficultyLevel;
         int[] thresholds = difficultyThresholds[difficulty];
 
