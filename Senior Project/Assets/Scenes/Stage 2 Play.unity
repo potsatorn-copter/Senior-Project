@@ -5981,6 +5981,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8814746609342625296, guid: 78e064071cd104d43808c444613cbdfe, type: 3}
   m_PrefabInstance: {fileID: 1099161684}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1080162494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1080162496}
+  - component: {fileID: 1080162495}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1080162495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080162494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b421a9eed9dce544e93c1f9fc60db073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreScene1: 0
+  scoreScene2: 0
+  scoreScene3: 0
+  scoreScene4: 0
+  scoreScene5: 0
+--- !u!4 &1080162496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080162494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 953.67847, y: 500.82233, z: 150.39285}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1080589934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5798271049882813417, guid: fdf5ca95f8bdad648996b3a1e3564e95, type: 3}
@@ -8042,6 +8091,112 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5500002
   m_Center: {x: 0.0000038146973, y: 0, z: 0.000061035156}
+--- !u!1 &1710677021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1710677023}
+  - component: {fileID: 1710677022}
+  m_Layer: 0
+  m_Name: JigsawManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1710677022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710677021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1606670f69aba42bfa2c93e3239a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jigsawImages:
+  - imageName: ImageEasy
+    completedImage: {fileID: 193271757, guid: b14ab924f96656841878c86e7be8eb27, type: 3}
+    lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
+    jigsawPieces:
+    - pieceName: Easy 1
+      pieceSprite: {fileID: -1260349381, guid: d0726dccf26d313479db92efe57e407b, type: 3}
+      isCollected: 0
+    - pieceName: Easy 2
+      pieceSprite: {fileID: -849176019, guid: 39d4679f7f9fb7e41ba47a0e1405bafc, type: 3}
+      isCollected: 0
+    - pieceName: Easy 3
+      pieceSprite: {fileID: -171942990, guid: af002c6bd8ad0544d9c61d3160014c88, type: 3}
+      isCollected: 0
+    - pieceName: Easy 4
+      pieceSprite: {fileID: 458826745, guid: f55d1c3c15c1f4740a643d83f8ddd8e2, type: 3}
+      isCollected: 0
+    - pieceName: Easy 5
+      pieceSprite: {fileID: -1546470502, guid: f6a3d41310dfa0845820d00da635ff90, type: 3}
+      isCollected: 0
+  - imageName: ImageMid
+    completedImage: {fileID: 1737086054, guid: 884defd12ccaf9b4b80101bb3ae3310b, type: 3}
+    lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
+    jigsawPieces:
+    - pieceName: Mid 1
+      pieceSprite: {fileID: 2037439557, guid: e4d9c0a306825104fb1407bda68a37df, type: 3}
+      isCollected: 0
+    - pieceName: Mid 2
+      pieceSprite: {fileID: -1025865581, guid: e252040e561241b4a81d4d5221393e51, type: 3}
+      isCollected: 0
+    - pieceName: Mid 3
+      pieceSprite: {fileID: 790091293, guid: f8477edb25f6de24dbef71761329b36a, type: 3}
+      isCollected: 0
+    - pieceName: Mid 4
+      pieceSprite: {fileID: -610079184, guid: 6f0ac480e8b4a2341ac0dabe77783d31, type: 3}
+      isCollected: 0
+    - pieceName: Mid 5
+      pieceSprite: {fileID: 306178060, guid: f4e2d0289342cab458cac52e4678bfbe, type: 3}
+      isCollected: 0
+  - imageName: ImageHard
+    completedImage: {fileID: -1603169554, guid: 44ebd0693cd55044c85a2e04570c1f91, type: 3}
+    lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
+    jigsawPieces:
+    - pieceName: Hard 1
+      pieceSprite: {fileID: 1960754694, guid: fd2df456cc490b445a88cc4d1f74c453, type: 3}
+      isCollected: 0
+    - pieceName: Hard 2
+      pieceSprite: {fileID: 72294167, guid: 377b48eff25fd1347a9cd3ce4d8dcc83, type: 3}
+      isCollected: 0
+    - pieceName: Hard 3
+      pieceSprite: {fileID: 194112214, guid: 608f9257f4a2ba148a867f73eedeac41, type: 3}
+      isCollected: 0
+    - pieceName: Hard 4
+      pieceSprite: {fileID: 1053739082, guid: ab0c125a82341c0429784de6aa6b801e, type: 3}
+      isCollected: 0
+    - pieceName: Hard 5
+      pieceSprite: {fileID: 1976494751, guid: fae198b4432452e47bf129dc24e03555, type: 3}
+      isCollected: 0
+--- !u!224 &1710677023
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710677021}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -124.18701}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 473.91858, y: 652.8236}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1732068799
 GameObject:
   m_ObjectHideFlags: 0
@@ -10139,3 +10294,5 @@ SceneRoots:
   - {fileID: 1732068801}
   - {fileID: 305023858}
   - {fileID: 563201530}
+  - {fileID: 1080162496}
+  - {fileID: 1710677023}

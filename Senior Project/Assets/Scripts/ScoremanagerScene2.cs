@@ -44,18 +44,18 @@ public class ScoremanagerScene2 : MonoBehaviour
     public void EndGameWithJigsawCheck()
     {
         if (isGameEnded) return;
+        
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
 
         isGameEnded = true;
         CalculateFinalScore();
 
         if (hasDroppedJigsaw)
         {
-            Debug.Log("Starting ShowJigsawAndEndGamePanel coroutine.");
             StartCoroutine(ShowJigsawAndEndGamePanelCoroutine());
         }
         else
         {
-            Debug.Log("Score not high enough for jigsaw - showing endGamePanel directly.");
             ShowEndGamePanel();
         }
     }
@@ -120,15 +120,11 @@ public class ScoremanagerScene2 : MonoBehaviour
     {
         if (jigsawUIPanel != null && hasDroppedJigsaw)
         {
-            Debug.Log("Waiting 3 seconds to hide jigsawUIPanel.");
             yield return new WaitForSecondsRealtime(3f);
-
-            Debug.Log("3 seconds elapsed, hiding jigsawUIPanel.");
+            
             jigsawUIPanel.HideJigsawUIPanel();
-            Debug.Log("JigsawUIPanel hidden.");
         }
-
-        Debug.Log("Waiting additional 0.5 seconds before showing endGamePanel.");
+        
         yield return new WaitForSecondsRealtime(0.5f);
 
         ShowEndGamePanel();
@@ -140,7 +136,6 @@ public class ScoremanagerScene2 : MonoBehaviour
         {
             endGamePanel.SetActive(true);
             Time.timeScale = 0f;
-            Debug.Log("EndGamePanel displayed and game paused.");
         }
     }
 }
