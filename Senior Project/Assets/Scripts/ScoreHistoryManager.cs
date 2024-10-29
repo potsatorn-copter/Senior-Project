@@ -119,7 +119,7 @@ public class ScoreHistoryManager : MonoBehaviour
         }
         else
         {
-            scoreHistoryText.SetText("No history available.");
+            scoreHistoryText.SetText("\n" + "No history available.");
         }
     }
 

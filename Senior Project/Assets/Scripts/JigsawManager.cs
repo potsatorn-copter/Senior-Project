@@ -138,31 +138,21 @@ public class JigsawManager : MonoBehaviour
     {
         foreach (var piece in jigsawImage.jigsawPieces)
         {
-            piece.isCollected = true;
+            // บันทึกเฉพาะชิ้นส่วนที่ถูกเก็บ
+            if (piece.isCollected)
+            {
+                PlayerPrefs.SetInt(jigsawImage.imageName + "_" + piece.pieceName, 1);
+            }
         }
+        PlayerPrefs.Save();
     }
 
     private void LoadJigsawProgress(JigsawImage jigsawImage)
     {
-        bool isUnlocked = false;
-        
-        // ตรวจสอบสถานะการปลดล็อคจาก PlayerPrefs
-        if (jigsawImage.imageName == "ImageEasy")
-        {
-            isUnlocked = PlayerPrefs.GetInt("isEasyUnlocked", 0) == 1;
-        }
-        else if (jigsawImage.imageName == "ImageNormal")
-        {
-            isUnlocked = PlayerPrefs.GetInt("isNormalUnlocked", 0) == 1;
-        }
-        else if (jigsawImage.imageName == "ImageHard")
-        {
-            isUnlocked = PlayerPrefs.GetInt("isHardUnlocked", 0) == 1;
-        }
-
         foreach (var piece in jigsawImage.jigsawPieces)
         {
-            piece.isCollected = isUnlocked;
+            // โหลดสถานะของแต่ละชิ้นส่วนแยกกัน
+            piece.isCollected = PlayerPrefs.GetInt(jigsawImage.imageName + "_" + piece.pieceName, 0) == 1;
         }
     }
 
@@ -178,6 +168,7 @@ public class JigsawManager : MonoBehaviour
             foreach (var piece in jigsawImage.jigsawPieces)
             {
                 piece.isCollected = false;
+                PlayerPrefs.DeleteKey(jigsawImage.imageName + "_" + piece.pieceName);
             }
         }
 
