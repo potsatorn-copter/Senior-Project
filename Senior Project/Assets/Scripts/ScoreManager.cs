@@ -75,7 +75,7 @@ public class ScoreManager : MonoBehaviour
     // ฟังก์ชันโหลดคะแนนจาก PlayerPrefs
     public void LoadScores()
     {
-        scoreScene1 = PlayerPrefs.GetInt("ScoreScene1", 0);
+        scoreScene1 = PlayerPrefs.GetInt("<alpha=#45>ScoreScene1", 0);
         scoreScene2 = PlayerPrefs.GetInt("ScoreScene2", 0);
         scoreScene3 = PlayerPrefs.GetInt("ScoreScene3", 0);
         scoreScene4 = PlayerPrefs.GetInt("ScoreScene4", 0);

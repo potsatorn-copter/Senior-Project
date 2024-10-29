@@ -109,20 +109,6 @@ public class Mainmenu : MonoBehaviour
         Time.timeScale = 1;
         SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
-
-    public void Stage8Rule()
-    {
-        SceneManager.LoadScene("Stage 8 Rule");
-        Time.timeScale = 1;
-        SoundManager.instance.Play(SoundManager.SoundName.Click);
-    }
-
-    public void Stage8Play()
-    {
-        SceneManager.LoadScene("Stage 8 Play");
-        Time.timeScale = 1;
-        SoundManager.instance.Play(SoundManager.SoundName.Click);
-    }
     
     public void Stage3Play()
     {
