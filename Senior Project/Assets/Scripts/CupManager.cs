@@ -122,6 +122,8 @@ public class CupManager : MonoBehaviour
 
     IEnumerator ShuffleAnimation()
     {
+        // ปิดการแสดงผลลูกบอลก่อนเริ่มการสลับ
+        ball.SetActive(false);
         shuffling = true;
 
         for (int i = 0; i < shuffleTimes; i++)
@@ -141,7 +143,6 @@ public class CupManager : MonoBehaviour
             {
                 activeCups[cupA].transform.position = Vector3.Lerp(cupAPosition, cupBPosition, (elapsedTime / shuffleDuration));
                 activeCups[cupB].transform.position = Vector3.Lerp(cupBPosition, cupAPosition, (elapsedTime / shuffleDuration));
-
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -150,13 +151,15 @@ public class CupManager : MonoBehaviour
             activeCups[cupB].transform.position = cupAPosition;
         }
 
+        // การสลับเสร็จสิ้นแล้ว ให้แสดงลูกบอลในแก้วที่ถูกต้อง
+        ball.SetActive(true);
         ball.transform.SetParent(cupWithBall);
         ball.transform.localPosition = new Vector3(0, -0.5f, 0);
 
         shuffling = false;
         gameStarted = true;
     }
-
+    
     public void CheckCup(int selectedIndex)
     {
         if (gameStarted)
