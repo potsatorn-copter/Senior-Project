@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+ using UnityEngine;
+ using UnityEngine.SceneManagement;
+ using UnityEngine.UI;
+
 
 public class JigsawManager : MonoBehaviour
 {
@@ -32,6 +31,7 @@ public class JigsawManager : MonoBehaviour
                 if (!piece.isCollected)
                     return false;
             }
+
             return true;
         }
     }
@@ -127,6 +127,7 @@ public class JigsawManager : MonoBehaviour
                         {
                             PlayerPrefs.SetInt("isHardUnlocked", 1);
                         }
+
                         PlayerPrefs.Save();
                     }
                 }
@@ -144,6 +145,7 @@ public class JigsawManager : MonoBehaviour
                 PlayerPrefs.SetInt(jigsawImage.imageName + "_" + piece.pieceName, 1);
             }
         }
+
         PlayerPrefs.Save();
     }
 
