@@ -44,7 +44,6 @@ public class JigsawUIPanel : MonoBehaviour
         yield return new WaitForSeconds(3f);
         if (panel != null)
         {
-            Debug.Log("Hiding JigsawUIPanel now."); // เพิ่ม Debug ตรงนี้
             panel.gameObject.SetActive(false);
         }
     }

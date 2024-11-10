@@ -76,6 +76,8 @@ public class MainmenuManager : MonoBehaviour
     
         // โหลดซีนล่าสุดที่เล่นค้างไว้
         SceneManager.LoadScene(lastScene);
+        
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
     // ฟังก์ชันสำหรับบันทึกความยากเมื่อเลือก
