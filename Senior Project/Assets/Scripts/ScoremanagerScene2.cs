@@ -92,21 +92,32 @@ public class ScoremanagerScene2 : MonoBehaviour
         if (finalScore >= 8)
         {
             int difficultyLevel = GameSettings.difficultyLevel;
-            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 1);
-
             JigsawManager.JigsawImage jigsawImage = JigsawManager.Instance.jigsawImages[difficultyLevel];
-            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[1];
+            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[1]; // ตรวจสอบชิ้นส่วนที่ index 1
 
-            if (jigsawUIPanel != null)
+            // ตรวจสอบว่าชิ้นส่วนนั้นถูกเก็บไปแล้วหรือยัง
+            if (!droppedPiece.isCollected)
             {
-                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
-                hasDroppedJigsaw = true;
-                Debug.Log("JigsawUIPanel shown with new piece.");
+                // เก็บชิ้นส่วนถ้ายังไม่ถูกเก็บ
+                JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 1);
+
+                if (jigsawUIPanel != null)
+                {
+                    jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
+                    hasDroppedJigsaw = true;
+                    Debug.Log("JigsawUIPanel shown with new piece.");
+                }
+                else
+                {
+                    Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                    hasDroppedJigsaw = false;
+                }
             }
             else
             {
-                Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                // แสดงว่าไม่แสดง UI เนื่องจากชิ้นส่วนถูกเก็บไปแล้ว
                 hasDroppedJigsaw = false;
+                Debug.Log("Jigsaw piece already collected - no UI shown.");
             }
         }
         else

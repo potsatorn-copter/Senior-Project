@@ -174,7 +174,7 @@ public class CupManager : MonoBehaviour
                 correctGuesses++;
                 finalScore = correctGuesses * 2;
                 ball.transform.SetParent(null);
-                ball.transform.position = activeCups[selectedIndex].transform.position + new Vector3(0, -6.0f, 0);
+                ball.transform.position = activeCups[selectedIndex].transform.position + new Vector3(0, -7.0f, 0);
                 ball.GetComponent<Renderer>().enabled = true;
             }
             else
@@ -234,18 +234,31 @@ public class CupManager : MonoBehaviour
         if (finalScore >= 8)
         {
             int imageIndex = GameSettings.difficultyLevel;
+            JigsawManager.JigsawImage jigsawImage = JigsawManager.Instance.jigsawImages[imageIndex];
+            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[4]; // ชิ้นส่วนที่ index 4
 
-            JigsawManager.Instance.CollectJigsawPiece(imageIndex, 4);
-
-            if (jigsawUIPanel != null)
+            // ตรวจสอบว่าชิ้นส่วนนั้นถูกเก็บไปแล้วหรือไม่
+            if (!droppedPiece.isCollected)
             {
-                Sprite jigsawSprite = JigsawManager.Instance.jigsawImages[imageIndex].jigsawPieces[4].pieceSprite;
-                jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
-                StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
+                // เก็บชิ้นส่วนถ้ายังไม่ถูกเก็บ
+                JigsawManager.Instance.CollectJigsawPiece(imageIndex, 4);
+
+                if (jigsawUIPanel != null)
+                {
+                    Sprite jigsawSprite = droppedPiece.pieceSprite;
+                    jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
+                    StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
+                }
+                else
+                {
+                    Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                    ShowEndGamePanel();
+                }
             }
             else
             {
-                Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                // แสดงข้อความแจ้งเตือนว่าชิ้นส่วนนี้ถูกเก็บไปแล้ว
+                Debug.Log("Jigsaw piece already collected - no UI shown.");
                 ShowEndGamePanel();
             }
         }

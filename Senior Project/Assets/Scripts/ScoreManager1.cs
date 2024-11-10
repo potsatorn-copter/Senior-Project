@@ -90,27 +90,36 @@ public class ScoreManager1 : MonoBehaviour
         if (finalScore >= 8)
         {
             int difficultyLevel = GameSettings.difficultyLevel;
-            JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 0);
-
             JigsawManager.JigsawImage jigsawImage = JigsawManager.Instance.jigsawImages[difficultyLevel];
-            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[0];
+        
+            // ตรวจสอบชิ้นส่วนที่ยังไม่ถูกเก็บ
+            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[0]; // ควรเปลี่ยนให้เลือกชิ้นส่วนที่ต้องการ
 
-            // แสดง JigsawUIPanel ทุกครั้ง ไม่สนใจว่าเก็บแล้วหรือยัง
-            jigsawDropped = true;
-
-            JigsawUIPanel jigsawUIPanel = FindObjectOfType<JigsawUIPanel>();
-            if (jigsawUIPanel != null)
+            if (!droppedPiece.isCollected)
             {
-                jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite,"คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
-                StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
+                // เก็บชิ้นส่วน
+                JigsawManager.Instance.CollectJigsawPiece(difficultyLevel, 0);
+                jigsawDropped = true;
+
+                // แสดง UI แจ้งเตือน
+                JigsawUIPanel jigsawUIPanel = FindObjectOfType<JigsawUIPanel>();
+                if (jigsawUIPanel != null)
+                {
+                    jigsawUIPanel.ShowJigsawUIPanel(droppedPiece.pieceSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
+                    StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
+                }
+                else
+                {
+                    Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                    ShowEndGamePanel();
+                }
+
+                Debug.Log($"Jigsaw piece dropped: Scene 1, Difficulty Level: {difficultyLevel}, Image Part: 1, Final Score: {finalScore}");
             }
             else
             {
-                Debug.LogWarning("JigsawUIPanel is not found in the scene.");
-                ShowEndGamePanel();
+                Debug.Log("ชิ้นส่วนนี้ถูกเก็บไปแล้ว");
             }
-
-            Debug.Log($"Jigsaw piece dropped: Scene 1, Difficulty Level: {difficultyLevel}, Image Part: 1, Final Score: {finalScore}");
         }
 
         if (!jigsawDropped)

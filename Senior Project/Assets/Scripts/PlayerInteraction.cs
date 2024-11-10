@@ -39,7 +39,6 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (hit.transform == cupManager.activeCups[i].transform) // เปลี่ยนจาก cupManager.cups เป็น cupManager.activeCups
                 {
-                    Debug.Log("คลิกที่ถ้วย: " + i);
                     cupManager.CheckCup(i); 
                     break;
                 }

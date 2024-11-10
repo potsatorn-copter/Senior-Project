@@ -110,28 +110,46 @@ public class JigsawManager : MonoBehaviour
                 if (!piece.isCollected)
                 {
                     piece.isCollected = true;
+                    Debug.Log($"Collected piece: {piece.pieceName} for {currentJigsaw.imageName}");
                     SaveJigsawProgress(currentJigsaw);
 
                     if (currentJigsaw.IsComplete())
                     {
+                        Debug.Log($"{currentJigsaw.imageName} is now complete!");
+
                         // บันทึกสถานะการปลดล็อคใน PlayerPrefs
                         if (currentJigsaw.imageName == "ImageEasy")
                         {
                             PlayerPrefs.SetInt("isEasyUnlocked", 1);
+                            Debug.Log("isEasyUnlocked set to 1");
                         }
                         else if (currentJigsaw.imageName == "ImageNormal")
                         {
                             PlayerPrefs.SetInt("isNormalUnlocked", 1);
+                            Debug.Log("isNormalUnlocked set to 1");
                         }
                         else if (currentJigsaw.imageName == "ImageHard")
                         {
                             PlayerPrefs.SetInt("isHardUnlocked", 1);
+                            Debug.Log("isHardUnlocked set to 1");
                         }
 
                         PlayerPrefs.Save();
                     }
                 }
+                else
+                {
+                    Debug.LogWarning($"Piece {piece.pieceName} for {currentJigsaw.imageName} is already collected.");
+                }
             }
+            else
+            {
+                Debug.LogWarning("Invalid sceneIndex for jigsawPieces.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Invalid difficultyLevel for jigsawImages.");
         }
     }
 
@@ -165,6 +183,7 @@ public class JigsawManager : MonoBehaviour
 
     public void ResetJigsawProgress()
     {
+        // รีเซ็ตสถานะของชิ้นส่วนจิ๊กซอว์และลบข้อมูลการเก็บชิ้นส่วน
         foreach (var jigsawImage in jigsawImages)
         {
             foreach (var piece in jigsawImage.jigsawPieces)
@@ -174,10 +193,18 @@ public class JigsawManager : MonoBehaviour
             }
         }
 
+        // รีเซ็ตสถานะการแสดงแจ้งเตือนเพื่อให้สามารถแสดงการแจ้งเตือนใหม่ได้
+        PlayerPrefs.SetInt("hasShownEasyUnlockNotification", 0);
+        PlayerPrefs.SetInt("hasShownNormalUnlockNotification", 0);
+        PlayerPrefs.SetInt("hasShownHardUnlockNotification", 0);
+        Debug.Log("Notification status has been reset.");
+
         // รีเซ็ตสถานะการปลดล็อคใน PlayerPrefs
         PlayerPrefs.SetInt("isEasyUnlocked", 0);
         PlayerPrefs.SetInt("isNormalUnlocked", 0);
         PlayerPrefs.SetInt("isHardUnlocked", 0);
+
+        // สั่ง Save เพียงครั้งเดียวเพื่อบันทึกการเปลี่ยนแปลงทั้งหมด
         PlayerPrefs.Save();
 
         UpdateGallery();

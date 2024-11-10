@@ -306,18 +306,32 @@ public class SceneController : MonoBehaviour
 
             if (jigsawManager != null)
             {
-                jigsawManager.CollectJigsawPiece(imageIndex, 2);
-                Debug.Log($"Jigsaw piece dropped: Scene 3, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 3: {imageIndex}, Final Score: {finalScore}");
+                JigsawManager.JigsawImage jigsawImage = jigsawManager.jigsawImages[imageIndex];
+                JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[2]; // ชิ้นส่วนที่ index 2
 
-                if (jigsawUIPanel != null)
+                // ตรวจสอบว่าชิ้นส่วนนั้นถูกเก็บไปแล้วหรือไม่
+                if (!droppedPiece.isCollected)
                 {
-                    Sprite jigsawSprite = jigsawManager.jigsawImages[imageIndex].jigsawPieces[2].pieceSprite;
-                    jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
-                    StartCoroutine(ShowEndGamePanelWithDelay());
+                    // เก็บชิ้นส่วนถ้ายังไม่ถูกเก็บ
+                    jigsawManager.CollectJigsawPiece(imageIndex, 2);
+                    Debug.Log($"Jigsaw piece dropped: Scene 3, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 3: {imageIndex}, Final Score: {finalScore}");
+
+                    if (jigsawUIPanel != null)
+                    {
+                        Sprite jigsawSprite = droppedPiece.pieceSprite;
+                        jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
+                        StartCoroutine(ShowEndGamePanelWithDelay());
+                    }
+                    else
+                    {
+                        Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                        ShowEndGamePanel();
+                    }
                 }
                 else
                 {
-                    Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                    // แสดงข้อความแจ้งเตือนว่าชิ้นส่วนนี้ถูกเก็บไปแล้ว
+                    Debug.Log("Jigsaw piece already collected - no UI shown.");
                     ShowEndGamePanel();
                 }
             }

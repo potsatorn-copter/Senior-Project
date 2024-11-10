@@ -19,6 +19,7 @@ TagManager:
   - Normal
   - Hard
   - Star2
+  - NotiTag
   layers:
   - Default
   - TransparentFX

@@ -29,17 +29,20 @@ public class TrashCanMovementController : MonoBehaviour
     {
         if (difficultyLevel == 0) // Easy
         {
-            movingPlatform.enabled = false; // ถ้าเป็น Easy ให้หยุดการขยับ
+            movingPlatform.enabled = true; // เปิดการขยับถังขยะ
+            movingPlatform.speed = 1f; // ตั้งความเร็วให้ช้ากว่าโหมดอื่น
             Monster.SetActive(false);
         }
-        else if (difficultyLevel == 1) // Normal หรือ Hard
+        else if (difficultyLevel == 1) // Normal
         {
-            movingPlatform.enabled = true; // ถ้าเป็น Normal หรือ Hard ให้เปิดการขยับถังขยะ
+            movingPlatform.enabled = true; // เปิดการขยับถังขยะ
+            movingPlatform.speed = 2f; // ตั้งค่าความเร็วปกติสำหรับ Normal
             Monster.SetActive(false);
         }
-        else if (difficultyLevel == 2) // Normal หรือ Hard
+        else if (difficultyLevel == 2) // Hard
         {
-            movingPlatform.enabled = true; // ถ้าเป็น Normal หรือ Hard ให้เปิดการขยับถังขยะ
+            movingPlatform.enabled = true; // เปิดการขยับถังขยะ
+            movingPlatform.speed = 2f; // ตั้งค่าความเร็วปกติสำหรับ Hard
             Obstaclebin.enabled = true;
             Monster.SetActive(true);
         }
