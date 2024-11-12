@@ -95,6 +95,12 @@ public class JigsawManager : MonoBehaviour
         if (galleryImage != null)
         {
             galleryImage.sprite = jigsawImage.IsComplete() ? jigsawImage.completedImage : jigsawImage.lockedImage;
+
+            Animator animator = galleryImage.GetComponent<Animator>();
+        if (animator != null && jigsawImage.IsComplete())
+        {
+            animator.Play("UnlockAnimation"); // เรียกใช้ Animation ที่สร้างไว้
+        }
         }
     }
 
