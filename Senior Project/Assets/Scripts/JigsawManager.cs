@@ -94,13 +94,37 @@ public class JigsawManager : MonoBehaviour
     {
         if (galleryImage != null)
         {
-            galleryImage.sprite = jigsawImage.IsComplete() ? jigsawImage.completedImage : jigsawImage.lockedImage;
+            // แสดง lockedImage เป็นค่าเริ่มต้น
+            galleryImage.sprite = jigsawImage.lockedImage;
 
-            Animator animator = galleryImage.GetComponent<Animator>();
-        if (animator != null && jigsawImage.IsComplete())
-        {
-            animator.Play("UnlockAnimation"); // เรียกใช้ Animation ที่สร้างไว้
-        }
+            // เพิ่ม Listener สำหรับการกดเพื่อให้เกิดการปลดล็อค
+            Button galleryButton = galleryImage.GetComponent<Button>();
+            if (galleryButton != null)
+            {
+                // ลบ Listener เดิมเพื่อป้องกันการเรียกซ้ำ
+                galleryButton.onClick.RemoveAllListeners();
+
+                // เพิ่ม Listener ใหม่
+                galleryButton.onClick.AddListener(() =>
+                {
+                    if (jigsawImage.IsComplete())
+                    {
+                        // เล่นแอนิเมชันเมื่อปลดล็อค
+                        Animator animator = galleryImage.GetComponent<Animator>();
+                        if (animator != null)
+                        {
+                            animator.Play("UnlockAnimation"); // เรียกใช้ Animation
+                        }
+
+                        // เปลี่ยนภาพเป็น completedImage
+                        galleryImage.sprite = jigsawImage.completedImage;
+                    }
+                    else
+                    {
+                        Debug.Log("Jigsaw image is not complete yet.");
+                    }
+                });
+            }
         }
     }
 
