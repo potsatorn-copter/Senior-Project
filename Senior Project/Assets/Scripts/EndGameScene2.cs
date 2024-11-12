@@ -28,7 +28,7 @@ public class EndGameScene2 : MonoBehaviour
         {
             Debug.Log("Player hit the item!");
             ShowUI();
-            if (scoreManager != null) scoreManager.EndGame();
+            //if (scoreManager != null) scoreManager.EndGame();
         }
     }
 

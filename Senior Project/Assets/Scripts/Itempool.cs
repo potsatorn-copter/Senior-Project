@@ -34,13 +34,13 @@ public class Itempool : MonoBehaviour
         {
             // Easy Mode (12 good items, 6 bad items)
             SetupPool(12, 6, goodItemSpritesEasy, badItemSpritesEasy);
-            spawnPattern = new int[] { 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0 };
+            spawnPattern = new int[] { 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1 };
         }
         else if (GameSettings.difficultyLevel == 1)  // Normal Mode
         {
             // Normal Mode (15 good items, 7 bad items)
             SetupPool(15, 7, goodItemSpritesNormal, badItemSpritesNormal);
-            spawnPattern = new int[] { 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1 };
+            spawnPattern = new int[] { 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1 };
         }
         else if (GameSettings.difficultyLevel == 2)  // Hard Mode
         {

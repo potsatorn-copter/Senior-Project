@@ -15,6 +15,7 @@ public class CupManager : MonoBehaviour
     public Button nextRoundButton;
     public GameObject finalScoreUI;
     public GameObject Cup4;
+    public JigsawUIPanel jigsawUIPanel;
 
     private Transform cupWithBall;
     private bool shuffling = false;
@@ -95,9 +96,9 @@ public class CupManager : MonoBehaviour
 
     void UpdateUI()
     {
-        scoreText.text = "Correct Guesses: " + correctGuesses;
-        finalScoreText.text = "Final Score: " + finalScore;
-        roundText.text = "Round: " + roundCount + "/5";
+        scoreText.text = "ทายถูก: " + correctGuesses;
+        finalScoreText.text = "คะแนนที่ได้ : " + finalScore;
+        roundText.text = "รอบที่เหลือ " + roundCount + "/5";
     }
 
     IEnumerator ShowBallThenCover()
@@ -121,6 +122,8 @@ public class CupManager : MonoBehaviour
 
     IEnumerator ShuffleAnimation()
     {
+        // ปิดการแสดงผลลูกบอลก่อนเริ่มการสลับ
+        ball.SetActive(false);
         shuffling = true;
 
         for (int i = 0; i < shuffleTimes; i++)
@@ -140,7 +143,6 @@ public class CupManager : MonoBehaviour
             {
                 activeCups[cupA].transform.position = Vector3.Lerp(cupAPosition, cupBPosition, (elapsedTime / shuffleDuration));
                 activeCups[cupB].transform.position = Vector3.Lerp(cupBPosition, cupAPosition, (elapsedTime / shuffleDuration));
-
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -149,13 +151,15 @@ public class CupManager : MonoBehaviour
             activeCups[cupB].transform.position = cupAPosition;
         }
 
+        // การสลับเสร็จสิ้นแล้ว ให้แสดงลูกบอลในแก้วที่ถูกต้อง
+        ball.SetActive(true);
         ball.transform.SetParent(cupWithBall);
         ball.transform.localPosition = new Vector3(0, -0.5f, 0);
 
         shuffling = false;
         gameStarted = true;
     }
-
+    
     public void CheckCup(int selectedIndex)
     {
         if (gameStarted)
@@ -164,14 +168,19 @@ public class CupManager : MonoBehaviour
 
             if (activeCups[selectedIndex].transform == cupWithBall)
             {
+                // เล่นเสียงเมื่อเลือกถูก
+                SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
+            
                 correctGuesses++;
                 finalScore = correctGuesses * 2;
                 ball.transform.SetParent(null);
-                ball.transform.position = activeCups[selectedIndex].transform.position + new Vector3(0, -6.0f, 0);
+                ball.transform.position = activeCups[selectedIndex].transform.position + new Vector3(0, -7.0f, 0);
                 ball.GetComponent<Renderer>().enabled = true;
             }
             else
             {
+                // เล่นเสียงเมื่อเลือกผิด
+                SoundManager.instance.Play(SoundManager.SoundName.WrongItem);
                 StartCoroutine(RevealCorrectAndSelectedCup(selectedIndex));
             }
 
@@ -197,9 +206,7 @@ public class CupManager : MonoBehaviour
         ScoreManager.Instance.SetScoreForScene(5, finalScore);
         Debug.Log("Score for Scene 5 set in ScoreManager: " + finalScore);
 
-        finalScoreUI.SetActive(true);
-
-        // เพิ่มระบบดรอปจิ๊กซอว์
+        // เรียกใช้การดรอปจิ๊กซอว์ (หรือแสดง finalScoreUI ถ้าไม่มีการดรอปจิ๊กซอว์)
         DropJigsawPieceIfEligible(finalScore);
     }
 
@@ -226,30 +233,63 @@ public class CupManager : MonoBehaviour
     {
         if (finalScore >= 8)
         {
-            int imageIndex = 0;
+            int imageIndex = GameSettings.difficultyLevel;
+            JigsawManager.JigsawImage jigsawImage = JigsawManager.Instance.jigsawImages[imageIndex];
+            JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[4]; // ชิ้นส่วนที่ index 4
 
-            if (GameSettings.difficultyLevel == 0)
+            // ตรวจสอบว่าชิ้นส่วนนั้นถูกเก็บไปแล้วหรือไม่
+            if (!droppedPiece.isCollected)
             {
-                imageIndex = 0;
-            }
-            else if (GameSettings.difficultyLevel == 1)
-            {
-                imageIndex = 1;
-            }
-            else if (GameSettings.difficultyLevel == 2)
-            {
-                imageIndex = 2;
-            }
+                // เก็บชิ้นส่วนถ้ายังไม่ถูกเก็บ
+                JigsawManager.Instance.CollectJigsawPiece(imageIndex, 4);
 
-            JigsawManager.Instance.CollectJigsawPiece(imageIndex, 4);
-            Debug.Log($"Jigsaw piece dropped: Scene 5, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 5: {imageIndex}, Final Score: {finalScore}");
+                if (jigsawUIPanel != null)
+                {
+                    Sprite jigsawSprite = droppedPiece.pieceSprite;
+                    jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
+                    StartCoroutine(ShowEndGamePanelWithDelay(jigsawUIPanel));
+                }
+                else
+                {
+                    Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                    ShowEndGamePanel();
+                }
+            }
+            else
+            {
+                // แสดงข้อความแจ้งเตือนว่าชิ้นส่วนนี้ถูกเก็บไปแล้ว
+                Debug.Log("Jigsaw piece already collected - no UI shown.");
+                ShowEndGamePanel();
+            }
         }
         else
         {
+            // กรณีที่คะแนนต่ำกว่า 8 ให้แสดง finalScoreUI โดยไม่ต้องรอ jigsawUIPanel
             Debug.Log("No jigsaw piece dropped in Scene 5. Final score below threshold.");
+            ShowEndGamePanel();
         }
     }
+    
+    private IEnumerator ShowEndGamePanelWithDelay(JigsawUIPanel jigsawUIPanel)
+    {SoundManager.instance.Play(SoundManager.SoundName.WinSound);
+        yield return new WaitForSeconds(3f); // รอให้ JigsawUIPanel แสดงครบ 3 วินาที
+        if (jigsawUIPanel != null)
+        {
+            jigsawUIPanel.HideJigsawUIPanel();
+        }
+        yield return new WaitForSeconds(0.5f); // รออีก 0.5 วินาที
+        ShowEndGamePanel();
+    }
 
+    private void ShowEndGamePanel()
+    {
+        if (finalScoreUI != null && !finalScoreUI.activeSelf)
+        {
+            finalScoreUI.SetActive(true);
+            Time.timeScale = 0f; // หยุดเวลา
+        }
+    }
+    
     public bool IsShuffling()
     {
         return shuffling;

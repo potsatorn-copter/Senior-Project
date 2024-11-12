@@ -22,6 +22,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreLabel;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI matchesLabel;
+    public JigsawUIPanel jigsawUIPanel;
 
     private MainCard[] cards; // เก็บการ์ดทั้งหมดในเกม
     private Coroutine previewCoroutine;
@@ -67,7 +68,7 @@ public class SceneController : MonoBehaviour
             gridRows = 2;
             gridCols = 6;
             offsetY = 4f;
-            timeRemaining = 50f;
+            timeRemaining = 30f;
             totalMatches = gridRows * gridCols / 2; // 6 คู่
         }
         else if (GameSettings.difficultyLevel == 1) // Normal
@@ -75,7 +76,7 @@ public class SceneController : MonoBehaviour
             gridRows = 3;
             gridCols = 6;
             offsetY = 3f;
-            timeRemaining = 80f;
+            timeRemaining = 60f;
             totalMatches = gridRows * gridCols / 2; // 9 คู่
         }
         else if (GameSettings.difficultyLevel == 2) // Hard
@@ -83,7 +84,7 @@ public class SceneController : MonoBehaviour
             gridRows = 3;
             gridCols = 6;
             offsetY = 3f;
-            timeRemaining = 70f;
+            timeRemaining = 50f;
             totalMatches = gridRows * gridCols / 2; // 9 คู่
         }
     }
@@ -173,7 +174,7 @@ public class SceneController : MonoBehaviour
         while (timeRemaining > 0 && !isGameOver)
         {
             timeRemaining -= Time.deltaTime;
-            timerText.text = "Time: " + Mathf.Ceil(timeRemaining).ToString() + "s";
+            timerText.text = "เหลือเวลา: " + Mathf.Ceil(timeRemaining).ToString() + "s";
             yield return null;
         }
 
@@ -223,7 +224,7 @@ public class SceneController : MonoBehaviour
         if (_firstRevealed.id == _secondRevealed.id)
         {
             successfulMatches++;
-            matchesLabel.text = "Matches: " + successfulMatches + "/" + totalMatches;
+            matchesLabel.text = "สำเร็จ: " + successfulMatches + "/" + totalMatches;
             SoundManager.instance.Play(SoundManager.SoundName.CorrectItem);
 
             if (successfulMatches == totalMatches)
@@ -244,90 +245,126 @@ public class SceneController : MonoBehaviour
     }
 
     private void GameOver()
-{
-    SoundManager.instance.Play(SoundManager.SoundName.WinSound);
-
-    int finalScore = 0;
-
-    if (GameSettings.difficultyLevel == 0) // Easy
     {
-        if (successfulMatches >= 5)
-            finalScore = 10; 
-        else if (successfulMatches >= 3)
-            finalScore = 6; 
-        else if (successfulMatches >= 1)
-            finalScore = 2; 
-        else
-            finalScore = 0; 
-    }
-    else if (GameSettings.difficultyLevel == 1) // Normal
-    {
-        if (successfulMatches >= 7)
-            finalScore = 10;
-        else if (successfulMatches >= 5)
-            finalScore = 6;
-        else if (successfulMatches >= 3)
-            finalScore = 4;
-        else if (successfulMatches >= 1)
-            finalScore = 2;
-        else
-            finalScore = 0;
-    }
-    else if (GameSettings.difficultyLevel == 2) // Hard
-    {
-        if (successfulMatches >= 7)
-            finalScore = 10;
-        else if (successfulMatches >= 5)
-            finalScore = 6;
-        else if (successfulMatches >= 3)
-            finalScore = 4;
-        else if (successfulMatches >= 1)
-            finalScore = 2;
-        else
-            finalScore = 0;
-    }
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
 
-    // อัปเดตการแสดงผลคะแนน
-    scoreLabel.text = "Final Score: " + finalScore;
-    gameOverUI.SetActive(true);
-    isGameOver = true;
+        int finalScore = 0;
 
-    // บันทึกคะแนนสำหรับซีนนี้
-    ScoreManager.Instance.SetScoreForScene(3, finalScore);
-    Debug.Log("Score for Scene 3 set in ScoreManager: " + finalScore);
-
-    // ตรวจสอบคะแนนสำหรับการดรอปจิ๊กซอว์
-    DropJigsawPieceIfEligible(finalScore);
-}
-
-private void DropJigsawPieceIfEligible(int finalScore)
-{
-    if (finalScore >= 8)  // กำหนดว่าคะแนนต้อง 8 ขึ้นไปถึงจะดรอปจิ๊กซอว์
-    {
-        int imageIndex = 0;  // Index สำหรับการดรอปชิ้นส่วนจิ๊กซอว์ (เช่น 0 สำหรับโหมดง่าย, 1 สำหรับโหมดกลาง, 2 สำหรับโหมดยาก)
-        
-        // ตรวจสอบระดับความยากเพื่อกำหนดชิ้นส่วนของภาพ
-        if (GameSettings.difficultyLevel == 0)
+        if (GameSettings.difficultyLevel == 0) // Easy
         {
-            imageIndex = 0;  // ภาพที่ 1
+            if (successfulMatches >= 5)
+                finalScore = 10; 
+            else if (successfulMatches >= 3)
+                finalScore = 6; 
+            else if (successfulMatches >= 1)
+                finalScore = 2; 
+            else
+                finalScore = 0; 
         }
-        else if (GameSettings.difficultyLevel == 1)
+        else if (GameSettings.difficultyLevel == 1) // Normal
         {
-            imageIndex = 1;  // ภาพที่ 2
+            if (successfulMatches >= 7)
+                finalScore = 10;
+            else if (successfulMatches >= 5)
+                finalScore = 6;
+            else if (successfulMatches >= 3)
+                finalScore = 4;
+            else if (successfulMatches >= 1)
+                finalScore = 2;
+            else
+                finalScore = 0;
         }
-        else if (GameSettings.difficultyLevel == 2)
+        else if (GameSettings.difficultyLevel == 2) // Hard
         {
-            imageIndex = 2;  // ภาพที่ 3
+            if (successfulMatches >= 7)
+                finalScore = 10;
+            else if (successfulMatches >= 5)
+                finalScore = 6;
+            else if (successfulMatches >= 3)
+                finalScore = 4;
+            else if (successfulMatches >= 1)
+                finalScore = 2;
+            else
+                finalScore = 0;
         }
 
-        // เรียกฟังก์ชันจาก JigsawManager เพื่อเก็บชิ้นส่วน
-        JigsawManager.Instance.CollectJigsawPiece(imageIndex, 2);
+        scoreLabel.text = "คะแนนที่ได้ : " + finalScore;
+        isGameOver = true;
 
-        Debug.Log($"Jigsaw piece dropped: Scene 3, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 3: {imageIndex}, Final Score: {finalScore}");
+        ScoreManager.Instance.SetScoreForScene(3, finalScore);
+        Debug.Log("Score for Scene 3 set in ScoreManager: " + finalScore);
+
+        DropJigsawPieceIfEligible(finalScore);
     }
-    else
+
+    private void DropJigsawPieceIfEligible(int finalScore)
     {
-        Debug.Log("No jigsaw piece dropped in Scene 3. Final score below threshold.");
+        if (finalScore >= 8)
+        {
+            int imageIndex = GameSettings.difficultyLevel;
+            JigsawManager jigsawManager = FindObjectOfType<JigsawManager>();
+
+            if (jigsawManager != null)
+            {
+                JigsawManager.JigsawImage jigsawImage = jigsawManager.jigsawImages[imageIndex];
+                JigsawManager.JigsawPiece droppedPiece = jigsawImage.jigsawPieces[2]; // ชิ้นส่วนที่ index 2
+
+                // ตรวจสอบว่าชิ้นส่วนนั้นถูกเก็บไปแล้วหรือไม่
+                if (!droppedPiece.isCollected)
+                {
+                    // เก็บชิ้นส่วนถ้ายังไม่ถูกเก็บ
+                    jigsawManager.CollectJigsawPiece(imageIndex, 2);
+                    Debug.Log($"Jigsaw piece dropped: Scene 3, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 3: {imageIndex}, Final Score: {finalScore}");
+
+                    if (jigsawUIPanel != null)
+                    {
+                        Sprite jigsawSprite = droppedPiece.pieceSprite;
+                        jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
+                        StartCoroutine(ShowEndGamePanelWithDelay());
+                    }
+                    else
+                    {
+                        Debug.LogWarning("JigsawUIPanel is not found in the scene.");
+                        ShowEndGamePanel();
+                    }
+                }
+                else
+                {
+                    // แสดงข้อความแจ้งเตือนว่าชิ้นส่วนนี้ถูกเก็บไปแล้ว
+                    Debug.Log("Jigsaw piece already collected - no UI shown.");
+                    ShowEndGamePanel();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("JigsawManager is not found in the scene.");
+                ShowEndGamePanel();
+            }
+        }
+        else
+        {
+            Debug.Log("No jigsaw piece dropped in Scene 3. Final score below threshold.");
+            ShowEndGamePanel();
+        }
     }
-}
+
+    private IEnumerator ShowEndGamePanelWithDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        if (jigsawUIPanel != null)
+        {
+            jigsawUIPanel.HideJigsawUIPanel();
+        }
+        yield return new WaitForSeconds(0.5f);
+        ShowEndGamePanel();
+    }
+
+    private void ShowEndGamePanel()
+    {
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
 }

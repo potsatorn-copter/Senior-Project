@@ -94,6 +94,18 @@ public class GrandpaController : MonoBehaviour
             SoundManager.instance.Play(SoundManager.SoundName.Eat);
             Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
         }
+        // ตรวจจับไอเทมพิเศษ เช่น ดาว
+        if (other.CompareTag("Star2"))
+        {
+            if (scoreManager != null) 
+            {
+                scoreManager.AddScore(100); // เพิ่มคะแนน 100
+                scoreManager.EndGameWithJigsawCheck(); // เรียกใช้เมธอดใหม่เพื่อตรวจสอบการจบเกม
+            }
+            SoundManager.instance.Play(SoundManager.SoundName.Eat);
+            Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
+        }
+        
         // เมื่อชนกับแอปเปิ้ล เพิ่ม 50 คะแนน
         else if (other.CompareTag("Apple"))
         {

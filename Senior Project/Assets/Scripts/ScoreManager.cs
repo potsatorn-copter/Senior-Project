@@ -14,7 +14,6 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        // ทำให้ ScoreManager คงอยู่ข้ามซีน (DontDestroyOnLoad)
         if (Instance == null)
         {
             Instance = this;
@@ -22,14 +21,12 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); // ทำลายตัวที่ซ้ำ
+            Destroy(gameObject);
         }
 
-        // โหลดคะแนนจาก PlayerPrefs เมื่อเริ่มเกมใหม่
         LoadScores();
     }
 
-    // ฟังก์ชันสำหรับตั้งค่าคะแนนในแต่ละซีน
     public void SetScoreForScene(int sceneIndex, int score)
     {
         switch (sceneIndex)
@@ -50,18 +47,14 @@ public class ScoreManager : MonoBehaviour
                 scoreScene5 = score;
                 break;
         }
-
-        // บันทึกคะแนนลงใน PlayerPrefs ทุกครั้งที่อัปเดตคะแนน
         SaveScores();
     }
 
-    // ฟังก์ชันสำหรับคำนวณคะแนนรวม
     public int GetTotalScore()
     {
         return scoreScene1 + scoreScene2 + scoreScene3 + scoreScene4 + scoreScene5;
     }
 
-    // ฟังก์ชันบันทึกคะแนนลงใน PlayerPrefs
     public void SaveScores()
     {
         PlayerPrefs.SetInt("ScoreScene1", scoreScene1);
@@ -72,17 +65,15 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    // ฟังก์ชันโหลดคะแนนจาก PlayerPrefs
     public void LoadScores()
     {
-        scoreScene1 = PlayerPrefs.GetInt("<alpha=#45>ScoreScene1", 0);
+        scoreScene1 = PlayerPrefs.GetInt("ScoreScene1", 0);
         scoreScene2 = PlayerPrefs.GetInt("ScoreScene2", 0);
         scoreScene3 = PlayerPrefs.GetInt("ScoreScene3", 0);
         scoreScene4 = PlayerPrefs.GetInt("ScoreScene4", 0);
         scoreScene5 = PlayerPrefs.GetInt("ScoreScene5", 0);
     }
 
-    // ฟังก์ชันเคลียร์คะแนนทั้งหมดใน PlayerPrefs
     public void ClearScores()
     {
         PlayerPrefs.DeleteKey("ScoreScene1");

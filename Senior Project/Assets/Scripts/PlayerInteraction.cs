@@ -34,13 +34,11 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("คลิกถูกต้องที่: " + hit.transform.name); 
 
             for (int i = 0; i < cupManager.activeCups.Length; i++) // เปลี่ยนจาก cupManager.cups เป็น cupManager.activeCups
             {
                 if (hit.transform == cupManager.activeCups[i].transform) // เปลี่ยนจาก cupManager.cups เป็น cupManager.activeCups
                 {
-                    Debug.Log("คลิกที่ถ้วย: " + i);
                     cupManager.CheckCup(i); 
                     break;
                 }
@@ -48,7 +46,6 @@ public class PlayerInteraction : MonoBehaviour
         }
         else
         {
-            Debug.Log("ไม่ได้คลิกบนถ้วย");
         }
     }
 }

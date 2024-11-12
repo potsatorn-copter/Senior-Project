@@ -31,7 +31,7 @@ public class MainmenuManager : MonoBehaviour
             continueButton.gameObject.SetActive(true);
 
             // Debug ซีนที่ค้างไว้
-            int lastScene = PlayerPrefs.GetInt("LastScenePlayed");
+            string lastScene = PlayerPrefs.GetString("LastScenePlayed");
             Debug.Log("Scene ที่ค้างไว้: " + lastScene);
 
             // ผูกปุ่มให้ทำงานเพื่อไปยังซีนที่ค้างไว้
@@ -58,7 +58,7 @@ public class MainmenuManager : MonoBehaviour
         // ลบข้อมูลเก่าที่ค้างไว้ (ถ้ามี)
         PlayerPrefs.DeleteKey("LastScenePlayed");
         
-        JigsawManager.Instance.ResetJigsawProgress();
+        //JigsawManager.Instance.ResetJigsawProgress();
         
         ScoreManager.Instance.ClearScores(); 
 
@@ -71,11 +71,13 @@ public class MainmenuManager : MonoBehaviour
     // ฟังก์ชันสำหรับเล่นเกมต่อจากที่ค้างไว้
     void ContinueGame()
     {
-        // ดึงซีนล่าสุดที่เล่นจาก PlayerPrefs
-        int lastScene = PlayerPrefs.GetInt("LastScenePlayed", SceneManager.GetSceneByName("Level").buildIndex); // ถ้าไม่มีให้ไปซีน "Level"
-
+        // ดึงชื่อซีนล่าสุดที่เล่นจาก PlayerPrefs
+        string lastScene = PlayerPrefs.GetString("LastScenePlayed", "Level"); // ถ้าไม่มีให้ไปซีน "Level"
+    
         // โหลดซีนล่าสุดที่เล่นค้างไว้
         SceneManager.LoadScene(lastScene);
+        
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
     }
 
     // ฟังก์ชันสำหรับบันทึกความยากเมื่อเลือก
