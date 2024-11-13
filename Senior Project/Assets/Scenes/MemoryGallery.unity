@@ -387,7 +387,7 @@ Animator:
   m_GameObject: {fileID: 112137226}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 59a1826fe4b9c884fb9af380da1ea73e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 934c1f5999cbf404b9b09586c3cc24d7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -629,7 +629,7 @@ Animator:
   m_GameObject: {fileID: 288348338}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3c82d94449b96974c9a3a1f8cf5f6a2d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 934c1f5999cbf404b9b09586c3cc24d7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1307,7 +1307,7 @@ GameObject:
   - component: {fileID: 953846470}
   - component: {fileID: 953846472}
   - component: {fileID: 953846474}
-  - component: {fileID: 953846473}
+  - component: {fileID: 953846475}
   m_Layer: 0
   m_Name: EasyImage
   m_TagString: Untagged
@@ -1418,7 +1418,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GalleryController, Assembly-CSharp
-        m_MethodName: OnImageClicked
+        m_MethodName: 
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1428,28 +1428,6 @@ MonoBehaviour:
           m_StringArgument: EasyImage
           m_BoolArgument: 0
         m_CallState: 2
---- !u!95 &953846473
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953846468}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b4142df20919ae64da454375452e20f4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!225 &953846474
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1462,6 +1440,28 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!95 &953846475
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953846468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 934c1f5999cbf404b9b09586c3cc24d7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1117400183
 PrefabInstance:
   m_ObjectHideFlags: 0
