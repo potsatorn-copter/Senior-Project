@@ -2139,7 +2139,7 @@ PrefabInstance:
     - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: mutedSprite
       value: 
-      objectReference: {fileID: 697239517, guid: ba7b14f1125e4b0479a318bcdb24ad97, type: 3}
+      objectReference: {fileID: -268853933, guid: 702a3c9cae75ba14389c8609905507d4, type: 3}
     - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: soundManager
       value: 
@@ -2147,7 +2147,7 @@ PrefabInstance:
     - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: unmutedSprite
       value: 
-      objectReference: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}
+      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
     - target: {fileID: 8713531416915308876, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_Sprite
       value: 

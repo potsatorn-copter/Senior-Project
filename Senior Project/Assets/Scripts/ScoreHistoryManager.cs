@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEngine.UI;
 
 [Serializable]
 public class QuizResult
@@ -22,21 +23,30 @@ public class ScoreHistoryManager : MonoBehaviour
 {
     private string filePath;
     private QuizHistory quizHistory;
-    public TextMeshProUGUI scoreHistoryText; // อ้างอิงถึง TextMeshPro ที่จะใช้แสดงคะแนน
+    public TextMeshProUGUI scoreHistoryText;
+    public GameObject clearHistoryButton; // ปุ่มเคลียร์ประวัติ
+    public GameObject clearHistoryWarningUI; // UI แจ้งเตือนให้เคลียร์ประวัติ
 
-    void  Start()
+    void Start()
     {
         filePath = Path.Combine(Application.persistentDataPath, "quizHistory.json");
-        Debug.Log("ตำแหน่งไฟล์ JSON: " + filePath);
-        LoadHistoryAsync(); // ใช้ฟังก์ชัน async เพื่อโหลดประวัติ
+        LoadHistoryAsync(); // โหลดประวัติแบบ async
+        clearHistoryWarningUI.SetActive(false); // เริ่มต้นปิดการแสดงผล UI เตือน
     }
 
     public async void SaveScore(int score)
     {
         if (quizHistory == null)
+            quizHistory = new QuizHistory();
+
+        // ตรวจสอบว่ามีประวัติเกิน 8 ครั้งหรือไม่
+        if (quizHistory.results.Count >= 8)
         {
-            quizHistory = new QuizHistory(); // กำหนดค่า quizHistory ถ้ายังไม่ได้ถูกสร้าง
-            Debug.Log("สร้างออบเจ็ค QuizHistory ใหม่");
+            if (clearHistoryWarningUI != null)
+            {
+                clearHistoryWarningUI.SetActive(true); // เปิดใช้งาน UI เตือน
+            }
+            return; // ออกจากฟังก์ชันโดยไม่บันทึกคะแนนใหม่
         }
 
         if (score > 0)
@@ -47,31 +57,11 @@ public class ScoreHistoryManager : MonoBehaviour
                 date = DateTime.Now.ToString("yyyy-MM-dd HH:mm")
             };
 
-            quizHistory.results.Add(newResult);
-            Debug.Log("เพิ่มคะแนนใหม่ในประวัติ: Score = " + newResult.score + " Date = " + newResult.date);
+            // แทรกประวัติใหม่ที่ตำแหน่งแรกของรายการ
+            quizHistory.results.Insert(0, newResult);
 
-            await SaveHistoryAsync(); // รอให้ข้อมูลบันทึกเสร็จ
-            DisplayScoreHistory();    // แสดงข้อมูลหลังจากบันทึกเสร็จ
-        }
-    }
-    
-
-    private async Task SaveHistoryAsync()
-    {
-        try
-        {
-            string json = JsonUtility.ToJson(quizHistory, true);
-            Debug.Log("ข้อมูลที่กำลังจะถูกบันทึกลง JSON: " + json);
-
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                await writer.WriteAsync(json); // บันทึกไฟล์แบบ async
-            }
-            Debug.Log("บันทึกไฟล์ JSON สำเร็จที่ตำแหน่ง: " + filePath);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("เกิดข้อผิดพลาดในการบันทึกไฟล์ JSON: " + e.Message);
+            await SaveHistoryAsync();
+            DisplayScoreHistory();
         }
     }
 
@@ -83,27 +73,23 @@ public class ScoreHistoryManager : MonoBehaviour
             {
                 using (StreamReader reader = new StreamReader(filePath))
                 {
-                    string json = await reader.ReadToEndAsync(); // โหลดไฟล์แบบ async
+                    string json = await reader.ReadToEndAsync();
                     quizHistory = JsonUtility.FromJson<QuizHistory>(json);
-                    Debug.Log("ข้อมูลที่โหลดจากไฟล์ JSON: " + json);
                 }
             }
-            catch (Exception e)
+            catch
             {
-                Debug.LogError("เกิดข้อผิดพลาดในการโหลดไฟล์ JSON: " + e.Message);
-                quizHistory = new QuizHistory(); // สร้างใหม่หากมีปัญหา
+                quizHistory = new QuizHistory();
             }
         }
         else
         {
-            quizHistory = new QuizHistory(); // สร้างใหม่หากไม่มีไฟล์
-            Debug.LogWarning("ไม่มีไฟล์ประวัติที่บันทึกไว้");
+            quizHistory = new QuizHistory();
         }
 
-        DisplayScoreHistory(); // เรียกแสดงข้อมูลหลังโหลดประวัติ
+        DisplayScoreHistory();
     }
-    
-    // ฟังก์ชันแสดงประวัติการบันทึก
+
     public void DisplayScoreHistory()
     {
         if (quizHistory != null && quizHistory.results.Count > 0)
@@ -111,24 +97,64 @@ public class ScoreHistoryManager : MonoBehaviour
             string history = "\n";
             foreach (var result in quizHistory.results)
             {
-                history += $"Score: {result.score} | Date: {result.date}\n"; // แสดงเฉพาะสกอร์รวมที่บันทึกแล้ว
+                history += $"Score: {result.score} | Date: {result.date}\n";
             }
 
-            // อัปเดตข้อความใน TextMeshProUGUI
             scoreHistoryText.SetText(history);
+
+            // แสดง UI เตือนให้เคลียร์ประวัติเมื่อประวัติเกิน 8 ครั้ง
+            if (quizHistory.results.Count >= 8)
+            {
+                if (clearHistoryWarningUI != null)
+                {
+                    clearHistoryWarningUI.SetActive(true); // เปิดใช้งาน UI เตือน
+                }
+            }
+            else
+            {
+                if (clearHistoryWarningUI != null)
+                {
+                    clearHistoryWarningUI.SetActive(false); // ปิดการแสดงผล UI เตือน
+                }
+            }
         }
         else
         {
-            scoreHistoryText.SetText("\n" + "No history available.");
+            scoreHistoryText.SetText("\nไม่มีประวัติ");
+            if (clearHistoryWarningUI != null)
+            {
+                clearHistoryWarningUI.SetActive(false); // ปิดการแสดงผล UI เตือนเมื่อไม่มีประวัติ
+            }
+        }
+    }
+
+    private async Task SaveHistoryAsync()
+    {
+        try
+        {
+            string json = JsonUtility.ToJson(quizHistory, true);
+
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                await writer.WriteAsync(json);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to save history: " + e.Message);
         }
     }
 
     public void ClearScoreHistory()
     {
-        quizHistory.results.Clear(); // ล้างข้อมูลในประวัติทั้งหมด
+        quizHistory.results.Clear();
+        SaveHistoryAsync();
+        DisplayScoreHistory();
 
-        SaveHistoryAsync(); // บันทึกข้อมูลที่ถูกล้างลงไฟล์ JSON
-
-        DisplayScoreHistory(); // อัปเดต UI
+        // ปิดการแสดงผล UI เตือนหลังจากเคลียร์ประวัติ
+        if (clearHistoryWarningUI != null)
+        {
+            clearHistoryWarningUI.SetActive(false);
+        }
     }
 }
