@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class FinalScoreDisplay : MonoBehaviour
 {
-    // TextMeshPro สำหรับแสดงคะแนนแต่ละซีน
     public TextMeshProUGUI scoreScene1Text;
     public TextMeshProUGUI scoreScene2Text;
     public TextMeshProUGUI scoreScene3Text;
@@ -13,22 +12,20 @@ public class FinalScoreDisplay : MonoBehaviour
     public TextMeshProUGUI scoreScene5Text;
 
     public float typingSpeed = 0.05f;
-    public float fadeDuration = 0.5f; 
+    public float fadeDuration = 0.5f;
 
-    // TextMeshPro สำหรับแสดงคะแนนรวม
     public TextMeshProUGUI totalScoreText;
 
     void Start()
     {
-        // ดึงคะแนนจาก ScoreManager
         int scoreScene1 = ScoreManager.Instance.scoreScene1;
         int scoreScene2 = ScoreManager.Instance.scoreScene2;
         int scoreScene3 = ScoreManager.Instance.scoreScene3;
         int scoreScene4 = ScoreManager.Instance.scoreScene4;
         int scoreScene5 = ScoreManager.Instance.scoreScene5;
 
-        // คำนวณคะแนนรวม
         int totalScore = ScoreManager.Instance.GetTotalScore();
+        string criteria = GetCriteria(totalScore);
 
         if (scoreScene1Text != null) StartCoroutine(TypeText(scoreScene1Text, $"Score Scene 1: {scoreScene1}/10"));
         if (scoreScene2Text != null) StartCoroutine(TypeText(scoreScene2Text, $"Score Scene 2: {scoreScene2}/10"));
@@ -36,18 +33,26 @@ public class FinalScoreDisplay : MonoBehaviour
         if (scoreScene4Text != null) StartCoroutine(TypeText(scoreScene4Text, $"Score Scene 4: {scoreScene4}/10"));
         if (scoreScene5Text != null) StartCoroutine(TypeText(scoreScene5Text, $"Score Scene 5: {scoreScene5}/10"));
 
-        if (scoreScene5Text != null) StartCoroutine(ShowAllScores(totalScoreText, $"Total Score: {totalScore}/50"));
-
-        // อัปเดต TextMeshPro เพื่อแสดงคะแนนแต่ละซีน
-        /*if (scoreScene1Text != null) scoreScene1Text.text = "Score Scene 1: " + scoreScene1 + "/10";
-        if (scoreScene2Text != null) scoreScene2Text.text = "Score Scene 2: " + scoreScene2 + "/10";
-        if (scoreScene3Text != null) scoreScene3Text.text = "Score Scene 3: " + scoreScene3 + "/10";
-        if (scoreScene4Text != null) scoreScene4Text.text = "Score Scene 4: " + scoreScene4 + "/10";
-        if (scoreScene5Text != null) scoreScene5Text.text = "Score Scene 5: " + scoreScene5 + "/10";
-
-        // อัปเดต TextMeshPro เพื่อแสดงคะแนนรวม
-        if (totalScoreText != null) totalScoreText.text = "Total Score: " + totalScore + "/50";*/
+        if (totalScoreText != null) 
+            StartCoroutine(ShowAllScores(totalScoreText, $"Total Score: {totalScore}/50\n{criteria}"));
     }
+
+    private string GetCriteria(int totalScore)
+    {
+        if (totalScore >= 46 && totalScore <= 50)
+            return "สุดยอด";
+        else if (totalScore >= 40 && totalScore <= 45)
+            return "เก่งมาก";
+        else if (totalScore >= 30 && totalScore <= 35)
+            return "เก่ง";
+        else if (totalScore >= 20 && totalScore <= 25)
+            return "ทั่วไป";
+        else if (totalScore >= 10 && totalScore <= 15)
+            return "พยายามอีกนิดนะ";
+        else
+            return "สู้ๆพยายามเข้า";
+    }
+
     private IEnumerator ShowAllScores(params object[] textsAndMessages)
     {
         for (int i = 0; i < textsAndMessages.Length; i += 2)
@@ -65,12 +70,12 @@ public class FinalScoreDisplay : MonoBehaviour
 
     private IEnumerator TypeText(TextMeshProUGUI textComponent, string message)
     {
-        textComponent.text = ""; // เคลียร์ข้อความก่อนเริ่ม
+        textComponent.text = "";
 
         foreach (char letter in message.ToCharArray())
         {
-            textComponent.text += letter; // เพิ่มตัวอักษรทีละตัว
-            yield return new WaitForSeconds(typingSpeed); // หน่วงเวลา
+            textComponent.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
         }
     }
 

@@ -871,6 +871,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: mutedSprite
+      value: 
+      objectReference: {fileID: -268853933, guid: 702a3c9cae75ba14389c8609905507d4, type: 3}
+    - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: unmutedSprite
+      value: 
+      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1131,7 +1139,6 @@ GameObject:
   - component: {fileID: 1191067079}
   - component: {fileID: 1191067078}
   - component: {fileID: 1191067081}
-  - component: {fileID: 1191067082}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -1157,7 +1164,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 596.8948, y: 225.0712}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1191067078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1281,28 +1288,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!95 &1191067082
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191067076}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 154ff04700ee866479ae15bb1b302f2f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1282103378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jigsawImages:
   - imageName: ImageEasy
-    completedImage: {fileID: 193271757, guid: b14ab924f96656841878c86e7be8eb27, type: 3}
+    completedImage: {fileID: 1447541358, guid: 78b6238842bde1c46b5ccf8018af4d40, type: 3}
     lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
     jigsawPieces:
     - pieceName: Easy 1
@@ -1350,10 +1335,10 @@ MonoBehaviour:
       pieceSprite: {fileID: 458826745, guid: f55d1c3c15c1f4740a643d83f8ddd8e2, type: 3}
       isCollected: 0
     - pieceName: Easy 5
-      pieceSprite: {fileID: -1546470502, guid: f6a3d41310dfa0845820d00da635ff90, type: 3}
+      pieceSprite: {fileID: 842867043, guid: 8f9ed4a6bf2b59449b1c6046fd071586, type: 3}
       isCollected: 0
   - imageName: ImageNormal
-    completedImage: {fileID: 291778818, guid: 8aebc707c8502de4e9a6259445ae64de, type: 3}
+    completedImage: {fileID: 405936542, guid: a0c41ab434fe7fe4cbea2a12351a4fca, type: 3}
     lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
     jigsawPieces:
     - pieceName: Mid 1
@@ -1369,10 +1354,10 @@ MonoBehaviour:
       pieceSprite: {fileID: 1568888954, guid: 6d42734e90322204ca7aaf2dc11a8702, type: 3}
       isCollected: 0
     - pieceName: Mid 5
-      pieceSprite: {fileID: 306178060, guid: f4e2d0289342cab458cac52e4678bfbe, type: 3}
+      pieceSprite: {fileID: -1420233888, guid: 0663743e0973c4d47a1febce1e6214d1, type: 3}
       isCollected: 0
   - imageName: ImageHard
-    completedImage: {fileID: -42359483, guid: b37eeec75c720c84d9f088eadbafcffc, type: 3}
+    completedImage: {fileID: -1897059588, guid: 15b63308540319f46b5a1c234bafd1b7, type: 3}
     lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
     jigsawPieces:
     - pieceName: Hard 1
@@ -1388,7 +1373,7 @@ MonoBehaviour:
       pieceSprite: {fileID: 1482012576, guid: 3c4b5cc3feaada7458971486d4268011, type: 3}
       isCollected: 0
     - pieceName: Hard 5
-      pieceSprite: {fileID: 1976494751, guid: fae198b4432452e47bf129dc24e03555, type: 3}
+      pieceSprite: {fileID: 512140323, guid: 81036dc51241ec143b6ab69f30429162, type: 3}
       isCollected: 0
 --- !u!224 &1282103380
 RectTransform:
@@ -2299,12 +2284,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865786885416189029, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: sounds.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5865786885416189029, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: sounds.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: c0dae9877cf8e24469bbe3ae45fa4d3d, type: 3}
+      objectReference: {fileID: 8300000, guid: 3d3b7161b8e60db4f8c23a468077984e, type: 3}
     - target: {fileID: 5865786885416189029, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: sounds.Array.data[1].clip
       value: 
@@ -2312,7 +2297,7 @@ PrefabInstance:
     - target: {fileID: 5865786885416189029, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: sounds.Array.data[2].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 49d08bb1661227e46ac0f2ea7be89022, type: 3}
+      objectReference: {fileID: 8300000, guid: a592e02eb4777874e8d528df8e713ea5, type: 3}
     - target: {fileID: 5865786885416189029, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: sounds.Array.data[3].clip
       value: 
@@ -2320,7 +2305,7 @@ PrefabInstance:
     - target: {fileID: 5865786885416189029, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: sounds.Array.data[4].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 5320f6b6c3156194f8023acca194f406, type: 3}
+      objectReference: {fileID: 8300000, guid: 363347837fc8e3348a768edcf9166f96, type: 3}
     - target: {fileID: 5865786885416189029, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: sounds.Array.data[5].clip
       value: 
@@ -2403,7 +2388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6085747200970280087, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: m_Volume
-      value: 0.213
+      value: 0.378
       objectReference: {fileID: 0}
     - target: {fileID: 6085747200970280087, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: m_Resource

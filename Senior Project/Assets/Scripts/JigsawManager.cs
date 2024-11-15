@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+ using UnityEngine;
+ using UnityEngine.SceneManagement;
+ using UnityEngine.UI;
+
 
 public class JigsawManager : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class JigsawManager : MonoBehaviour
                 if (!piece.isCollected)
                     return false;
             }
+
             return true;
         }
     }
@@ -233,7 +234,9 @@ public class JigsawManager : MonoBehaviour
         PlayerPrefs.SetInt("isNormalUnlocked", 0);
         PlayerPrefs.SetInt("isHardUnlocked", 0);
 
+        // สั่ง Save เพียงครั้งเดียวเพื่อบันทึกการเปลี่ยนแปลงทั้งหมด
         PlayerPrefs.Save();
-        Debug.Log("Progress reset.");
+
+        UpdateGallery();
     }
 }
