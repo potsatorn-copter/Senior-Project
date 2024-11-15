@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jigsawImages:
   - imageName: ImageEasy
-    completedImage: {fileID: 193271757, guid: b14ab924f96656841878c86e7be8eb27, type: 3}
+    completedImage: {fileID: 1447541358, guid: 78b6238842bde1c46b5ccf8018af4d40, type: 3}
     lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
     jigsawPieces:
     - pieceName: Easy 1
@@ -1335,10 +1335,10 @@ MonoBehaviour:
       pieceSprite: {fileID: 458826745, guid: f55d1c3c15c1f4740a643d83f8ddd8e2, type: 3}
       isCollected: 0
     - pieceName: Easy 5
-      pieceSprite: {fileID: -1546470502, guid: f6a3d41310dfa0845820d00da635ff90, type: 3}
+      pieceSprite: {fileID: 842867043, guid: 8f9ed4a6bf2b59449b1c6046fd071586, type: 3}
       isCollected: 0
   - imageName: ImageNormal
-    completedImage: {fileID: 291778818, guid: 8aebc707c8502de4e9a6259445ae64de, type: 3}
+    completedImage: {fileID: 405936542, guid: a0c41ab434fe7fe4cbea2a12351a4fca, type: 3}
     lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
     jigsawPieces:
     - pieceName: Mid 1
@@ -1354,10 +1354,10 @@ MonoBehaviour:
       pieceSprite: {fileID: 1568888954, guid: 6d42734e90322204ca7aaf2dc11a8702, type: 3}
       isCollected: 0
     - pieceName: Mid 5
-      pieceSprite: {fileID: 306178060, guid: f4e2d0289342cab458cac52e4678bfbe, type: 3}
+      pieceSprite: {fileID: -1420233888, guid: 0663743e0973c4d47a1febce1e6214d1, type: 3}
       isCollected: 0
   - imageName: ImageHard
-    completedImage: {fileID: -42359483, guid: b37eeec75c720c84d9f088eadbafcffc, type: 3}
+    completedImage: {fileID: -1897059588, guid: 15b63308540319f46b5a1c234bafd1b7, type: 3}
     lockedImage: {fileID: -1465796252, guid: 75159e35bb210734d91c426ce811375c, type: 3}
     jigsawPieces:
     - pieceName: Hard 1
@@ -1373,7 +1373,7 @@ MonoBehaviour:
       pieceSprite: {fileID: 1482012576, guid: 3c4b5cc3feaada7458971486d4268011, type: 3}
       isCollected: 0
     - pieceName: Hard 5
-      pieceSprite: {fileID: 1976494751, guid: fae198b4432452e47bf129dc24e03555, type: 3}
+      pieceSprite: {fileID: 512140323, guid: 81036dc51241ec143b6ab69f30429162, type: 3}
       isCollected: 0
 --- !u!224 &1282103380
 RectTransform:

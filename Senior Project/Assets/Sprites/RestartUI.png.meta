@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e7c09a8dd002dd34caebb9fce1a38eb4
+guid: 5e3f0917bf6b0174c83a483c5d1bcf4d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: png-clipart-computer-icons-jumping-jumping-people-miscellaneous-child-thumbnail_0
+      name: RestartUI_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 348
-        height: 348
+        width: 110
+        height: 110
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0af5a16ca056f9b4fa2cc25e9f1539ff
-      internalID: -1730676144
+      spriteID: e9942cf7ac2a44c4e93f1e80fafa0c4b
+      internalID: -775473035
       vertices: []
       indices: 
       edges: []
@@ -159,7 +159,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f4735700ecdf64f4db12d66b684d97c4
+    spriteID: dceb11920bd1a6e45b8ca3ff7a65d22b
     internalID: 0
     vertices: []
     indices: 
@@ -167,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      png-clipart-computer-icons-jumping-jumping-people-miscellaneous-child-thumbnail_0: -1730676144
+      RestartUI_0: -775473035
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
