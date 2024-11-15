@@ -113,7 +113,7 @@ public class JigsawManager : MonoBehaviour
                         Animator animator = galleryImage.GetComponent<Animator>();
                         if (animator != null)
                         {
-                            animator.Play("UnlockAnimation"); // เรียกใช้ Animation
+                            animator.SetTrigger("Unlock"); // เรียกใช้ Animation
                         }
 
                         // เปลี่ยนภาพเป็น completedImage
