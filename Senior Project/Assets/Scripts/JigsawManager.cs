@@ -69,6 +69,59 @@ public class JigsawManager : MonoBehaviour
         }
     }
 
+    private void UpdateSingleGalleryImage(Image galleryImage, JigsawImage jigsawImage, string unlockKey)
+    {
+        if (galleryImage != null)
+        {
+            // ตรวจสอบสถานะการปลดล็อคจาก PlayerPrefs
+            bool isUnlocked = PlayerPrefs.GetInt(unlockKey, 0) == 1;
+
+            // หากปลดล็อคแล้วให้แสดงภาพที่สมบูรณ์ทันที
+            if (isUnlocked)
+            {
+                galleryImage.sprite = jigsawImage.completedImage;
+            }
+            else
+            {
+                // หากยังไม่ปลดล็อคแสดงภาพที่ถูกล็อค
+                galleryImage.sprite = jigsawImage.lockedImage;
+
+                // เพิ่ม Listener สำหรับการกดเพื่อปลดล็อค
+                Button galleryButton = galleryImage.GetComponent<Button>();
+                if (galleryButton != null)
+                {
+                    galleryButton.onClick.RemoveAllListeners(); // ลบ Listener เดิม
+                    galleryButton.onClick.AddListener(() =>
+                    {
+                        if (jigsawImage.IsComplete())
+                        {
+                            // เล่นอนิเมชันปลดล็อค
+                            Animator animator = galleryImage.GetComponent<Animator>();
+                            if (animator != null)
+                            {
+                                animator.SetTrigger("Unlock");
+                            }
+
+                            // บันทึกสถานะการปลดล็อคใน PlayerPrefs
+                            PlayerPrefs.SetInt(unlockKey, 1);
+                            PlayerPrefs.Save();
+
+                            // แสดงภาพที่สมบูรณ์
+                            galleryImage.sprite = jigsawImage.completedImage;
+
+                            Debug.Log($"{jigsawImage.imageName} has been unlocked!");
+                        }
+                        else
+                        {
+                            Debug.Log("Jigsaw image is not complete yet.");
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+
     public void UpdateGallery()
     {
         if (IsGalleryScene())
@@ -79,51 +132,13 @@ public class JigsawManager : MonoBehaviour
 
             if (easyImageObj && normalImageObj && hardImageObj)
             {
-                UpdateSingleGalleryImage(easyImageObj.GetComponent<Image>(), jigsawImages[0]);
-                UpdateSingleGalleryImage(normalImageObj.GetComponent<Image>(), jigsawImages[1]);
-                UpdateSingleGalleryImage(hardImageObj.GetComponent<Image>(), jigsawImages[2]);
+                UpdateSingleGalleryImage(easyImageObj.GetComponent<Image>(), jigsawImages[0], "isEasyUnlocked");
+                UpdateSingleGalleryImage(normalImageObj.GetComponent<Image>(), jigsawImages[1], "isNormalUnlocked");
+                UpdateSingleGalleryImage(hardImageObj.GetComponent<Image>(), jigsawImages[2], "isHardUnlocked");
             }
             else
             {
                 Debug.LogWarning("One or more gallery images are missing in the Gallery Scene.");
-            }
-        }
-    }
-
-    private void UpdateSingleGalleryImage(Image galleryImage, JigsawImage jigsawImage)
-    {
-        if (galleryImage != null)
-        {
-            // แสดง lockedImage เป็นค่าเริ่มต้น
-            galleryImage.sprite = jigsawImage.lockedImage;
-
-            // เพิ่ม Listener สำหรับการกดเพื่อให้เกิดการปลดล็อค
-            Button galleryButton = galleryImage.GetComponent<Button>();
-            if (galleryButton != null)
-            {
-                // ลบ Listener เดิมเพื่อป้องกันการเรียกซ้ำ
-                galleryButton.onClick.RemoveAllListeners();
-
-                // เพิ่ม Listener ใหม่
-                galleryButton.onClick.AddListener(() =>
-                {
-                    if (jigsawImage.IsComplete())
-                    {
-                        // เล่นแอนิเมชันเมื่อปลดล็อค
-                        Animator animator = galleryImage.GetComponent<Animator>();
-                        if (animator != null)
-                        {
-                            animator.SetTrigger("Unlock"); // เรียกใช้ Animation
-                        }
-
-                        // เปลี่ยนภาพเป็น completedImage
-                        galleryImage.sprite = jigsawImage.completedImage;
-                    }
-                    else
-                    {
-                        Debug.Log("Jigsaw image is not complete yet.");
-                    }
-                });
             }
         }
     }
@@ -147,21 +162,21 @@ public class JigsawManager : MonoBehaviour
                     {
                         Debug.Log($"{currentJigsaw.imageName} is now complete!");
 
-                        // บันทึกสถานะการปลดล็อคใน PlayerPrefs
+                        // บันทึกสถานะว่า "จิ๊กซอว์ครบ" (แต่ยังไม่ปลดล็อค)
                         if (currentJigsaw.imageName == "ImageEasy")
                         {
-                            PlayerPrefs.SetInt("isEasyUnlocked", 1);
-                            Debug.Log("isEasyUnlocked set to 1");
+                            PlayerPrefs.SetInt("isEasyCompleted", 1);
+                            Debug.Log("isEasyCompleted set to 1");
                         }
                         else if (currentJigsaw.imageName == "ImageNormal")
                         {
-                            PlayerPrefs.SetInt("isNormalUnlocked", 1);
-                            Debug.Log("isNormalUnlocked set to 1");
+                            PlayerPrefs.SetInt("isNormalCompleted", 1);
+                            Debug.Log("isNormalCompleted set to 1");
                         }
                         else if (currentJigsaw.imageName == "ImageHard")
                         {
-                            PlayerPrefs.SetInt("isHardUnlocked", 1);
-                            Debug.Log("isHardUnlocked set to 1");
+                            PlayerPrefs.SetInt("isHardCompleted", 1);
+                            Debug.Log("isHardCompleted set to 1");
                         }
 
                         PlayerPrefs.Save();
@@ -223,20 +238,33 @@ public class JigsawManager : MonoBehaviour
             }
         }
 
-        // รีเซ็ตสถานะการแสดงแจ้งเตือนเพื่อให้สามารถแสดงการแจ้งเตือนใหม่ได้
+        // รีเซ็ตสถานะการแจ้งเตือนทั้งหมด
         PlayerPrefs.SetInt("hasShownEasyUnlockNotification", 0);
         PlayerPrefs.SetInt("hasShownNormalUnlockNotification", 0);
         PlayerPrefs.SetInt("hasShownHardUnlockNotification", 0);
-        Debug.Log("Notification status has been reset.");
 
-        // รีเซ็ตสถานะการปลดล็อคใน PlayerPrefs
+        // รีเซ็ตสถานะความสำเร็จและการปลดล็อคใน PlayerPrefs
+        PlayerPrefs.SetInt("isEasyCompleted", 0);
+        PlayerPrefs.SetInt("isNormalCompleted", 0);
+        PlayerPrefs.SetInt("isHardCompleted", 0);
+
         PlayerPrefs.SetInt("isEasyUnlocked", 0);
         PlayerPrefs.SetInt("isNormalUnlocked", 0);
         PlayerPrefs.SetInt("isHardUnlocked", 0);
 
-        // สั่ง Save เพียงครั้งเดียวเพื่อบันทึกการเปลี่ยนแปลงทั้งหมด
+        Debug.Log("All Jigsaw progress and notifications have been reset.");
+
+        // บันทึกการเปลี่ยนแปลงใน PlayerPrefs
         PlayerPrefs.Save();
 
+        // เรียกอัปเดตแกลเลอรีใหม่
         UpdateGallery();
+
+        // แจ้ง UnlockNotificationUIManager ให้อัปเดตสถานะใหม่
+        UnlockNotificationUIManager unlockManager = FindObjectOfType<UnlockNotificationUIManager>();
+        if (unlockManager != null)
+        {
+            unlockManager.OnEnable(); // เรียกให้ตรวจสอบสถานะการแจ้งเตือนใหม่
+        }
     }
 }

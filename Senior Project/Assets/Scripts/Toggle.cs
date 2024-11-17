@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,33 +12,50 @@ public class Toggle : MonoBehaviour
 
     private void Awake()
     {
-        // ค้นหา SoundManager ที่เป็น Singleton จากซีนแรก
         soundManager = FindObjectOfType<SoundManager>();
         if (soundManager == null)
         {
             Debug.LogWarning("SoundManager not found in the scene.");
         }
 
-        isMuted = PlayerPrefs.GetInt("isMuted", 0) == 1;
-        UpdateMuteButtonUI();
+        // โหลดสถานะการปิด/เปิดเสียงจาก PlayerPrefs
+        isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
 
-        muteButton.onClick.AddListener(MuteAllSounds);
-    }
-
-    public void MuteAllSounds()
-    {
-        isMuted = !isMuted;
-        UpdateMuteButtonUI();
-
+        // ส่งสถานะเสียงไปยัง SoundManager
         if (soundManager != null)
         {
             soundManager.MuteAllSounds(isMuted);
         }
-        PlayerPrefs.SetInt("isMuted", isMuted ? 1 : 0);
+
+        // อัปเดต UI ปุ่มให้ตรงกับสถานะเสียงที่โหลดมา
+        UpdateMuteButtonUI();
+
+        // เพิ่ม Listener ให้ปุ่ม
+        muteButton.onClick.AddListener(ToggleMuteStatus);
+    }
+
+    public void ToggleMuteStatus()
+    {
+        // สลับสถานะเสียง
+        isMuted = !isMuted;
+
+        // บันทึกสถานะเสียงลง PlayerPrefs
+        PlayerPrefs.SetInt("IsMuted", isMuted ? 1 : 0);
+        PlayerPrefs.Save();
+
+        // อัปเดต UI
+        UpdateMuteButtonUI();
+
+        // ส่งคำสั่งปิด/เปิดเสียงไปยัง SoundManager
+        if (soundManager != null)
+        {
+            soundManager.MuteAllSounds(isMuted);
+        }
     }
 
     private void UpdateMuteButtonUI()
     {
+        // เปลี่ยน Sprite ของปุ่มให้ตรงกับสถานะเสียง
         muteButton.image.sprite = isMuted ? mutedSprite : unmutedSprite;
     }
 }
