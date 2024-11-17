@@ -879,6 +879,10 @@ PrefabInstance:
       propertyPath: unmutedSprite
       value: 
       objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
+    - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: backgroundMusicSource
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2388,7 +2392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6085747200970280087, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: m_Volume
-      value: 0.378
+      value: 0.283
       objectReference: {fileID: 0}
     - target: {fileID: 6085747200970280087, guid: 3f560b859405fab489e3bb956d74923a, type: 3}
       propertyPath: m_Resource

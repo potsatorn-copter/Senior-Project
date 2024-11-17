@@ -9,7 +9,7 @@ public class UnlockNotificationUIManager : MonoBehaviour
     public GameObject normalNotification; // GameObject สำหรับการแจ้งเตือน Normal
     public GameObject hardNotification;   // GameObject สำหรับการแจ้งเตือน Hard
 
-    void OnEnable()
+    public void OnEnable()
     {
         // ปิดการแสดงผลของการแจ้งเตือนทั้งหมดไว้ก่อน
         easyNotification.SetActive(false);
@@ -23,68 +23,43 @@ public class UnlockNotificationUIManager : MonoBehaviour
 
     private void CheckUnlockNotifications()
     {
+        bool isEasyCompleted = PlayerPrefs.GetInt("isEasyCompleted", 0) == 1;
         bool isEasyUnlocked = PlayerPrefs.GetInt("isEasyUnlocked", 0) == 1;
         bool hasShownEasyNotification = PlayerPrefs.GetInt("hasShownEasyUnlockNotification", 0) == 1;
 
+        bool isNormalCompleted = PlayerPrefs.GetInt("isNormalCompleted", 0) == 1;
         bool isNormalUnlocked = PlayerPrefs.GetInt("isNormalUnlocked", 0) == 1;
         bool hasShownNormalNotification = PlayerPrefs.GetInt("hasShownNormalUnlockNotification", 0) == 1;
 
+        bool isHardCompleted = PlayerPrefs.GetInt("isHardCompleted", 0) == 1;
         bool isHardUnlocked = PlayerPrefs.GetInt("isHardUnlocked", 0) == 1;
         bool hasShownHardNotification = PlayerPrefs.GetInt("hasShownHardUnlockNotification", 0) == 1;
 
-        Debug.Log($"PlayerPrefs - isEasyUnlocked: {isEasyUnlocked}, hasShownEasyUnlockNotification: {hasShownEasyNotification}");
-        Debug.Log($"PlayerPrefs - isNormalUnlocked: {isNormalUnlocked}, hasShownNormalUnlockNotification: {hasShownNormalNotification}");
-        Debug.Log($"PlayerPrefs - isHardUnlocked: {isHardUnlocked}, hasShownHardUnlockNotification: {hasShownHardNotification}");
+        Debug.Log($"PlayerPrefs - isEasyCompleted: {isEasyCompleted}, isEasyUnlocked: {isEasyUnlocked}, hasShownEasyUnlockNotification: {hasShownEasyNotification}");
+        Debug.Log($"PlayerPrefs - isNormalCompleted: {isNormalCompleted}, isNormalUnlocked: {isNormalUnlocked}, hasShownNormalUnlockNotification: {hasShownNormalNotification}");
+        Debug.Log($"PlayerPrefs - isHardCompleted: {isHardCompleted}, isHardUnlocked: {isHardUnlocked}, hasShownHardUnlockNotification: {hasShownHardNotification}");
 
-        if (isEasyUnlocked && !hasShownEasyNotification)
+        if (isEasyCompleted && !isEasyUnlocked && !hasShownEasyNotification)
         {
             ShowNotification(easyNotification, "Easy");
         }
-        else
-        {
-            Debug.Log("Easy notification not shown.");
-        }
 
-        if (isNormalUnlocked && !hasShownNormalNotification)
+        if (isNormalCompleted && !isNormalUnlocked && !hasShownNormalNotification)
         {
             ShowNotification(normalNotification, "Normal");
         }
-        else
-        {
-            Debug.Log("Normal notification not shown.");
-        }
 
-        if (isHardUnlocked && !hasShownHardNotification)
+        if (isHardCompleted && !isHardUnlocked && !hasShownHardNotification)
         {
             ShowNotification(hardNotification, "Hard");
-        }
-        else
-        {
-            Debug.Log("Hard notification not shown.");
         }
     }
 
     private void ShowNotification(GameObject notification, string level)
     {
-        // ระบุการเปิดใช้งานรายตัวสำหรับการแจ้งเตือนแต่ละประเภท
-        if (level == "Easy")
-        {
-            easyNotification.SetActive(true);
-            Debug.Log("Easy notification set to active: " + easyNotification.activeSelf);
-        }
-        else if (level == "Normal")
-        {
-            normalNotification.SetActive(true);
-            Debug.Log("Normal notification set to active: " + normalNotification.activeSelf);
-        }
-        else if (level == "Hard")
-        {
-            hardNotification.SetActive(true);
-            Debug.Log("Hard notification set to active: " + hardNotification.activeSelf);
-        }
-
-        // Debug เพิ่มเติมเพื่อยืนยันว่า `easyNotification` ยังคงแสดงผลอยู่
-        Debug.Log("Confirming visibility - " + level + "Notification activeSelf: " + notification.activeSelf + ", activeInHierarchy: " + notification.activeInHierarchy);
+        // แสดงการแจ้งเตือนตามประเภท
+        notification.SetActive(true);
+        Debug.Log($"{level} notification set to active.");
     }
 
     public void HideAllNotifications()

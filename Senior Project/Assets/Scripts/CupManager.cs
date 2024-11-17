@@ -223,7 +223,7 @@ public class CupManager : MonoBehaviour
 
         cupWithBall.position += new Vector3(0, 2, 0);
         ball.transform.SetParent(null);
-        ball.transform.position = cupWithBall.position + new Vector3(0, -6.0f, 0);
+        ball.transform.position = cupWithBall.position + new Vector3(0, -7.0f, 0);
         ball.GetComponent<Renderer>().enabled = true;
 
         yield return new WaitForSeconds(1);
