@@ -70,56 +70,68 @@ public class JigsawManager : MonoBehaviour
     }
 
     private void UpdateSingleGalleryImage(Image galleryImage, JigsawImage jigsawImage, string unlockKey)
+{
+    Animator animator = galleryImage.GetComponent<Animator>();
+    //Animator NotificationAnimation = galleryImage.GetComponent<Animator>();
+    
+    if (galleryImage != null)
     {
-        if (galleryImage != null)
+        // ตรวจสอบสถานะการปลดล็อคจาก PlayerPrefs
+        bool isUnlocked = PlayerPrefs.GetInt(unlockKey, 0) == 1;
+
+        // หากปลดล็อคแล้วให้แสดงภาพที่สมบูรณ์ทันที
+        if (isUnlocked)
         {
-            // ตรวจสอบสถานะการปลดล็อคจาก PlayerPrefs
-            bool isUnlocked = PlayerPrefs.GetInt(unlockKey, 0) == 1;
+            galleryImage.sprite = jigsawImage.completedImage;
+        }
+        else
+        {
+            // หากยังไม่ปลดล็อคแสดงภาพที่ถูกล็อค
+            galleryImage.sprite = jigsawImage.lockedImage;
 
-            // หากปลดล็อคแล้วให้แสดงภาพที่สมบูรณ์ทันที
-            if (isUnlocked)
+            // เพิ่ม Listener สำหรับการกดเพื่อปลดล็อค
+            Button galleryButton = galleryImage.GetComponent<Button>();
+            if (galleryButton != null)
             {
-                galleryImage.sprite = jigsawImage.completedImage;
-            }
-            else
-            {
-                // หากยังไม่ปลดล็อคแสดงภาพที่ถูกล็อค
-                galleryImage.sprite = jigsawImage.lockedImage;
-
-                // เพิ่ม Listener สำหรับการกดเพื่อปลดล็อค
-                Button galleryButton = galleryImage.GetComponent<Button>();
-                if (galleryButton != null)
+                // เล่น Notification Animation
+                if (animator != null && jigsawImage.IsComplete())
                 {
-                    galleryButton.onClick.RemoveAllListeners(); // ลบ Listener เดิม
-                    galleryButton.onClick.AddListener(() =>
-                    {
-                        if (jigsawImage.IsComplete())
-                        {
-                            // เล่นอนิเมชันปลดล็อค
-                            Animator animator = galleryImage.GetComponent<Animator>();
-                            if (animator != null)
-                            {
-                                animator.SetTrigger("Unlock");
-                            }
-
-                            // บันทึกสถานะการปลดล็อคใน PlayerPrefs
-                            PlayerPrefs.SetInt(unlockKey, 1);
-                            PlayerPrefs.Save();
-
-                            // แสดงภาพที่สมบูรณ์
-                            galleryImage.sprite = jigsawImage.completedImage;
-
-                            Debug.Log($"{jigsawImage.imageName} has been unlocked!");
-                        }
-                        else
-                        {
-                            Debug.Log("Jigsaw image is not complete yet.");
-                        }
-                    });
+                    animator.SetBool("Notification", true); // เรียกใช้งานแอนิเมชั่น Notification
                 }
+
+                galleryButton.onClick.RemoveAllListeners(); // ลบ Listener เดิม
+                galleryButton.onClick.AddListener(() =>
+                {
+
+                    if (jigsawImage.IsComplete())
+                    {
+                        // เล่นแอนิเมชันปลดล็อค
+
+                        if (animator != null)
+                        {
+                            animator.SetTrigger("Unlock");
+                            animator.SetBool("Notification", false); // เรียกใช้งานแอนิเมชั่น Notification
+                        }
+
+                        // บันทึกสถานะการปลดล็อคใน PlayerPrefs
+                        PlayerPrefs.SetInt(unlockKey, 1);
+                        PlayerPrefs.Save();
+
+                        // แสดงภาพที่สมบูรณ์
+                        galleryImage.sprite = jigsawImage.completedImage;
+
+                        Debug.Log($"{jigsawImage.imageName} has been unlocked!");
+                    }
+                    else
+                    {
+                        Debug.Log("Jigsaw image is not complete yet.");
+                    }
+                });
             }
         }
     }
+}
+
 
 
     public void UpdateGallery()
