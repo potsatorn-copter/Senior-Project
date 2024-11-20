@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 36
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2910,7 +2910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 13
+      value: 87
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3291,7 +3291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1995811715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3398,16 +3398,16 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1655428092}
-    iPadPosition: {x: 157.89, y: -94.78}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 46.5, y: -35.5}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 553724192}
     iPadPosition: {x: 0, y: 0}
     iPadScale: {x: 1.48, y: 1.64, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 2134532046}
-    iPadPosition: {x: -100.23, y: -94.78}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -52.5, y: -57.2}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 274331626}
     iPadPosition: {x: 240.3, y: 174.4}
@@ -3418,16 +3418,16 @@ MonoBehaviour:
     iPadScale: {x: 1.8, y: 1.8, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 628759230}
-    iPadPosition: {x: -100.23, y: -94.78}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -52.5, y: -57.2}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 273293075}
     iPadPosition: {x: -175.9, y: 184.9}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 49398396}
-    iPadPosition: {x: 157.89, y: -94.78}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 46.5, y: -35.5}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 906330479}
     iPadPosition: {x: 339.5, y: 101.9}

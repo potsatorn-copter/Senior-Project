@@ -5916,16 +5916,16 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1805068429}
-    iPadPosition: {x: 78.63, y: -47.48}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 46.7, y: -14.7}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 948320768}
     iPadPosition: {x: 14.26, y: 0}
     iPadScale: {x: 12, y: 12, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1615395745}
-    iPadPosition: {x: -53.46, y: -47.48}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -31.3, y: -32.3}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1406012553}
     iPadPosition: {x: 65.3, y: -47.48}
@@ -8811,7 +8811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 87
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y

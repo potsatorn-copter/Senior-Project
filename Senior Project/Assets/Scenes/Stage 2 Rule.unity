@@ -809,7 +809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 29
+      value: 92
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3562,8 +3562,8 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 631002351}
-    iPadPosition: {x: -66.8, y: -51.3}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -34.9, y: -30.1}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 915814041}
     iPadPosition: {x: -696.5, y: -242.62}
@@ -3578,20 +3578,20 @@ MonoBehaviour:
     iPadScale: {x: 1.5, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 2054464323}
-    iPadPosition: {x: 140.42, y: -51.3}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 55, y: -30.1}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1706066778}
     iPadPosition: {x: -681.5, y: -121.8}
     iPadScale: {x: 1.2, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 40250668}
-    iPadPosition: {x: -66.8, y: -51.3}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -34.9, y: -30.1}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 276102423}
-    iPadPosition: {x: 140.42, y: -51.3}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 55, y: -30.1}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1324180357}
     iPadPosition: {x: 228, y: 109.3}
@@ -4680,7 +4680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 25
+      value: 89
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y

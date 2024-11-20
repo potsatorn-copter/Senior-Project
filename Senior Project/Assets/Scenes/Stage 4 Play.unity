@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 44
+      value: 92
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4804,7 +4804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElements:
   - element: {fileID: 1721221787}
-    iPadPosition: {x: 836.53, y: -113.9}
+    iPadPosition: {x: 836.53, y: -128.3}
     iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 117778473}
@@ -4812,12 +4812,12 @@ MonoBehaviour:
     iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1012372018}
-    iPadPosition: {x: -96.6, y: -128.25}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -40.1, y: -59.8}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 386044467}
-    iPadPosition: {x: 66, y: -128.25}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 38.8, y: -37.1}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 573270417}
     iPadPosition: {x: 0, y: 0}
@@ -4836,11 +4836,11 @@ MonoBehaviour:
     iPadScale: {x: 1.5, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 476961395}
-    iPadPosition: {x: -149.3, y: 83.9}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -64.6, y: 83.9}
+    iPadScale: {x: 1.97, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 766759188}
-    iPadPosition: {x: 35.4, y: 569}
+    iPadPosition: {x: 35.4, y: 553}
     iPadScale: {x: 5.18, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 835066362}

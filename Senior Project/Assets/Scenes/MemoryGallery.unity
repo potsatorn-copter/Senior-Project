@@ -457,16 +457,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElements:
   - element: {fileID: 1623352479}
-    iPadPosition: {x: -85, y: -211.6}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -26.7, y: -52.4}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1625087387}
-    iPadPosition: {x: 182, y: -211.6}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 54, y: -35.7}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 647813161}
-    iPadPosition: {x: -154.3, y: -154.9}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -161.9, y: -21.2}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 953846469}
     iPadPosition: {x: 64.4, y: -50}
@@ -2041,11 +2041,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

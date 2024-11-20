@@ -1155,8 +1155,8 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1675031428}
-    iPadPosition: {x: -124.4, y: -134.5}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -60.8, y: -76.2}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1516066255}
     iPadPosition: {x: -593.3, y: -164}
@@ -1171,8 +1171,8 @@ MonoBehaviour:
     iPadScale: {x: 1.5, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1573413522}
-    iPadPosition: {x: 124.32, y: -134.5}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 79.7, y: -68.5}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 2046526477}
 --- !u!4 &903674496

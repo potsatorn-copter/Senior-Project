@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 33, y: -7.0930176}
+  m_AnchoredPosition: {x: 86, y: -7.0930176}
   m_SizeDelta: {x: 157.4323, y: 142.5732}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &296556096
@@ -1829,12 +1829,12 @@ MonoBehaviour:
     iPadScale: {x: 1.1, y: 1.1, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1654202985}
-    iPadPosition: {x: -209.5, y: -146.4}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -145.3, y: -125.2}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 296556095}
-    iPadPosition: {x: 125.6468, y: -49.5}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 41.4, y: -8.6}
+    iPadScale: {x: 1.7, y: 1.7, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 1848011375}
 --- !u!1 &2111104555

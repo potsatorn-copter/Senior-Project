@@ -1981,7 +1981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 39
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3392,12 +3392,12 @@ MonoBehaviour:
     iPadScale: {x: 1.5, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1474857303}
-    iPadPosition: {x: -28.7, y: -54.4}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: -25.6, y: -25.6}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 845480593}
-    iPadPosition: {x: 88.81, y: -43.39}
-    iPadScale: {x: 1.5, y: 1.5, z: 1}
+    iPadPosition: {x: 47.1, y: -24.3}
+    iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1635838542}
     iPadPosition: {x: 0, y: 0}
