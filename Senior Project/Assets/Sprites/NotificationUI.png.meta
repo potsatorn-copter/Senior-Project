@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 75159e35bb210734d91c426ce811375c
+guid: d38a3f8dd28e2d54dbee7a0e4e8b7a9c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -120,19 +120,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -149,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: b6114256-9b7a-4f4d-8084-efa15b552bf1_0
+      name: NotificationUI_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 341
+        height: 341
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c210fb4fb83d4145be123c96df0718f
-      internalID: -1465796252
+      spriteID: 24c730bb337a6b2488766a6c69b49c20
+      internalID: -218914897
       vertices: []
       indices: 
       edges: []
@@ -172,7 +159,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 63a26fc13f8ff1345bfbe86cb7db75bb
+    spriteID: 8cd19a819b4b20a4eb53aa8bc01e108e
     internalID: 0
     vertices: []
     indices: 
@@ -180,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      b6114256-9b7a-4f4d-8084-efa15b552bf1_0: -1465796252
+      NotificationUI_0: -218914897
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
