@@ -64,7 +64,7 @@ public class ScoreManagerStage4 : MonoBehaviour
     {
         if (scoreTextGet != null)
         {
-            scoreTextGet.text = "คะแนน  : " + score;
+            scoreTextGet.text = "คะแนน: " + score;
         }
         if (newScoreText != null)
         {

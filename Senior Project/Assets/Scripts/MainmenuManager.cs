@@ -58,7 +58,7 @@ public class MainmenuManager : MonoBehaviour
         // ลบข้อมูลเก่าที่ค้างไว้ (ถ้ามี)
         PlayerPrefs.DeleteKey("LastScenePlayed");
         
-        //JigsawManager.Instance.ResetJigsawProgress();
+        JigsawManager.Instance.ResetJigsawProgress();
         
         ScoreManager.Instance.ClearScores(); 
 
