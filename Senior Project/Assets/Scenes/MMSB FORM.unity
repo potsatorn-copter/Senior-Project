@@ -5285,6 +5285,10 @@ MonoBehaviour:
     iPadPosition: {x: -23.7, y: 10.8}
     iPadScale: {x: 1.1, y: 1.1, z: 1}
     scaleOnIpad: 1
+  - element: {fileID: 1004804152}
+    iPadPosition: {x: -987, y: -474.9}
+    iPadScale: {x: 2.5, y: 2.5, z: 1}
+    scaleOnIpad: 1
   canvasRect: {fileID: 862252577}
 --- !u!4 &346579597
 Transform:
