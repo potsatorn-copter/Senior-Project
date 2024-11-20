@@ -66,7 +66,7 @@ public class ScoreManager1 : MonoBehaviour
 
         if (scoreText != null)
         {
-            scoreText.gameObject.SetActive(false);
+            
         }
 
         Debug.Log("Setting score for Scene 1 in ScoreManager: " + finalScore);
