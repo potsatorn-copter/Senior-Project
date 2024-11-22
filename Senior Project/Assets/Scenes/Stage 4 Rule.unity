@@ -1042,7 +1042,7 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1675031428}
-    iPadPosition: {x: -60.8, y: -76.2}
+    iPadPosition: {x: -79.7, y: -99.3}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1516066255}
@@ -1058,7 +1058,7 @@ MonoBehaviour:
     iPadScale: {x: 1.5, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1573413522}
-    iPadPosition: {x: 79.7, y: -68.5}
+    iPadPosition: {x: 84.8, y: -99.3}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 2046526477}
@@ -1555,6 +1555,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.31381
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077052844689143680, guid: 14a861921c631ab4ba7c8256e29b48c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1686,15 +1690,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023751992641464274, guid: 89fd6fde8b1071f479c419ee2beae3de, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1023751992641464274, guid: 89fd6fde8b1071f479c419ee2beae3de, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1023751992641464274, guid: 89fd6fde8b1071f479c419ee2beae3de, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1023751992641464274, guid: 89fd6fde8b1071f479c419ee2beae3de, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1796,11 +1800,11 @@ RectTransform:
   m_Children:
   - {fileID: 1228430273}
   - {fileID: 624147110}
-  - {fileID: 1675031428}
   - {fileID: 1516066255}
   - {fileID: 247723391}
   - {fileID: 25152967}
   - {fileID: 1573413522}
+  - {fileID: 1675031428}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -1,40 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(RectTransform))]
 public class SafeAreaAdjuster : MonoBehaviour
 {
-    private RectTransform rectTransform;
+    RectTransform rectTransform;
+    Rect safeArea;
+    Vector2 minAnchor;
+    Vector2 maxAnchor;
 
-    void Start()
+    void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        ApplySafeArea();
-    }
+        safeArea = Screen.safeArea;
+        minAnchor = safeArea.position;
+        maxAnchor = minAnchor + safeArea.size;
 
-    void ApplySafeArea()
-    {
-        // รับค่า Safe Area จากหน้าจอ
-        Rect safeArea = Screen.safeArea;
+        minAnchor.x /= Screen.width;
+        minAnchor.y /= Screen.height;
+        maxAnchor.x /= Screen.width;
+        maxAnchor.y /= Screen.height;
 
-        // สำหรับการจำลองใน Unity Editor
-#if UNITY_EDITOR
-        // จำลอง Safe Area (แก้ค่าตามความต้องการ)
-        safeArea = new Rect(0, 100, Screen.width, Screen.height - 200);
-#endif
-
-        // คำนวณ anchorMin และ anchorMax จาก Safe Area
-        Vector2 anchorMin = safeArea.position;
-        Vector2 anchorMax = safeArea.position + safeArea.size;
-
-        anchorMin.x /= Screen.width;
-        anchorMin.y /= Screen.height;
-        anchorMax.x /= Screen.width;
-        anchorMax.y /= Screen.height;
-
-        // ปรับค่า RectTransform
-        rectTransform.anchorMin = anchorMin;
-        rectTransform.anchorMax = anchorMax;
-
-        Debug.Log($"Safe Area Applied: {safeArea}");
+        rectTransform.anchorMin = minAnchor;
+        rectTransform.anchorMax = maxAnchor;
     }
 }
