@@ -54,7 +54,7 @@ public class ResponsiveUI : MonoBehaviour
 
     private void Update()
     {
-        AdjustUIPositions(); // อัพเดตตำแหน่ง UI ระหว่างการทดสอบใน Editor
+        //AdjustUIPositions(); // อัพเดตตำแหน่ง UI ระหว่างการทดสอบใน Editor
     }
 
     private void AdjustUIPositions()

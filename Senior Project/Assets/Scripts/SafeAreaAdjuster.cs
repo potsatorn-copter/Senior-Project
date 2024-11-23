@@ -23,5 +23,6 @@ public class SafeAreaAdjuster : MonoBehaviour
 
         rectTransform.anchorMin = minAnchor;
         rectTransform.anchorMax = maxAnchor;
+        
     }
 }
