@@ -161,6 +161,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.Alphacore.ELDERLYROUTINE
+    Standalone: com.Alphacore.ELDERLY-ROUTINE
     iPhone: com.DefaultCompany.Senior-Project
   buildNumber:
     Bratwurst: 0

@@ -271,7 +271,8 @@ public class CupManager : MonoBehaviour
     }
     
     private IEnumerator ShowEndGamePanelWithDelay(JigsawUIPanel jigsawUIPanel)
-    {SoundManager.instance.Play(SoundManager.SoundName.WinSound);
+    {
+        SoundManager.instance.Play(SoundManager.SoundName.WinSound);
         yield return new WaitForSeconds(3f); // รอให้ JigsawUIPanel แสดงครบ 3 วินาที
         if (jigsawUIPanel != null)
         {

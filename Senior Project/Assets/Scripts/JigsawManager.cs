@@ -116,6 +116,8 @@ public class JigsawManager : MonoBehaviour
                         // บันทึกสถานะการปลดล็อคใน PlayerPrefs
                         PlayerPrefs.SetInt(unlockKey, 1);
                         PlayerPrefs.Save();
+                        
+                        SoundManager.instance.Play(SoundManager.SoundName.RevealImageSound);
 
                         // แสดงภาพที่สมบูรณ์
                         galleryImage.sprite = jigsawImage.completedImage;

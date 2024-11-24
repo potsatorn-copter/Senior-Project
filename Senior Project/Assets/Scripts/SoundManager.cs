@@ -54,8 +54,8 @@ public class SoundManager : MonoBehaviour
         WrongPair,
         ChargeSound,
         BottlehitBinSound,
-        ChooseBallSound,
-        ShuffleSound
+        EndLoop,
+        RevealImageSound
 
     }
 

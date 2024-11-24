@@ -36,6 +36,7 @@ public class FinalScoreDisplay : MonoBehaviour
 
     void Start()
     {
+        SoundManager.instance.Play(SoundManager.SoundName.EndLoop);
         string criteria = GetCriteria(totalScore);
         // แสดงคะแนนใน UI
         if (scoreScene1Text != null) StartCoroutine(TypeText(scoreScene1Text, $"Score Scene 1: {scoreScene1}/10"));
