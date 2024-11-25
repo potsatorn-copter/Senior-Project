@@ -26,3 +26,5 @@ public class SafeAreaAdjuster : MonoBehaviour
         
     }
 }
+
+

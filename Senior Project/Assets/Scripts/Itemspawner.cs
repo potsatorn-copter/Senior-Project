@@ -9,8 +9,24 @@ public class Itemspawner : MonoBehaviour
     public Transform spawnPoint;
     public ScoreManager1 scoreManager; // อ้างอิงไปยัง ScoreManager เพื่อจบเกมเมื่อไอเท็มหมด
 
+    private float spawnDelay; // ดีเลย์สำหรับการเกิดของไอเท็ม
+
     private void Start()
     {
+        // กำหนดดีเลย์ตามระดับความยาก
+        if (GameSettings.difficultyLevel == 0) // Easy
+        {
+            spawnDelay = 4f; // โหมดง่าย ดีเลย์ 6 วินาที
+        }
+        else if (GameSettings.difficultyLevel == 1) // Normal
+        {
+            spawnDelay = 3f; // โหมดกลาง ดีเลย์ 4 วินาที
+        }
+        else if (GameSettings.difficultyLevel == 2) // Hard
+        {
+            spawnDelay = 2f; // โหมดยาก ดีเลย์ 3 วินาที
+        }
+
         StartCoroutine(SpawnItems());
     }
 
@@ -18,10 +34,11 @@ public class Itemspawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(1f, 2f));
+            yield return new WaitForSeconds(spawnDelay); // ใช้ดีเลย์ที่ตั้งไว้ตามระดับความยาก
 
             var itemGameObject = itemPool.GetItemFromPool();
             Item item = null;
+
             if (itemGameObject != null)
             {
                 item = itemGameObject.GetComponent<Item>();
@@ -43,10 +60,10 @@ public class Itemspawner : MonoBehaviour
                 break; // ออกจากลูปเมื่อไอเท็มหมด
             }
 
-            yield return new WaitForSeconds(Random.Range(3f, 6f));
-
+            // Deactivate item after delay
             if (item != null)
             {
+                yield return new WaitForSeconds(3f); // หน่วงเวลาก่อนปิดการใช้งานไอเท็ม
                 item.Deactivate();
             }
         }

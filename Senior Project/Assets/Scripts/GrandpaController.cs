@@ -1,15 +1,18 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class GrandpaController : MonoBehaviour
 {
-    private PlayerInput playerInput;
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private float slowFallMultiplier = 0.5f;
-    
+
     private Rigidbody rb;
-    private Vector2 movementInput; 
+    private Vector2 movementInput;
+    private bool isMovingLeft = false;
+    private bool isMovingRight = false;
+    private SpriteRenderer spriteRenderer;
+
     private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
 
     public bool hasJumpBoost = false; // สถานะการบูสต์การกระโดดจากกล้วย
@@ -18,7 +21,12 @@ public class GrandpaController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SpriteRenderer not found on this GameObject.");
+        }
 
         // ค้นหา ScoremanagerScene2 ในซีนปัจจุบัน
         scoreManager = FindObjectOfType<ScoremanagerScene2>();
@@ -30,8 +38,39 @@ public class GrandpaController : MonoBehaviour
 
     private void Update()
     {
-        // Get movement input from the Input System
-        movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        // ตรวจจับการกดปุ่มซ้าย
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            MoveLeft();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            StopMoving();
+        }
+
+        // ตรวจจับการกดปุ่มขวา
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            MoveRight();
+        }
+        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            StopMoving();
+        }
+
+        // ตั้งค่าการเคลื่อนไหวตามทิศทางที่กำหนด
+        if (isMovingLeft)
+        {
+            movementInput = Vector2.left;
+        }
+        else if (isMovingRight)
+        {
+            movementInput = Vector2.right;
+        }
+        else
+        {
+            movementInput = Vector2.zero; // หยุดเคลื่อนไหวเมื่อไม่มีการกดปุ่ม
+        }
     }
 
     private void FixedUpdate()
@@ -41,21 +80,42 @@ public class GrandpaController : MonoBehaviour
         velocity.x = movementInput.x * movementSpeed;
         rb.velocity = velocity;
 
-        // Rotate character based on movement direction
-        if (movementInput.x > 0)
+        // Flip Sprite based on movement direction
+        FlipSprite();
+    }
+
+    private void FlipSprite()
+    {
+        if (movementInput.x > 0) // เดินขวา
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0); // Facing right
+            spriteRenderer.flipX = false; // หันหน้าขวา
         }
-        else if (movementInput.x < 0)
+        else if (movementInput.x < 0) // เดินซ้าย
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0); // Facing left
+            spriteRenderer.flipX = true; // หันหน้าซ้าย
         }
 
-        // Apply slow fall effect when the character is falling
-        if (rb.velocity.y < 0)
-        {
-            rb.AddForce(Vector3.up * slowFallMultiplier, ForceMode.Acceleration);
-        }
+        // Debug Sprite flip state
+        Debug.Log($"FlipSprite: flipX={spriteRenderer.flipX}");
+    }
+
+    public void MoveLeft()
+    {
+        isMovingLeft = true; // ตั้งค่าการเดินซ้าย
+        isMovingRight = false; // ปิดการเดินขวา
+    }
+
+    public void MoveRight()
+    {
+        isMovingRight = true; // ตั้งค่าการเดินขวา
+        isMovingLeft = false; // ปิดการเดินซ้าย
+    }
+
+    public void StopMoving()
+    {
+        isMovingLeft = false; // หยุดเดินซ้าย
+        isMovingRight = false; // หยุดเดินขวา
+        movementInput = Vector2.zero; // รีเซ็ต movementInput
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -66,25 +126,20 @@ public class GrandpaController : MonoBehaviour
 
         if (trampolinePlatform != null && !trampolinePlatform.isSteppedOn)
         {
-            // กรณี TrampolinePlatform และยังไม่ได้เหยียบ
             if (scoreManager != null) scoreManager.AddScore(100); // เพิ่มคะแนน
-            trampolinePlatform.isSteppedOn = true; // บันทึกว่าแพลตฟอร์มถูกเหยียบแล้ว
+            trampolinePlatform.isSteppedOn = true;
 
-            // เล่นเสียงเมื่อเหยียบแพลตฟอร์ม
             SoundManager.instance.Play(SoundManager.SoundName.Jump);
         }
         else if (fakePlatform != null && !fakePlatform.isSteppedOn)
         {
-            // กรณี FakePlatform และยังไม่ได้เหยียบ
             if (scoreManager != null) scoreManager.AddScore(100); // เพิ่มคะแนน
-            fakePlatform.isSteppedOn = true; // บันทึกว่าแพลตฟอร์มถูกเหยียบแล้ว
+            fakePlatform.isSteppedOn = true;
 
-            // เล่นเสียงเมื่อเหยียบแพลตฟอร์ม
             SoundManager.instance.Play(SoundManager.SoundName.Jump);
         }
     }
 
-    // ฟังก์ชันตรวจจับการชนกับไอเทมพิเศษ เช่น ดาวหรือแอปเปิ้ล
     private void OnTriggerEnter(Collider other)
     {
         // เมื่อชนกับดาว เพิ่ม 100 คะแนน
@@ -97,7 +152,7 @@ public class GrandpaController : MonoBehaviour
         // ตรวจจับไอเทมพิเศษ เช่น ดาว
         if (other.CompareTag("Star2"))
         {
-            if (scoreManager != null) 
+            if (scoreManager != null)
             {
                 scoreManager.AddScore(100); // เพิ่มคะแนน 100
                 scoreManager.EndGameWithJigsawCheck(); // เรียกใช้เมธอดใหม่เพื่อตรวจสอบการจบเกม
@@ -105,7 +160,7 @@ public class GrandpaController : MonoBehaviour
             SoundManager.instance.Play(SoundManager.SoundName.Eat);
             Destroy(other.gameObject); // ทำลายไอเทมหลังเก็บได้
         }
-        
+
         // เมื่อชนกับแอปเปิ้ล เพิ่ม 50 คะแนน
         else if (other.CompareTag("Apple"))
         {
@@ -115,7 +170,6 @@ public class GrandpaController : MonoBehaviour
         }
     }
 
-    // ฟังก์ชันเก็บไอเทมกล้วย
     public void CollectBanana()
     {
         hasJumpBoost = true; // ตั้งค่าการบูสต์เมื่อเก็บกล้วย

@@ -2316,7 +2316,7 @@ MonoBehaviour:
   liftHeight: 2
   easyShuffleDuration: 1
   normalShuffleDuration: 0.8
-  hardShuffleDuration: 0.6
+  hardShuffleDuration: 0.7
   easyShuffleTimes: 10
   normalHardShuffleTimes: 12
 --- !u!4 &1066720956

@@ -26,7 +26,7 @@ public class CupManager : MonoBehaviour
     public float liftHeight = 2.0f;
     public float easyShuffleDuration = 1.0f;
     public float normalShuffleDuration = 0.8f;
-    public float hardShuffleDuration = 0.6f;
+    public float hardShuffleDuration = 0.7f;
     private float shuffleDuration;
     public int easyShuffleTimes = 10;
     public int normalHardShuffleTimes = 12;

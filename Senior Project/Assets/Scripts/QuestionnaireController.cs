@@ -38,6 +38,7 @@ public class QuestionnaireController : MonoBehaviour
     {
         if (currentQuestionIndex < questions.Length - 1)
         {
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
             questions[currentQuestionIndex].SetActive(false);
             currentQuestionIndex++;
             ShowQuestion(currentQuestionIndex);
@@ -54,6 +55,7 @@ public class QuestionnaireController : MonoBehaviour
     {
         if (currentQuestionIndex > 0)
         {
+        SoundManager.instance.Play(SoundManager.SoundName.Click);
             questions[currentQuestionIndex].SetActive(false);
             currentQuestionIndex--;
             ShowQuestion(currentQuestionIndex);

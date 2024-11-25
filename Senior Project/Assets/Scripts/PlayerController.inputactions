@@ -6,18 +6,18 @@
             "id": "835506b2-9c03-4a4c-8df6-385b29a86b6a",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "93016752-a4d6-407f-b7fc-313f13b28efb",
-                    "expectedControlType": "Vector2",
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "32c9861c-904f-4203-befe-972b8353da5e",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "Right",
                     "type": "Button",
-                    "id": "3693d682-6e49-406c-b74e-fc047f0e63ae",
+                    "id": "8b12e25f-58a8-4f6b-b170-9e50d480b451",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -27,23 +27,45 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "6c105e90-920b-467d-9a7f-6e31e7de7521",
-                    "path": "<Gamepad>/leftStick",
+                    "id": "a7fb0451-b3be-49b1-ac5a-f1a34e63a2f3",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "5a489eb1-7bc1-4225-907a-fa22dfa0311d",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "7fbc2e60-2e27-41d6-9899-c2e6a2e10313",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdb2facb-bd59-4e77-8a8c-437d37427690",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02d474fd-6d98-4d8b-9965-f4aff0c6420a",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
