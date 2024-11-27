@@ -4,7 +4,7 @@ using UnityEngine;
 public class OneTimePlatform : MonoBehaviour
 {
     public float bounceForce = 3f; // แรงดีดกลับเมื่อผู้เล่นเหยียบ
-    public float disappearDelay = 0.5f; // กำหนดเวลาหลังจากที่ผู้เล่นเหยียบแล้วแพลตฟอร์มจะหายไป
+    public float disappearDelay = 1.0f; // กำหนดเวลาหลังจากที่ผู้เล่นเหยียบแล้วแพลตฟอร์มจะหายไป
     private bool hasBeenUsed = false; // ตรวจสอบว่าแพลตฟอร์มถูกใช้หรือยัง
     public bool isSteppedOn = false; // ตรวจสอบว่าแพลตฟอร์มถูกเหยียบหรือยัง
     private Collider2D platformCollider;
