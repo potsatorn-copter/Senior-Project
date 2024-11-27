@@ -10935,6 +10935,64 @@ RectTransform:
   m_AnchoredPosition: {x: 8, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &782263340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 782263342}
+  - component: {fileID: 782263343}
+  m_Layer: 0
+  m_Name: Zfold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &782263342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782263340}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 712.5, y: 337.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &782263343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782263340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32400447afe797947b07cc0115353b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiElements:
+  - element: {fileID: 1852719498}
+    smallDevicePosition: {x: 0, y: 0}
+    smallDeviceScale: {x: 0.7, y: 0.7, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 491585502}
+    smallDevicePosition: {x: 711, y: -270.3}
+    smallDeviceScale: {x: 1, y: 1, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1212042652}
+    smallDevicePosition: {x: 41, y: 0}
+    smallDeviceScale: {x: 0.8, y: 0.8, z: 0}
+    scaleOnSmallDevice: 1
+  canvasRect: {fileID: 862252577}
 --- !u!1 &791797608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6796746865734994761, guid: 550c9a3d301c15845b349457444380a9, type: 3}
@@ -30915,3 +30973,4 @@ SceneRoots:
   - {fileID: 1021790737}
   - {fileID: 520791203}
   - {fileID: 346579597}
+  - {fileID: 782263342}

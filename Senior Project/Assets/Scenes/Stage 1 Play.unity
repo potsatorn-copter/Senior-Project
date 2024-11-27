@@ -840,6 +840,64 @@ MonoBehaviour:
   scoreText: {fileID: 907399214}
   finalScoreText: {fileID: 843614880}
   endGamePanel: {fileID: 534874428}
+--- !u!1 &883141980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883141982}
+  - component: {fileID: 883141981}
+  m_Layer: 0
+  m_Name: Zfold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &883141981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883141980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32400447afe797947b07cc0115353b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiElements:
+  - element: {fileID: 895550562}
+    smallDevicePosition: {x: 0, y: -2.62}
+    smallDeviceScale: {x: 5, y: 1.3, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 2012096862}
+    smallDevicePosition: {x: 43, y: 0}
+    smallDeviceScale: {x: 7, y: 7, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 534874429}
+    smallDevicePosition: {x: 43, y: 0}
+    smallDeviceScale: {x: 7, y: 7, z: 0}
+    scaleOnSmallDevice: 1
+  canvasRect: {fileID: 1212360454}
+--- !u!4 &883141982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883141980}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 712.5, y: 337.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &895550561
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,3 +3522,4 @@ SceneRoots:
   - {fileID: 2132831579}
   - {fileID: 3371454306291136797}
   - {fileID: 2136862972}
+  - {fileID: 883141982}

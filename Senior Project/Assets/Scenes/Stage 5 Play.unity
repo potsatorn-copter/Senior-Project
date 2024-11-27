@@ -252,11 +252,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6693395915966620632, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 34.909058
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 6693395915966620632, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6693395915966620632, guid: a6938a66024913a439c761bba50df617, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1071,26 +1071,32 @@ MonoBehaviour:
     volume: 0.519
     loop: 0
     audioSource: {fileID: 0}
+    mute: 0
   - soundName: 2
     clip: {fileID: 8300000, guid: 3d3b7161b8e60db4f8c23a468077984e, type: 3}
     volume: 0.519
     loop: 0
     audioSource: {fileID: 0}
+    mute: 0
   - soundName: 3
     clip: {fileID: 8300000, guid: 480dff1b0a8671149832784a3fd0b116, type: 3}
     volume: 0.519
     loop: 0
     audioSource: {fileID: 0}
+    mute: 0
   - soundName: 4
     clip: {fileID: 8300000, guid: 49d08bb1661227e46ac0f2ea7be89022, type: 3}
     volume: 0.519
     loop: 0
     audioSource: {fileID: 0}
+    mute: 0
   - soundName: 6
     clip: {fileID: 8300000, guid: d7d7f23157475de4ab43c42e9fbd6d15, type: 3}
     volume: 0.519
     loop: 0
     audioSource: {fileID: 0}
+    mute: 0
+  externalAudioSources: []
 --- !u!4 &478165393
 Transform:
   m_ObjectHideFlags: 0
@@ -2339,6 +2345,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6796746865734994761, guid: 550c9a3d301c15845b349457444380a9, type: 3}
   m_PrefabInstance: {fileID: 772625866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1198927072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198927074}
+  - component: {fileID: 1198927073}
+  m_Layer: 0
+  m_Name: Zfold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1198927073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198927072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32400447afe797947b07cc0115353b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiElements:
+  - element: {fileID: 1034568676}
+    smallDevicePosition: {x: 39, y: 0}
+    smallDeviceScale: {x: 7, y: 7, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 1635838542}
+    smallDevicePosition: {x: 39, y: 0}
+    smallDeviceScale: {x: 7, y: 7, z: 0}
+    scaleOnSmallDevice: 1
+  canvasRect: {fileID: 270523547}
+--- !u!4 &1198927074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198927072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 712.5, y: 337.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1250291032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2495,10 @@ PrefabInstance:
     - target: {fileID: 6364987868894740729, guid: 1bfb11824b2712c4fb056df380d34c8a, type: 3}
       propertyPath: m_Name
       value: JigsawUIPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6364987868894740729, guid: 1bfb11824b2712c4fb056df380d34c8a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6996170965965849406, guid: 1bfb11824b2712c4fb056df380d34c8a, type: 3}
       propertyPath: panel
@@ -3712,3 +3776,4 @@ SceneRoots:
   - {fileID: 766226490}
   - {fileID: 1264284775}
   - {fileID: 1710185828}
+  - {fileID: 1198927074}
