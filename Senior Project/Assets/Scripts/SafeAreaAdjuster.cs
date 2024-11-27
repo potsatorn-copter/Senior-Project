@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SafeAreaAdjuster : MonoBehaviour
 {
-    RectTransform rectTransform;
+   RectTransform rectTransform;
     Rect safeArea;
     Vector2 minAnchor;
     Vector2 maxAnchor;
-
+/*
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -24,7 +24,7 @@ public class SafeAreaAdjuster : MonoBehaviour
         rectTransform.anchorMin = minAnchor;
         rectTransform.anchorMax = maxAnchor;
         
-    }
+    }*/
 }
 
 
