@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 88c913861d7066847b16982826f35dbc
+guid: 53bf1b307cc8f2443999fc6615ccf48e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,19 +81,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LargeHandleFilled_0
+      name: RArrowUI_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 208
-        height: 208
+        width: 375
+        height: 376
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +137,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f53b38e2bbc8884e8fae62f7506d167
-      internalID: -543271189
+      spriteID: bd7992a7cd49e954cb2bb95568b02b12
+      internalID: -1453996135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RArrowUI_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 5
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd85a6d4fc3e4a0458137e02fd03525d
+      internalID: 2078966880
       vertices: []
       indices: 
       edges: []
@@ -159,7 +167,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 277a770c0bf468742b34c7a4e21b5c02
+    spriteID: caae7091aa1a2ce4ab1a6eb36dbde16a
     internalID: 0
     vertices: []
     indices: 
@@ -167,7 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LargeHandleFilled_0: -543271189
+      RArrowUI_0: -1453996135
+      RArrowUI_1: 2078966880
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

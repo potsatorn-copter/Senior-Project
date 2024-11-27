@@ -18,8 +18,10 @@ public class Toggle : MonoBehaviour
             Debug.LogWarning("SoundManager not found in the scene.");
         }
 
-        // โหลดสถานะการปิด/เปิดเสียงจาก PlayerPrefs
-        isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
+        isMuted = false;
+
+        // ลงทะเบียน AudioSource ที่ไม่ได้อยู่ใน SoundManager
+        RegisterExternalAudioSources();
 
         // ส่งสถานะเสียงไปยัง SoundManager
         if (soundManager != null)
@@ -36,17 +38,13 @@ public class Toggle : MonoBehaviour
 
     public void ToggleMuteStatus()
     {
-        // สลับสถานะเสียง
         isMuted = !isMuted;
 
-        // บันทึกสถานะเสียงลง PlayerPrefs
         PlayerPrefs.SetInt("IsMuted", isMuted ? 1 : 0);
         PlayerPrefs.Save();
 
-        // อัปเดต UI
         UpdateMuteButtonUI();
 
-        // ส่งคำสั่งปิด/เปิดเสียงไปยัง SoundManager
         if (soundManager != null)
         {
             soundManager.MuteAllSounds(isMuted);
@@ -55,7 +53,19 @@ public class Toggle : MonoBehaviour
 
     private void UpdateMuteButtonUI()
     {
-        // เปลี่ยน Sprite ของปุ่มให้ตรงกับสถานะเสียง
         muteButton.image.sprite = isMuted ? mutedSprite : unmutedSprite;
+    }
+
+    private void RegisterExternalAudioSources()
+    {
+        AudioSource[] externalSources = FindObjectsOfType<AudioSource>();
+
+        foreach (var audioSource in externalSources)
+        {
+            if (soundManager != null && !soundManager.externalAudioSources.Contains(audioSource))
+            {
+                soundManager.RegisterExternalAudioSource(audioSource);
+            }
+        }
     }
 }

@@ -70,11 +70,11 @@ public class ScoremanagerScene2 : MonoBehaviour
         }
         else if (difficultyLevel == 1)
         {
-            finalScore = score >= 2300 ? 10 : score >= 2000 ? 8 : score >= 1900 ? 6 : score >= 1500 ? 4 : score >= 1000 ? 2 : 0;
+            finalScore = score >= 2300 ? 10 : score >= 2100 ? 8 : score >= 1900 ? 6 : score >= 1500 ? 4 : score >= 1000 ? 2 : 0;
         }
         else if (difficultyLevel == 2)
         {
-            finalScore = score >= 2200 ? 10 : score >= 2000 ? 8 : score >= 1800 ? 6 : score >= 1500 ? 4 : score >= 1300 ? 2 : 0;
+            finalScore = score >= 2400 ? 10 : score >= 2200 ? 8 : score >= 1800 ? 6 : score >= 1500 ? 4 : score >= 1300 ? 2 : 0;
         }
 
         if (finalScoreText != null)
