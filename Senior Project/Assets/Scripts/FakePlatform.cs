@@ -7,19 +7,19 @@ public class FakePlatform : MonoBehaviour
 
     private bool hasBeenUsed = false; // ตรวจสอบว่าแพลตฟอร์มถูกใช้หรือยัง
     public bool isSteppedOn = false; // ตรวจสอบว่าแพลตฟอร์มถูกเหยียบหรือยัง
-    private Collider platformCollider;
+    private Collider2D platformCollider;
 
     private void Start()
     {
-        platformCollider = GetComponent<Collider>();
+        platformCollider = GetComponent<Collider2D>();
         platformCollider.isTrigger = true; // ทำให้แพลตฟอร์มทะลุผ่านได้จากด้านล่าง
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!isSteppedOn && other.CompareTag("Player"))
         {
-            Rigidbody rb = other.GetComponent<Rigidbody>();
+            Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
 
             // ตรวจสอบว่าผู้เล่นชนจากด้านบนของแพลตฟอร์ม
             if (rb != null && other.transform.position.y > transform.position.y)

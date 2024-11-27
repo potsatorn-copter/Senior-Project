@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class GrandpaController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 10f;
-    [SerializeField] private float slowFallMultiplier = 0.5f;
+    [SerializeField] private float maxFallSpeed = -10f; // ความเร็วตกสูงสุด (ค่าเป็นลบ)
 
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     private Vector2 movementInput;
     private bool isMovingLeft = false;
     private bool isMovingRight = false;
@@ -20,7 +20,7 @@ public class GrandpaController : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (spriteRenderer == null)
@@ -76,8 +76,15 @@ public class GrandpaController : MonoBehaviour
     private void FixedUpdate()
     {
         // Apply horizontal movement
-        Vector3 velocity = rb.velocity;
+        Vector2 velocity = rb.velocity;
         velocity.x = movementInput.x * movementSpeed;
+
+        // จำกัดความเร็วตก
+        if (velocity.y < maxFallSpeed)
+        {
+            velocity.y = maxFallSpeed; // จำกัดความเร็วในแนวดิ่ง
+        }
+
         rb.velocity = velocity;
 
         // Flip Sprite based on movement direction
@@ -94,9 +101,6 @@ public class GrandpaController : MonoBehaviour
         {
             spriteRenderer.flipX = true; // หันหน้าซ้าย
         }
-
-        // Debug Sprite flip state
-        Debug.Log($"FlipSprite: flipX={spriteRenderer.flipX}");
     }
 
     public void MoveLeft()
@@ -118,7 +122,7 @@ public class GrandpaController : MonoBehaviour
         movementInput = Vector2.zero; // รีเซ็ต movementInput
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // ตรวจสอบว่าแพลตฟอร์มที่ชนคือ TrampolinePlatform หรือ FakePlatform
         TrampolinePlatform trampolinePlatform = collision.gameObject.GetComponent<TrampolinePlatform>();
@@ -140,7 +144,7 @@ public class GrandpaController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // เมื่อชนกับดาว เพิ่ม 100 คะแนน
         if (other.CompareTag("Star"))

@@ -1,9 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-using System.Collections;
-using UnityEngine;
-
 public class MonsterMove : MonoBehaviour
 {
     public float moveDistance = 3.0f; // ระยะที่มอนสเตอร์จะขยับ
@@ -89,7 +86,7 @@ public class MonsterMove : MonoBehaviour
     }
 
     // ฟังก์ชันนี้จะถูกเรียกเมื่อมีการชนกับ Player
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && scoreManager != null)
         {

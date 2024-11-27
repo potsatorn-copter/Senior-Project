@@ -11,9 +11,9 @@ public class PlatformManager : MonoBehaviour
 
     void Start()
     {
-        platformPresetEasy.SetActive(false);
-        platformPresetNormal.SetActive(false);
-        platformPresetHard.SetActive(false);
+        //platformPresetEasy.SetActive(false);
+        //platformPresetNormal.SetActive(false);
+        //platformPresetHard.SetActive(false);
 
         // ตรวจสอบระดับความยาก
         if (GameSettings.difficultyLevel == 0) // ง่าย
