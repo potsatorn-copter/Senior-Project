@@ -33,7 +33,7 @@ public class ScoremanagerScene2 : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        if (scoreText != null) scoreText.text = "คะแนน: " + score;
+        if (scoreText != null) scoreText.text = "แต้ม: " + score;
     }
 
     public int GetCurrentScore()
@@ -74,7 +74,7 @@ public class ScoremanagerScene2 : MonoBehaviour
         }
         else if (difficultyLevel == 2)
         {
-            finalScore = score >= 2700 ? 10 : score >= 2500 ? 8 : score >= 2200 ? 6 : score >= 2000 ? 4 : score >= 1500 ? 2 : 0;
+            finalScore = score >= 2800 ? 10 : score >= 2600 ? 8 : score >= 2100 ? 6 : score >= 1800 ? 4 : score >= 1500 ? 2 : 0;
         }
 
         if (finalScoreText != null)

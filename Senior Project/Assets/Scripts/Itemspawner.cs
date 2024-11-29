@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,35 +8,72 @@ public class Itemspawner : MonoBehaviour
 {
     public Itempool itemPool;
     public Transform spawnPoint;
-    public ScoreManager1 scoreManager; // อ้างอิงไปยัง ScoreManager เพื่อจบเกมเมื่อไอเท็มหมด
+    public ScoreManager1 scoreManager;
+
+    public GameObject startGameUI; // UI ที่จะแสดงปุ่มเริ่มเกม
+    public TextMeshProUGUI countdownText;    // ข้อความสำหรับแสดงเลขถอยหลัง
 
     private float spawnDelay; // ดีเลย์สำหรับการเกิดของไอเท็ม
+    private bool isGameStarted = false; // สถานะเริ่มเกม
 
     private void Start()
     {
         // กำหนดดีเลย์ตามระดับความยาก
         if (GameSettings.difficultyLevel == 0) // Easy
         {
-            spawnDelay = 4f; // โหมดง่าย ดีเลย์ 6 วินาที
+            spawnDelay = 2f;
         }
         else if (GameSettings.difficultyLevel == 1) // Normal
         {
-            spawnDelay = 3f; // โหมดกลาง ดีเลย์ 4 วินาที
+            spawnDelay = 1f;
         }
         else if (GameSettings.difficultyLevel == 2) // Hard
         {
-            spawnDelay = 2f; // โหมดยาก ดีเลย์ 3 วินาที
+            spawnDelay = 0.5f;
         }
 
-        StartCoroutine(SpawnItems());
+        // แสดง UI เริ่มเกม
+        startGameUI.SetActive(true);
+
+        // ซ่อนข้อความนับถอยหลังเริ่มต้น
+        countdownText.gameObject.SetActive(false);
+    }
+
+    // ฟังก์ชันที่เรียกเมื่อกดปุ่มเริ่มเกม
+    public void OnStartGameButtonPressed()
+    {
+        if (!isGameStarted)
+        {
+            isGameStarted = true;
+            startGameUI.SetActive(false); // ปิด UI เริ่มเกม
+            StartCoroutine(StartCountdownAndSpawn());
+        }
+    }
+
+    // แสดงเลขถอยหลัง 3 2 1 ก่อนเริ่มเกม
+    private IEnumerator StartCountdownAndSpawn()
+    {
+        // เปิดข้อความนับถอยหลัง
+        countdownText.gameObject.SetActive(true);
+
+        for (int i = 3; i > 0; i--)
+        {
+            countdownText.text = i.ToString(); // แสดงเลขถอยหลัง
+            yield return new WaitForSeconds(1f); // รอ 1 วินาที
+        }
+
+        // ลบข้อความถอยหลังและซ่อน Text
+        countdownText.text = "";
+        countdownText.gameObject.SetActive(false);
+
+        StartCoroutine(SpawnItems()); // เริ่ม Spawn ไอเท็ม
     }
 
     private IEnumerator SpawnItems()
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnDelay); // ใช้ดีเลย์ที่ตั้งไว้ตามระดับความยาก
-
+            // เรียกไอเท็มจาก Pool
             var itemGameObject = itemPool.GetItemFromPool();
             Item item = null;
 
@@ -44,7 +82,7 @@ public class Itemspawner : MonoBehaviour
                 item = itemGameObject.GetComponent<Item>();
                 if (item != null && spawnPoint != null)
                 {
-                    item.Activate(spawnPoint.position);
+                    item.Activate(spawnPoint.position); // เปิดใช้งานไอเท็มที่ตำแหน่ง Spawn
                 }
                 else
                 {
@@ -60,12 +98,15 @@ public class Itemspawner : MonoBehaviour
                 break; // ออกจากลูปเมื่อไอเท็มหมด
             }
 
-            // Deactivate item after delay
+            // รอเวลา 3 วินาทีเพื่อให้ไอเท็มค้างอยู่ในซีนก่อน Deactivate
             if (item != null)
             {
-                yield return new WaitForSeconds(3f); // หน่วงเวลาก่อนปิดการใช้งานไอเท็ม
-                item.Deactivate();
+                yield return new WaitForSeconds(3f);
+                item.Deactivate(); // ปิดการใช้งานไอเท็ม
             }
+
+            // หลังจาก Deactivate ไอเท็ม ให้รอ spawnDelay ก่อนสร้างไอเท็มใหม่
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 }

@@ -12,15 +12,15 @@ public class CreditsTextFormatter : MonoBehaviour
         // จัดข้อความด้วยการใช้แท็บ (\t) เพื่อจัดระยะช่องว่างให้เท่ากันทุกบรรทัด
         string formattedText = 
                                      "\t\t\t\t\t\t\t\tจัดทำโดย\n" +
-            "AlphaCore Studios\n" +
-            "1640701072\tพสธร บุญล้อม\t\t\tGame Developer, Project Manager\n" +
-            "1640701023\tพิริยะพงศ์ เพชรศิริ\t\t\tGame Developer\n" +
-            "1640700868\tอธิเมศร์ สมบัติเลิศสิริ\t\tGame Developer\n" +
-            "1640703946\tทิพณัฐ หมอกแก้ว\t\t\t3D 2D Artist\n" +
-            "1640707715\tวรเมธ หมุนทรัพย์\t\t\t3D 2D Artist\n" +
-            "1640701684\tวันชัย วงจันทร์\t\t\tGame Designer\n" +
-            "1640700777\tภฤศ เกื้อหนุน\t\t\t\t\tGame Designer\n" +
-            "1640700702\tปุญญพัฒน์ มหวนมาลิน\t\tGame Designer\n" 
+            "\tAlphaCore Studios\n" +
+            "\tพสธร บุญล้อม\t\t\tGame Developer, Project Manager\n" +
+            "\tพิริยะพงศ์ เพชรศิริ\t\t\tGame Developer\n" +
+            "\tอธิเมศร์ สมบัติเลิศสิริ\t\tGame Developer\n" +
+            "\tทิพณัฐ หมอกแก้ว\t\t\t3D 2D Artist\n" +
+            "\tวรเมธ หมุนทรัพย์\t\t\t3D 2D Artist\n" +
+            "\tวันชัย วงจันทร์\t\t\tGame Designer\n" +
+            "\tภฤศ เกื้อหนุน\t\t\t\t\tGame Designer\n" +
+            "\tปุญญพัฒน์ มหวนมาลิน\t\tGame Designer\n" 
                               ;
 
         // ตั้งค่าข้อความที่จัดรูปแบบแล้วไปยัง TextMeshProUGUI

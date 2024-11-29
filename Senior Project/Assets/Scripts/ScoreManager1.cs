@@ -79,7 +79,7 @@ public class ScoreManager1 : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "คะแนน: " + goodItemCount;
+            scoreText.text = "เก็บได้: " + goodItemCount;
         }
     }
 

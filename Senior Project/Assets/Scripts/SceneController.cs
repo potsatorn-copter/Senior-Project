@@ -135,19 +135,20 @@ public class SceneController : MonoBehaviour
         if (isGameOver)
             return;
     }
-    public void SetEasyMode()  // ฟังก์ชันที่เรียกเมื่อกดปุ่ม Easy
+
+    public void SetEasyMode() // ฟังก์ชันที่เรียกเมื่อกดปุ่ม Easy
     {
         GameSettings.difficultyLevel = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // รีโหลด Scene เพื่อทดสอบ
     }
 
-    public void SetNormalMode()  // ฟังก์ชันที่เรียกเมื่อกดปุ่ม Normal
+    public void SetNormalMode() // ฟังก์ชันที่เรียกเมื่อกดปุ่ม Normal
     {
         GameSettings.difficultyLevel = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // รีโหลด Scene เพื่อทดสอบ
     }
 
-    public void SetHardMode()  // ฟังก์ชันที่เรียกเมื่อกดปุ่ม Hard
+    public void SetHardMode() // ฟังก์ชันที่เรียกเมื่อกดปุ่ม Hard
     {
         GameSettings.difficultyLevel = 2;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // รีโหลด Scene เพื่อทดสอบ
@@ -253,13 +254,13 @@ public class SceneController : MonoBehaviour
         if (GameSettings.difficultyLevel == 0) // Easy
         {
             if (successfulMatches >= 5)
-                finalScore = 10; 
+                finalScore = 10;
             else if (successfulMatches >= 3)
-                finalScore = 6; 
+                finalScore = 6;
             else if (successfulMatches >= 1)
-                finalScore = 2; 
+                finalScore = 2;
             else
-                finalScore = 0; 
+                finalScore = 0;
         }
         else if (GameSettings.difficultyLevel == 1) // Normal
         {
@@ -314,57 +315,64 @@ public class SceneController : MonoBehaviour
                 {
                     // เก็บชิ้นส่วนถ้ายังไม่ถูกเก็บ
                     jigsawManager.CollectJigsawPiece(imageIndex, 2);
-                    Debug.Log($"Jigsaw piece dropped: Scene 3, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 3: {imageIndex}, Final Score: {finalScore}");
+                    Debug.Log(
+                        $"Jigsaw piece dropped: Scene 3, Difficulty Level: {GameSettings.difficultyLevel}, Image Part 3: {imageIndex}, Final Score: {finalScore}");
 
                     if (jigsawUIPanel != null)
                     {
                         Sprite jigsawSprite = droppedPiece.pieceSprite;
                         jigsawUIPanel.ShowJigsawUIPanel(jigsawSprite, "คุณได้รับชิ้นส่วนจิ๊กซอว์ใหม่!");
-                        StartCoroutine(ShowEndGamePanelWithDelay());
+                        StartCoroutine(ShowEndGamePanelWithDelay()); // เรียกฟังก์ชันเพื่อรอให้ JigsawUIPanel ซ่อนก่อน
                     }
                     else
                     {
                         Debug.LogWarning("JigsawUIPanel is not found in the scene.");
-                        ShowEndGamePanel();
+                        ShowEndGamePanel(); // แสดง EndGamePanel โดยตรงหากไม่มี JigsawUIPanel
                     }
                 }
                 else
                 {
                     // แสดงข้อความแจ้งเตือนว่าชิ้นส่วนนี้ถูกเก็บไปแล้ว
                     Debug.Log("Jigsaw piece already collected - no UI shown.");
-                    ShowEndGamePanel();
+                    ShowEndGamePanel(); // แสดง EndGamePanel โดยตรง
                 }
             }
             else
             {
                 Debug.LogWarning("JigsawManager is not found in the scene.");
-                ShowEndGamePanel();
+                ShowEndGamePanel(); // แสดง EndGamePanel โดยตรง
             }
         }
         else
         {
             Debug.Log("No jigsaw piece dropped in Scene 3. Final score below threshold.");
-            ShowEndGamePanel();
+            ShowEndGamePanel(); // แสดง EndGamePanel โดยตรงหากคะแนนไม่ถึงเกณฑ์
         }
     }
 
     private IEnumerator ShowEndGamePanelWithDelay()
     {
+        // รอให้ JigsawUIPanel แสดงผลเสร็จ
         yield return new WaitForSeconds(3f);
+
+        // ซ่อน JigsawUIPanel
         if (jigsawUIPanel != null)
         {
             jigsawUIPanel.HideJigsawUIPanel();
         }
+
+        // รอเล็กน้อยก่อนแสดง EndGamePanel
         yield return new WaitForSeconds(0.5f);
-        ShowEndGamePanel();
+
+        ShowEndGamePanel(); // แสดง EndGamePanel
     }
 
     private void ShowEndGamePanel()
     {
         if (gameOverUI != null)
         {
-            gameOverUI.SetActive(true);
-            Time.timeScale = 0f;
+            gameOverUI.SetActive(true); // แสดง EndGamePanel
+            Time.timeScale = 0f; // หยุดเวลาในเกม
         }
     }
 }

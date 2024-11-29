@@ -103,22 +103,32 @@ public class CupManager : MonoBehaviour
 
     IEnumerator ShowBallThenCover()
     {
+        // เลือกแก้วที่ลูกบอลจะอยู่
         int initialBallPosition = Random.Range(0, activeCups.Length);
         cupWithBall = activeCups[initialBallPosition].transform;
 
+        // ยกแก้วขึ้นและวางลูกบอลในแก้ว
         cupWithBall.position += new Vector3(0, liftHeight, 0);
         ball.transform.SetParent(cupWithBall);
         ball.transform.localPosition = new Vector3(0, -4.0f, 0);
 
+        // แสดงแก้วที่ยกขึ้น
         yield return new WaitForSeconds(2);
 
+        // ลดแก้วกลับลงมา
         cupWithBall.position -= new Vector3(0, liftHeight, 0);
+
+        // **แก้ไข**: ตรวจสอบตำแหน่งลูกบอลหลังลดแก้ว
+        ball.transform.SetParent(cupWithBall);
         ball.transform.localPosition = new Vector3(0, -0.5f, 0);
 
+        // รอให้การลดแก้วเสร็จสิ้น
         yield return new WaitForSeconds(1);
 
+        // เริ่มกระบวนการสลับแก้ว
         StartCoroutine(ShuffleAnimation());
     }
+
 
     IEnumerator ShuffleAnimation()
     {

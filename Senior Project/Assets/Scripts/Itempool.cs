@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI; // สำหรับการใช้งาน Text UI
 
 public class Itempool : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class Itempool : MonoBehaviour
     public Sprite[] badItemSpritesEasy;    // Sprite for Easy (1 sprite)
     public Sprite[] badItemSpritesNormal;  // Sprite for Normal (2 sprites)
     public Sprite[] badItemSpritesHard;    // Sprite for Hard (2 sprites)
+
+    public TextMeshProUGUI poolCounterText; // Text UI สำหรับแสดงจำนวนไอเท็มใน Pool
 
     public static int poolSize;  // Dynamic pool size based on difficulty level
 
@@ -48,6 +52,8 @@ public class Itempool : MonoBehaviour
             SetupPool(16, 8, goodItemSpritesHard, badItemSpritesHard);
             spawnPattern = new int[] { 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0 };
         }
+
+        UpdatePoolCounterUI(); // อัปเดตจำนวนไอเท็มที่เหลือใน Pool ตอนเริ่มต้น
     }
 
     // Setup the pool based on the number of good and bad items
@@ -117,6 +123,8 @@ public class Itempool : MonoBehaviour
         {
             itemToSpawn.SetActive(true);
             itemsActivated++;
+            UpdatePoolCounterUI(); // อัปเดตจำนวนไอเท็มที่เหลือใน Pool
+
             if (itemsActivated >= poolSize)
             {
                 poolCompleted = true;
@@ -124,6 +132,15 @@ public class Itempool : MonoBehaviour
         }
 
         return itemToSpawn;
+    }
+
+    private void UpdatePoolCounterUI()
+    {
+        if (poolCounterText != null)
+        {
+            int remainingItems = poolSize - itemsActivated;
+            poolCounterText.text = $"ไอเทมทั้งหมด: {remainingItems}";
+        }
     }
 
     // Mark the item as inactive instead of returning it to the pool

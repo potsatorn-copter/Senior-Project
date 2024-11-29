@@ -53,6 +53,7 @@ public class TrampolinePlatform : MonoBehaviour
                 // เพิ่มแรงกระโดด
                 rb.velocity = new Vector2(rb.velocity.x, 0f); // รีเซ็ตความเร็วในแนวดิ่ง
                 rb.AddForce(Vector2.up * finalBounceForce, ForceMode2D.Impulse); // ส่งแรงขึ้นด้านบน
+                playerController.StartSmoothFall();
                 SoundManager.instance.Play(SoundManager.SoundName.Jump);
 
                 if (isOneTime) // ถ้าเป็นแพลตฟอร์มชนิดใช้ครั้งเดียว

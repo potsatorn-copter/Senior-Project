@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -5,7 +6,10 @@ using UnityEngine;
 public class GrandpaController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 10f;
-    [SerializeField] private float maxFallSpeed = -10f; // ความเร็วตกสูงสุด (ค่าเป็นลบ)
+    [SerializeField] private float maxFallSpeed = -10f;
+    [SerializeField] private float fallSmoothDuration = 1f;
+    [SerializeField] private float maxFallSpeedSmooth = -5f;
+    private Coroutine fallSmoothCoroutine;
 
     private Rigidbody2D rb;
     private Vector2 movementInput;
@@ -13,10 +17,10 @@ public class GrandpaController : MonoBehaviour
     private bool isMovingRight = false;
     private SpriteRenderer spriteRenderer;
 
-    private ScoremanagerScene2 scoreManager; // ตัวแปรเก็บอ้างอิงถึง ScoremanagerScene2
+    private ScoremanagerScene2 scoreManager;
 
-    public bool hasJumpBoost = false; // สถานะการบูสต์การกระโดดจากกล้วย
-    public float boostMultiplier = 1.5f; // ตัวคูณแรงกระโดดเมื่อมีบูสต์
+    public bool hasJumpBoost = false;
+    public float boostMultiplier = 1.5f;
 
     private void Start()
     {
@@ -28,7 +32,6 @@ public class GrandpaController : MonoBehaviour
             Debug.LogError("SpriteRenderer not found on this GameObject.");
         }
 
-        // ค้นหา ScoremanagerScene2 ในซีนปัจจุบัน
         scoreManager = FindObjectOfType<ScoremanagerScene2>();
         if (scoreManager == null)
         {
@@ -38,27 +41,24 @@ public class GrandpaController : MonoBehaviour
 
     private void Update()
     {
-        // ตรวจจับการกดปุ่มซ้าย
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
             MoveLeft();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
+        else if (Input.GetKeyUp(KeyCode.A))
         {
             StopMoving();
         }
 
-        // ตรวจจับการกดปุ่มขวา
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             MoveRight();
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        else if (Input.GetKeyUp(KeyCode.D))
         {
             StopMoving();
         }
 
-        // ตั้งค่าการเคลื่อนไหวตามทิศทางที่กำหนด
         if (isMovingLeft)
         {
             movementInput = Vector2.left;
@@ -69,25 +69,21 @@ public class GrandpaController : MonoBehaviour
         }
         else
         {
-            movementInput = Vector2.zero; // หยุดเคลื่อนไหวเมื่อไม่มีการกดปุ่ม
+            movementInput = Vector2.zero;
         }
     }
 
     private void FixedUpdate()
     {
-        // Apply horizontal movement
         Vector2 velocity = rb.velocity;
         velocity.x = movementInput.x * movementSpeed;
 
-        // จำกัดความเร็วตก
         if (velocity.y < maxFallSpeed)
         {
-            velocity.y = maxFallSpeed; // จำกัดความเร็วในแนวดิ่ง
+            velocity.y = maxFallSpeed;
         }
 
         rb.velocity = velocity;
-
-        // Flip Sprite based on movement direction
         FlipSprite();
     }
 
@@ -105,45 +101,52 @@ public class GrandpaController : MonoBehaviour
 
     public void MoveLeft()
     {
-        isMovingLeft = true; // ตั้งค่าการเดินซ้าย
-        isMovingRight = false; // ปิดการเดินขวา
+        isMovingLeft = true;
+        isMovingRight = false;
     }
 
     public void MoveRight()
     {
-        isMovingRight = true; // ตั้งค่าการเดินขวา
-        isMovingLeft = false; // ปิดการเดินซ้าย
+        isMovingRight = true;
+        isMovingLeft = false;
     }
 
     public void StopMoving()
     {
-        isMovingLeft = false; // หยุดเดินซ้าย
-        isMovingRight = false; // หยุดเดินขวา
-        movementInput = Vector2.zero; // รีเซ็ต movementInput
+        isMovingLeft = false;
+        isMovingRight = false;
+        movementInput = Vector2.zero;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void StartSmoothFall()
     {
-        // ตรวจสอบว่าแพลตฟอร์มที่ชนคือ TrampolinePlatform หรือ FakePlatform
-        TrampolinePlatform trampolinePlatform = collision.gameObject.GetComponent<TrampolinePlatform>();
-        FakePlatform fakePlatform = collision.gameObject.GetComponent<FakePlatform>();
-
-        if (trampolinePlatform != null && !trampolinePlatform.isSteppedOn)
+        if (fallSmoothCoroutine != null)
         {
-            if (scoreManager != null) scoreManager.AddScore(100); // เพิ่มคะแนน
-            trampolinePlatform.isSteppedOn = true;
-
-            SoundManager.instance.Play(SoundManager.SoundName.Jump);
+            StopCoroutine(fallSmoothCoroutine);
         }
-        else if (fakePlatform != null && !fakePlatform.isSteppedOn)
-        {
-            if (scoreManager != null) scoreManager.AddScore(100); // เพิ่มคะแนน
-            fakePlatform.isSteppedOn = true;
-
-            SoundManager.instance.Play(SoundManager.SoundName.Jump);
-        }
+        fallSmoothCoroutine = StartCoroutine(SmoothFall());
     }
 
+    private IEnumerator SmoothFall()
+    {
+        float elapsedTime = 0f;
+        float startFallSpeed = rb.velocity.y;
+
+        while (elapsedTime < fallSmoothDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newFallSpeed = Mathf.Lerp(startFallSpeed, maxFallSpeedSmooth, elapsedTime / fallSmoothDuration);
+            rb.velocity = new Vector2(rb.velocity.x, newFallSpeed);
+            yield return null;
+        }
+
+        rb.velocity = new Vector2(rb.velocity.x, maxFallSpeedSmooth);
+    }
+    public void CollectBanana()
+    {
+        hasJumpBoost = true; // ตั้งค่าการบูสต์เมื่อเก็บกล้วย
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         // เมื่อชนกับดาว เพิ่ม 100 คะแนน
@@ -175,8 +178,5 @@ public class GrandpaController : MonoBehaviour
         }
     }
 
-    public void CollectBanana()
-    {
-        hasJumpBoost = true; // ตั้งค่าการบูสต์เมื่อเก็บกล้วย
-    }
+
 }
