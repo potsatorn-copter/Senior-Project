@@ -1544,23 +1544,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 776
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1538392
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1538392
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1538392
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2382,6 +2382,14 @@ MonoBehaviour:
   - element: {fileID: 1635838542}
     smallDevicePosition: {x: 39, y: 0}
     smallDeviceScale: {x: 7, y: 7, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 1270632866}
+    smallDevicePosition: {x: 24, y: 78.9}
+    smallDeviceScale: {x: 7, y: 7, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 772625867}
+    smallDevicePosition: {x: 0, y: 0}
+    smallDeviceScale: {x: 0.9, y: 0.96, z: 0}
     scaleOnSmallDevice: 1
   canvasRect: {fileID: 270523547}
 --- !u!4 &1198927074

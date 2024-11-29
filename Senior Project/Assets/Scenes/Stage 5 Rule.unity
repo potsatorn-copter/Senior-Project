@@ -550,23 +550,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 776
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1665666
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1665666
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1665666
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -659,7 +659,7 @@ PrefabInstance:
     - target: {fileID: 8713531416915308876, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}
+      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1027,13 +1027,21 @@ MonoBehaviour:
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 247855201}
-    smallDevicePosition: {x: -430.4, y: -82.6}
+    smallDevicePosition: {x: -644, y: -122.4}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 1011483228}
-    smallDevicePosition: {x: -362.13, y: 319.57}
+    smallDevicePosition: {x: -432.8, y: 298}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
+  - element: {fileID: 546761548}
+    smallDevicePosition: {x: -540.6, y: -279.2}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 629069124}
+    smallDevicePosition: {x: 0, y: 0}
+    smallDeviceScale: {x: 0.9, y: 0.96, z: 0}
+    scaleOnSmallDevice: 1
   canvasRect: {fileID: 1370729155}
 --- !u!4 &659279297
 Transform:
@@ -1682,16 +1690,20 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 247855201}
-    iPadPosition: {x: -484.9, y: -72.59}
-    iPadScale: {x: 1.2, y: 1.2, z: 1}
+    iPadPosition: {x: -738.2, y: -4.4}
+    iPadScale: {x: 1.1, y: 1.1, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1011483228}
-    iPadPosition: {x: -439.6, y: 567.61}
+    iPadPosition: {x: -546.3, y: 544.1}
     iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 629069124}
     iPadPosition: {x: 0, y: 0}
     iPadScale: {x: 1.5, y: 1.5, z: 1}
+    scaleOnIpad: 1
+  - element: {fileID: 546761548}
+    iPadPosition: {x: -742.6, y: -230.9}
+    iPadScale: {x: 1.1, y: 1.1, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 1370729155}
 --- !u!4 &1355536078

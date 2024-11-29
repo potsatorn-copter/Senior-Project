@@ -457,15 +457,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElements:
   - element: {fileID: 1623352479}
-    iPadPosition: {x: 0, y: 0}
+    iPadPosition: {x: -30.53, y: -12.62}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1625087387}
-    iPadPosition: {x: 0, y: 0}
+    iPadPosition: {x: 32.33, y: -9.95}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 647813161}
-    iPadPosition: {x: -161.9, y: -21.2}
+    iPadPosition: {x: -253.2, y: -21.2}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 953846469}
@@ -752,11 +752,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 776
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -947,6 +959,10 @@ MonoBehaviour:
     scaleOnSmallDevice: 0
   - element: {fileID: 112137227}
     smallDevicePosition: {x: -46.00012, y: -75}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 425958057}
+    smallDevicePosition: {x: 0.4559, y: 8.7}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   canvasRect: {fileID: 13621670}

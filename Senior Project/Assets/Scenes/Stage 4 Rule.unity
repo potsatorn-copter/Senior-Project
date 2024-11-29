@@ -185,11 +185,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 776
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,7 +294,7 @@ PrefabInstance:
     - target: {fileID: 8713531416915308876, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}
+      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1049,11 +1061,11 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1516066255}
-    iPadPosition: {x: -593.3, y: -164}
+    iPadPosition: {x: -771.8, y: -73.6}
     iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 247723391}
-    iPadPosition: {x: -488.7, y: 461.28}
+    iPadPosition: {x: -534.7, y: 461.28}
     iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 25152967}
@@ -1063,6 +1075,14 @@ MonoBehaviour:
   - element: {fileID: 1573413522}
     iPadPosition: {x: 84.8, y: -99.3}
     iPadScale: {x: 2, y: 2, z: 1}
+    scaleOnIpad: 1
+  - element: {fileID: 1028918841}
+    iPadPosition: {x: -774.1, y: -210.9}
+    iPadScale: {x: 1.2, y: 1.2, z: 1}
+    scaleOnIpad: 1
+  - element: {fileID: 1931416251}
+    iPadPosition: {x: -781.3, y: -366.6}
+    iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 2046526477}
 --- !u!4 &903674496
@@ -1633,6 +1653,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516066254}
   m_CullTransparentMesh: 1
+--- !u!1 &1554118309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554118311}
+  - component: {fileID: 1554118310}
+  m_Layer: 0
+  m_Name: Zfold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1554118310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554118309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32400447afe797947b07cc0115353b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiElements:
+  - element: {fileID: 624147110}
+    smallDevicePosition: {x: -0.00001410172, y: 61.5}
+    smallDeviceScale: {x: 1.2, y: 1.2, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 1573413522}
+    smallDevicePosition: {x: 99, y: -49.8}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1675031428}
+    smallDevicePosition: {x: -82.8, y: -47.8}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1516066255}
+    smallDevicePosition: {x: -509.2, y: -61}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1028918841}
+    smallDevicePosition: {x: -516.6, y: -168.9}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1931416251}
+    smallDevicePosition: {x: -527.4, y: -281.6}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 25152967}
+    smallDevicePosition: {x: 0, y: 0}
+    smallDeviceScale: {x: 0.9, y: 0.96, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 247723391}
+    smallDevicePosition: {x: -383.8, y: 307.4}
+    smallDeviceScale: {x: 0.8, y: 0.8, z: 0}
+    scaleOnSmallDevice: 1
+  canvasRect: {fileID: 2046526477}
+--- !u!4 &1554118311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554118309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 793, y: 385.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1573413521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2165,3 +2263,4 @@ SceneRoots:
   - {fileID: 778730668}
   - {fileID: 212104157}
   - {fileID: 903674496}
+  - {fileID: 1554118311}

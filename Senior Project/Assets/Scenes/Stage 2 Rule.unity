@@ -438,17 +438,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElements:
   - element: {fileID: 915814041}
-    smallDevicePosition: {x: -523, y: -137.5}
+    smallDevicePosition: {x: -483.3, y: -89.3}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 1902786432}
-    smallDevicePosition: {x: -390, y: 342.1}
+    smallDevicePosition: {x: -445.5, y: 342.1}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 583966301}
-    smallDevicePosition: {x: -0.00001410172, y: 15.5}
+    smallDevicePosition: {x: 27.98, y: 4.9}
+    smallDeviceScale: {x: 1.3, y: 1.3, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 1049476983}
+    smallDevicePosition: {x: -512.5313, y: -324.2}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
+  - element: {fileID: 1706066778}
+    smallDevicePosition: {x: -245.4, y: 13.8}
+    smallDeviceScale: {x: 0.7, y: 0.7, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 1793049206}
+    smallDevicePosition: {x: 0, y: 0}
+    smallDeviceScale: {x: 0.9, y: 0.96, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 629591431}
+    smallDevicePosition: {x: 0, y: 0}
+    smallDeviceScale: {x: 0.9, y: 0.96, z: 0}
+    scaleOnSmallDevice: 1
   canvasRect: {fileID: 1218291954}
 --- !u!4 &169238414
 Transform:
@@ -678,11 +694,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 774
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -775,7 +803,7 @@ PrefabInstance:
     - target: {fileID: 8713531416915308876, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}
+      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1699,7 +1727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.000014101724, y: 91}
+  m_AnchoredPosition: {x: -0.000014101724, y: 44.221893}
   m_SizeDelta: {x: 160, y: 129.10889}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &583966302
@@ -3906,11 +3934,11 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 915814041}
-    iPadPosition: {x: -696.5, y: -242.62}
+    iPadPosition: {x: -660.5, y: -59.8}
     iPadScale: {x: 1.3, y: 1.3, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1902786432}
-    iPadPosition: {x: -475.3, y: 495.4}
+    iPadPosition: {x: -606.5, y: 570.2}
     iPadScale: {x: 1.3, y: 1.3, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1793049206}
@@ -3922,8 +3950,8 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1706066778}
-    iPadPosition: {x: -681.5, y: -121.8}
-    iPadScale: {x: 1.2, y: 1.5, z: 1}
+    iPadPosition: {x: -480.8, y: -30.6}
+    iPadScale: {x: 1.1, y: 1.2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 40250668}
     iPadPosition: {x: 0, y: 0}
@@ -3934,16 +3962,24 @@ MonoBehaviour:
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1324180357}
-    iPadPosition: {x: 228, y: 109.3}
+    iPadPosition: {x: 228, y: 32.8}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1755951927}
-    iPadPosition: {x: -231.3, y: 109.3}
+    iPadPosition: {x: -231.3, y: 32.8}
     iPadScale: {x: 2, y: 2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 629591431}
     iPadPosition: {x: 0, y: 0}
     iPadScale: {x: 1.5, y: 1.5, z: 1}
+    scaleOnIpad: 1
+  - element: {fileID: 1049476983}
+    iPadPosition: {x: -678.1, y: -438.5}
+    iPadScale: {x: 1.3, y: 1.3, z: 1}
+    scaleOnIpad: 1
+  - element: {fileID: 411226599}
+    iPadPosition: {x: -73.8, y: 192.3}
+    iPadScale: {x: 1.3, y: 1.3, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 1218291954}
 --- !u!1 &1621140854
@@ -4374,11 +4410,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 776
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4471,7 +4519,7 @@ PrefabInstance:
     - target: {fileID: 8713531416915308876, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}
+      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

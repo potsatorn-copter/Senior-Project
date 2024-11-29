@@ -214,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6357926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 770.4631, y: -92.51151}
+  m_AnchoredPosition: {x: 707.85626, y: -92.51151}
   m_SizeDelta: {x: 71.5368, y: 11.7053}
   m_Pivot: {x: 0.17668171, y: 0.5918021}
 --- !u!114 &6357928
@@ -7780,8 +7780,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElements:
   - element: {fileID: 6357926}
-    iPadPosition: {x: 705.9, y: -303.9}
-    iPadScale: {x: 2, y: 10, z: 0}
+    iPadPosition: {x: 665.3, y: -303.9}
+    iPadScale: {x: 4, y: 20, z: 0}
     scaleOnIpad: 1
   - element: {fileID: 1761194993}
     iPadPosition: {x: 44.6, y: 0}
@@ -7806,6 +7806,10 @@ MonoBehaviour:
   - element: {fileID: 1406012553}
     iPadPosition: {x: 65.3, y: -47.48}
     iPadScale: {x: 12, y: 12, z: 1}
+    scaleOnIpad: 1
+  - element: {fileID: 2094178709}
+    iPadPosition: {x: -802.6, y: -303.9}
+    iPadScale: {x: 4, y: 20, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 1058427489}
 --- !u!4 &1042141382
@@ -11095,6 +11099,14 @@ MonoBehaviour:
     smallDevicePosition: {x: 36, y: 14}
     smallDeviceScale: {x: 7, y: 7, z: 0}
     scaleOnSmallDevice: 1
+  - element: {fileID: 6357926}
+    smallDevicePosition: {x: 707.8563, y: -92.51151}
+    smallDeviceScale: {x: 3, y: 15, z: 0}
+    scaleOnSmallDevice: 1
+  - element: {fileID: 2094178709}
+    smallDevicePosition: {x: -858.9156, y: -92.51151}
+    smallDeviceScale: {x: 3, y: 15, z: 0}
+    scaleOnSmallDevice: 1
   canvasRect: {fileID: 1058427489}
 --- !u!4 &1506137816
 Transform:
@@ -12636,23 +12648,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 776
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.02264
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.02264
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14928,7 +14940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2094178709
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14945,7 +14957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -916.35785, y: -92.51151}
+  m_AnchoredPosition: {x: -858.9156, y: -92.51151}
   m_SizeDelta: {x: 71.5368, y: 11.7053}
   m_Pivot: {x: 0.17668171, y: 0.5918021}
 --- !u!114 &2094178710

@@ -56,7 +56,7 @@ public class CameraFollow : MonoBehaviour
         {
             Vector3 viewportPos = Camera.main.WorldToViewportPoint(platform.transform.position);
 
-            if (viewportPos.y < -0.5f)
+            if (viewportPos.y < -0.3f)
             {
                 Destroy(platform);
             }

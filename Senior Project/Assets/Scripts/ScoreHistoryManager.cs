@@ -40,7 +40,7 @@ public class ScoreHistoryManager : MonoBehaviour
             quizHistory = new QuizHistory();
 
         // ตรวจสอบว่ามีประวัติเกิน 8 ครั้งหรือไม่
-        if (quizHistory.results.Count >= 8)
+        if (quizHistory.results.Count >= 7)
         {
             if (clearHistoryWarningUI != null)
             {
@@ -103,7 +103,7 @@ public class ScoreHistoryManager : MonoBehaviour
             scoreHistoryText.SetText(history);
 
             // แสดง UI เตือนให้เคลียร์ประวัติเมื่อประวัติเกิน 8 ครั้ง
-            if (quizHistory.results.Count >= 8)
+            if (quizHistory.results.Count >= 7)
             {
                 if (clearHistoryWarningUI != null)
                 {

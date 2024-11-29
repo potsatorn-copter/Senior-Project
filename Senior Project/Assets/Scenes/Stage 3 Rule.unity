@@ -599,23 +599,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 776.3168
+      value: 774
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 709.67
+      value: 710
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1180358
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1180358
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1180358
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -708,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 8713531416915308876, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 532080155, guid: a84f7b03185045543b367c6dbe4f2d44, type: 3}
+      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1008,8 +1008,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElements:
   - element: {fileID: 105405266}
-    iPadPosition: {x: 12.9, y: 261.8}
-    iPadScale: {x: 2, y: 2, z: 1}
+    iPadPosition: {x: 18.5, y: 234.2}
+    iPadScale: {x: 2.3, y: 2.3, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1324069868}
     iPadPosition: {x: 0, y: 0}
@@ -1024,11 +1024,15 @@ MonoBehaviour:
     iPadScale: {x: 1.5, y: 1.5, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 247855201}
-    iPadPosition: {x: -610.1, y: -121.04}
+    iPadPosition: {x: -643.8, y: 24.3}
+    iPadScale: {x: 1.2, y: 1.2, z: 1}
+    scaleOnIpad: 1
+  - element: {fileID: 1128515024}
+    iPadPosition: {x: -729.6, y: -229.9}
     iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   - element: {fileID: 1011483228}
-    iPadPosition: {x: -446.8, y: 590.3}
+    iPadPosition: {x: -558.9, y: 551.1}
     iPadScale: {x: 1.2, y: 1.2, z: 1}
     scaleOnIpad: 1
   canvasRect: {fileID: 1370729155}
@@ -1797,13 +1801,21 @@ MonoBehaviour:
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 247855201}
-    smallDevicePosition: {x: -484.8, y: -180.1}
+    smallDevicePosition: {x: -530.5, y: -87.8}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 1011483228}
-    smallDevicePosition: {x: -322.93, y: 306.38}
+    smallDevicePosition: {x: -432.2, y: 306.38}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
+  - element: {fileID: 1128515024}
+    smallDevicePosition: {x: -581.2, y: -249}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 629069124}
+    smallDevicePosition: {x: 0, y: 0}
+    smallDeviceScale: {x: 0.9, y: 0.96, z: 0}
+    scaleOnSmallDevice: 1
   canvasRect: {fileID: 1370729155}
 --- !u!4 &1462240381
 Transform:

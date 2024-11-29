@@ -10992,6 +10992,22 @@ MonoBehaviour:
     smallDevicePosition: {x: 41, y: 0}
     smallDeviceScale: {x: 0.8, y: 0.8, z: 0}
     scaleOnSmallDevice: 1
+  - element: {fileID: 1739229322}
+    smallDevicePosition: {x: 0, y: 29.88061}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1171722758}
+    smallDevicePosition: {x: 771, y: -454.4}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1127742897}
+    smallDevicePosition: {x: -464, y: 523.3344}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
+  - element: {fileID: 1460429607}
+    smallDevicePosition: {x: -507, y: 482.2485}
+    smallDeviceScale: {x: 0, y: 0, z: 0}
+    scaleOnSmallDevice: 0
   canvasRect: {fileID: 862252577}
 --- !u!1 &791797608 stripped
 GameObject:
