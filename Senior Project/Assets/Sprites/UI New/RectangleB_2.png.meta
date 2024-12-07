@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 42efa0912cf6b724a9388e00c58e776e
+guid: a323cdd9ab15cb349b0209e141e36376
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,19 +81,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -108,19 +95,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -149,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ExitUI_0
+      name: RectangleB_2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 418
-        height: 201
+        width: 1794
+        height: 989
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 355cdb260b5492742a1648346f29dec7
-      internalID: 1250319443
+      spriteID: 5744c1c9cc55e054c9eb2eb84434cf27
+      internalID: -1432579579
       vertices: []
       indices: 
       edges: []
@@ -172,7 +146,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 23e37ce15e6f21d4c85637d0236669f0
+    spriteID: 97edfcbf04911a843978b7910df69d0d
     internalID: 0
     vertices: []
     indices: 
@@ -180,7 +154,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ExitUI_0: 1250319443
+      RectangleB_2_0: -1432579579
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

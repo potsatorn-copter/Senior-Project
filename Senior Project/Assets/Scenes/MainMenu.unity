@@ -245,7 +245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -749150500, guid: e34fe9aea7d481048b4defc8381630a8, type: 3}
+  m_Sprite: {fileID: 61791436, guid: 2673b08ce7b7fe840b85d2a2afdf7f20, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -771,6 +771,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1848011375}
     m_Modifications:
+    - target: {fileID: 184067155780587576, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 694878974, guid: 4ff0c0c904431ed4290ae82b26c50d88, type: 3}
     - target: {fileID: 220244984884564476, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -779,6 +783,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Credits
       objectReference: {fileID: 0}
+    - target: {fileID: 345872084623276747, guid: 550c9a3d301c15845b349457444380a9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1649126845, guid: 3b3ca9dbcc0dc874ca629c0f40343a59, type: 3}
     - target: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -894,11 +902,11 @@ PrefabInstance:
     - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: mutedSprite
       value: 
-      objectReference: {fileID: -268853933, guid: 702a3c9cae75ba14389c8609905507d4, type: 3}
+      objectReference: {fileID: -690608006, guid: c318c44b798a64a4c8cf36676aba615e, type: 3}
     - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: unmutedSprite
       value: 
-      objectReference: {fileID: -593029658, guid: 7e2e1f51809d7ed46bacd8045f28bb4a, type: 3}
+      objectReference: {fileID: -1991991028, guid: b72e20ca4e13b7647a4aa220f1393bfe, type: 3}
     - target: {fileID: 8239809073836925875, guid: 550c9a3d301c15845b349457444380a9, type: 3}
       propertyPath: backgroundMusicSource
       value: 
@@ -1084,7 +1092,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1649167262, guid: bc40eda47f8fec84eae6a9ddc513a3bc, type: 3}
+  m_Sprite: {fileID: 1765496423, guid: b9b090083bc5e334ca58a196d45c6a12, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1265,7 +1273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 542307033, guid: e3d822366ba20f64abcfd5eb98f53543, type: 3}
+  m_Sprite: {fileID: 1749613055, guid: ffe5c4cdc6d1af34f9a04cca46d2b9b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2105,7 +2113,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1735992795, guid: d8295f3cf7d288448b291445f7d487c0, type: 3}
+  m_Sprite: {fileID: 461991419, guid: 7219ccd8cb2619e42972fc9581385cf7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2291,7 +2299,7 @@ PrefabInstance:
     - target: {fileID: 1271070304016358116, guid: 89fd6fde8b1071f479c419ee2beae3de, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 566647123, guid: 04638f5549f8b3749a9fe4aecbcffe9b, type: 3}
+      objectReference: {fileID: 683649549, guid: 977dc7162aab95343aca7eb600477fd9, type: 3}
     - target: {fileID: 2317940748090010625, guid: 89fd6fde8b1071f479c419ee2beae3de, type: 3}
       propertyPath: m_Name
       value: Setting tog

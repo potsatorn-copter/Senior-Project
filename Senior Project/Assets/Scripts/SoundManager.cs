@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
+    public bool IsMuted { get; set; } = false; // สถานะเสียงที่ใช้แชร์ระหว่างซีน
+
     private void Awake()
     {
         if (instance == null)
@@ -18,11 +20,6 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        Play(SoundName.MainmenuSong);
     }
 
     [SerializeField] public Sound[] sounds;
@@ -37,7 +34,7 @@ public class SoundManager : MonoBehaviour
         public AudioClip clip;
         [Range(0f, 1f)] public float volume;
         public bool loop;
-       [HideInInspector] public AudioSource audioSource;
+        [HideInInspector] public AudioSource audioSource;
         public bool mute;
     }
 
@@ -61,6 +58,15 @@ public class SoundManager : MonoBehaviour
         RevealImageSound
     }
 
+    private void Start()
+    {
+        // เล่นเพลงหลักเมื่อเริ่มต้น
+        Play(SoundName.MainmenuSong);
+
+        // ตั้งค่ามิวต์ตามสถานะที่แชร์
+        MuteAllSounds(IsMuted);
+    }
+
     public void Play(SoundName soundName)
     {
         Sound sound = GetSound(soundName);
@@ -73,7 +79,7 @@ public class SoundManager : MonoBehaviour
             sound.audioSource.loop = sound.loop;
         }
 
-        if (!sound.mute)
+        if (!sound.mute && !IsMuted) // ตรวจสอบสถานะมิวต์โดยรวม
         {
             sound.audioSource.Play();
         }
@@ -86,6 +92,8 @@ public class SoundManager : MonoBehaviour
 
     public void MuteAllSounds(bool isMuted)
     {
+        IsMuted = isMuted;
+
         // Mute เสียงในระบบ SoundManager
         foreach (var sound in sounds)
         {

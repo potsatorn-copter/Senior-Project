@@ -4,7 +4,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target;
-    public float smoothSpeed = 0.3f;
+    public float smoothSpeed = 3f; // Higher value for better responsiveness
     public Vector3 offset;
     public float cameraThreshold = 0.2f;
     public GameObject gameOverUI;
@@ -36,7 +36,9 @@ public class CameraFollow : MonoBehaviour
         {
             highestYPosition = Mathf.Lerp(highestYPosition, target.position.y - cameraThreshold, 0.02f);
             Vector3 desiredPosition = new Vector3(transform.position.x, highestYPosition + offset.y, transform.position.z);
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+
+            // Adjust the smoothing speed using deltaTime
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
             transform.position = smoothedPosition;
         }
 

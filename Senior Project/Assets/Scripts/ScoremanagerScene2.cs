@@ -74,7 +74,7 @@ public class ScoremanagerScene2 : MonoBehaviour
         }
         else if (difficultyLevel == 2)
         {
-            finalScore = score >= 2800 ? 10 : score >= 2600 ? 8 : score >= 2100 ? 6 : score >= 1800 ? 4 : score >= 1500 ? 2 : 0;
+            finalScore = score >= 2600 ? 10 : score >= 2400 ? 8 : score >= 2100 ? 6 : score >= 1800 ? 4 : score >= 1500 ? 2 : 0;
         }
 
         if (finalScoreText != null)

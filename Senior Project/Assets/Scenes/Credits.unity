@@ -1023,14 +1023,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.44281775, g: 0.82540244, b: 0.8773585, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 764664615, guid: 6c913fb45d64e044ba27a093bf5d5e49, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1181,11 +1181,14 @@ MonoBehaviour:
     volume: 0.519
     loop: 0
     audioSource: {fileID: 0}
+    mute: 0
   - soundName: 2
     clip: {fileID: 8300000, guid: 3d3b7161b8e60db4f8c23a468077984e, type: 3}
     volume: 0.519
     loop: 0
     audioSource: {fileID: 0}
+    mute: 0
+  externalAudioSources: []
 --- !u!4 &1197335150
 Transform:
   m_ObjectHideFlags: 0
@@ -1294,7 +1297,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.028301895, g: 0.027367398, b: 0.027367398, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1724,7 +1727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 469271881, guid: 60a2a84a4e3a1924b88cb7db8a60ec97, type: 3}
+  m_Sprite: {fileID: 1853328135, guid: a28fdbe91f13979479578cd796e6305a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

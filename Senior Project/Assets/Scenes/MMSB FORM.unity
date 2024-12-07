@@ -10993,7 +10993,7 @@ MonoBehaviour:
     smallDeviceScale: {x: 0.8, y: 0.8, z: 0}
     scaleOnSmallDevice: 1
   - element: {fileID: 1739229322}
-    smallDevicePosition: {x: 0, y: 29.88061}
+    smallDevicePosition: {x: -3.56, y: 29.88061}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 1171722758}
