@@ -484,6 +484,10 @@ MonoBehaviour:
     iPadPosition: {x: 0.4559, y: -46.836}
     iPadScale: {x: 1.48, y: 1.64, z: 1}
     scaleOnIpad: 1
+  - element: {fileID: 378926459}
+    iPadPosition: {x: 14, y: -24.64148}
+    iPadScale: {x: 1.31, y: 1.64, z: 1}
+    scaleOnIpad: 1
   canvasRect: {fileID: 13621670}
 --- !u!1 &288348338
 GameObject:
@@ -653,6 +657,81 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &378926458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 378926459}
+  - component: {fileID: 378926461}
+  - component: {fileID: 378926460}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &378926459
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378926458}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 581781799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 53.221058, y: -24.64148}
+  m_SizeDelta: {x: 765.6002, y: 180.04309}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &378926460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378926458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9339623, g: 0.91193485, b: 0.91193485, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 764664615, guid: 6c913fb45d64e044ba27a093bf5d5e49, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &378926461
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378926458}
+  m_CullTransparentMesh: 1
 --- !u!224 &425958057 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4655894947740569096, guid: 550c9a3d301c15845b349457444380a9, type: 3}
@@ -954,21 +1033,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElements:
   - element: {fileID: 953846469}
-    smallDevicePosition: {x: 127, y: -75}
+    smallDevicePosition: {x: 127, y: -95}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 288348339}
-    smallDevicePosition: {x: 35.99993, y: -75}
+    smallDevicePosition: {x: 35.99993, y: -95}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 112137227}
-    smallDevicePosition: {x: -46.00012, y: -75}
+    smallDevicePosition: {x: -46.00012, y: -95}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
   - element: {fileID: 425958057}
     smallDevicePosition: {x: 0.4559, y: 8.7}
     smallDeviceScale: {x: 0, y: 0, z: 0}
     scaleOnSmallDevice: 0
+  - element: {fileID: 378926459}
+    smallDevicePosition: {x: 17.9, y: -19.7}
+    smallDeviceScale: {x: 0.97, y: 1, z: 0}
+    scaleOnSmallDevice: 1
   canvasRect: {fileID: 13621670}
 --- !u!4 &537571073
 Transform:
@@ -1097,6 +1180,7 @@ RectTransform:
   m_Children:
   - {fileID: 1623352479}
   - {fileID: 1625087387}
+  - {fileID: 378926459}
   m_Father: {fileID: 550703772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1182,8 +1266,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280163874
-  m_fontColor: {r: 0.13207549, g: 0.11774655, b: 0.11774655, a: 1}
+    rgba: 4278387600
+  m_fontColor: {r: 0.5660378, g: 0.013349946, b: 0.013349946, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
