@@ -10,7 +10,7 @@ public class SafeAreaAdjuster : MonoBehaviour
     Vector2 maxAnchor;
 
     void Awake()
-  {  
+  {  /*
         rectTransform = GetComponent<RectTransform>();
         safeArea = Screen.safeArea;
         minAnchor = safeArea.position;
@@ -23,7 +23,7 @@ public class SafeAreaAdjuster : MonoBehaviour
 
         rectTransform.anchorMin = minAnchor;
         rectTransform.anchorMax = maxAnchor;
-        
+        */
     }
 }
 

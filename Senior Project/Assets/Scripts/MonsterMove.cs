@@ -92,7 +92,8 @@ public class MonsterMove : MonoBehaviour
         {
             // ลดคะแนนเมื่อชนกับ Player
             scoreManager.AddScore(-damageAmount);
-            Debug.Log("Player hit monster! Score deducted by: " + damageAmount);
+            //Debug.Log("Player hit monster! Score deducted by: " + damageAmount);
+            SoundManager.instance.Play(SoundManager.SoundName.Click);
         }
     }
 

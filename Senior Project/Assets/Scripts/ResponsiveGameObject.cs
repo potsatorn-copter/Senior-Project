@@ -49,7 +49,7 @@ public class ResponsiveGameObject : MonoBehaviour
 
     private void Update()
     {
-        // สามารถเรียกอัพเดตตำแหน่งทุกเฟรมได้ในกรณีที่ต้องการ
+       
         // AdjustGameObjectPositions();
     }
 
