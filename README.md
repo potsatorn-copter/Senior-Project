@@ -2,6 +2,6 @@
 
 ## เป็นเกมมือถือสำหรับผู้สูงอายุที่มีภาวะความจำเสื่อม  
 
-## Branc ที่ใช้ได้คือ Copter-Senior และ NeW ใน Branch Copter-Senior มีเวอร์ชั่นเล่นบน Pc
+## Branch ที่ใช้ได้คือ Copter-Senior และ NeW ใน Branch Copter-Senior มีเวอร์ชั่นเล่นบน Pc
 
 
